@@ -1,0 +1,3 @@
+senha.trim().toUpperCase()
+
+UTILIZAR O CONTINUE
