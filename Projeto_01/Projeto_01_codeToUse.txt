@@ -1,3 +1,9 @@
 senha.trim().toUpperCase()
 
+---
+
 UTILIZAR O CONTINUE
+
+---
+
+JOKENPO idea for final battle
