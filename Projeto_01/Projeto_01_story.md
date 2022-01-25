@@ -3,10 +3,10 @@
 Você é um(a) jovem nobre. No dia do seu casamento, seu noivo(a) foi envenenado. \nVocê jura vingar a morte dele(a).
 
 
-1.  "Você descobriu quem era o assassino? [S/N] 
-2.  "Você conseguiu que o assassino confessasse seus motivos? [S/N] 
-3.  "Você entregou o assassino às autoridades? [S/N] 
-4.  "Você interviu para que alterassem a pena de morte para prisão perpétua? [S/N] 
+1.  "Você descobriu quem era o assassino? [S/N] courage
+2.  "Você conseguiu que o assassino confessasse seus motivos? [S/N] persuasion
+3.  "Você entregou o assassino às autoridades? [S/N] justice / strength
+4.  "Você interviu para que alterassem a pena de morte para prisão perpétua? [S/N] compassion
 5.  "Você foi escolhida pelo povo para liderá-los, por sua compaixão e senso de justiça? [S/N] 
 
 ## **BACKGROUND**
@@ -48,7 +48,7 @@ You interrogate the server, but they are not saying anything. Will youer persuas
 
 (Roll the dice for results)
 
-If you decided to find the murderer as your previous choice, you will have a +1 bonus to your roll.
+If you chose persuasion as one of your attributes, you will have a +(persuasion) bonus to your roll.
 If you roll 1, 2, or 3, you will not be able to persuade the servant into explosing their motives.
 If you roll 4, 5, or 6, you will discover the reason behind your spouse's murder.
 
@@ -60,5 +60,14 @@ Moved by this unexpected display of emotion, they confess. It was love and jealo
 You were the object of their passion for many years, and when you found love yourself, they couldn't bear the thought of seeing you with another.
 
 ------------------------------
+
+## **DECISION #3** - the killer's fate
+
+Opinions are divided. Some claim there is no excuse for what this person did. They should be executed right then and there.
+Others believe it is not in their hands to judge, and the accused deserves a fair trial. What will it be?
+
+[1] (+1 Justice) You are outraged that anyone would think you would commit such a heinous act! You take the killer to justice.
+
+[2] (-1 Justice)
 
 
