@@ -1,9 +1,17 @@
-senha.trim().toUpperCase()
+const prompt = require("prompt-sync")();
+
++ senha.trim().toUpperCase()
 
 ---
 
-UTILIZAR O CONTINUE
++ UTILIZAR O CONTINUE
 
 ---
 
-JOKENPO idea for final battle
++ JOKENPO idea for final battle (attack/defend)
+
+---
+
+### INTEGRATE WITH HTML
+
++ https://docs.microsoft.com/en-us/learn/modules/build-simple-website/

@@ -1,3 +1,5 @@
+# **PROJETO 1** - HISTÓRIA
+
 Você é um(a) jovem nobre. No dia do seu casamento, seu noivo(a) foi envenenado. \nVocê jura vingar a morte dele(a).
 
 
@@ -7,7 +9,7 @@ Você é um(a) jovem nobre. No dia do seu casamento, seu noivo(a) foi envenenado
 4.  "Você interviu para que alterassem a pena de morte para prisão perpétua? [S/N] 
 5.  "Você foi escolhida pelo povo para liderá-los, por sua compaixão e senso de justiça? [S/N] 
 
-BACKGROUND
+## **BACKGROUND**
 
 Today is the happiest day of your life. Or it ought to be. You've just sworn your vows to the love of your life. 
 You're sitting on a corner watching the guests drink and dance and laugh. You catch a glimpse of your beloved. 
@@ -15,6 +17,8 @@ But instead of joy in their eyes, you see pain. You dart toward them, but it's t
 When you are finally able to reach them across the room, through a wave of alarmed guests, you find their lifeless body lying on the floor.
 
 ------------------------------
+
+## **DECISION #1** - find the killer
 
 At that very moment, it feels like the ground has been pulled from under you. 
 Everyhting goes silent, and the world is moving both too fast and too slow. You have a decision to make.
@@ -36,6 +40,8 @@ You take a whiff and get a hint of almonds. Cyanide.
 
 ------------------------------
 
+## **DECISION #2** - discover the motive
+
 They bring the accused forward. It's just on of the servants from the kitchens. You stand there for a minute, puzzled.
 What motive could they possibly have? Your bethrothed was loved by all, nobles and commonfolk alike. So why would someone do this?
 You interrogate the server, but they are not saying anything. Will youer persuasion techniques be enough to convince them to talk?
@@ -54,4 +60,5 @@ Moved by this unexpected display of emotion, they confess. It was love and jealo
 You were the object of their passion for many years, and when you found love yourself, they couldn't bear the thought of seeing you with another.
 
 ------------------------------
+
 
