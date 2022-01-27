@@ -5,7 +5,7 @@
 ## DECISION #3
 
 + TODO: implement battle (jokenpo)
-+ TODO: refactor story console.log()s
++ refactor story console.log()s ✔
 
 ---
 
