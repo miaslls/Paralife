@@ -16,22 +16,7 @@ console.log(
   `When you are finally able to reach them across the room, through a wave of alarmed guests, you find their lifeless body lying on the floor.`
 );
 
-// console.log("\n\t.");
-// console.log("\n\t.");
-// console.log("\n\t.\n");
-
-// let continueStory = "?";
-
-// do {
-//     if (continueStory.trim().toUpperCase() != "Y" && continueStory.trim().toUpperCase() != "N" && continueStory.trim().toUpperCase() != "?") {
-//         console.log("You must type Y or N.");
-//     }
-//     continueStory = prompt("\tDo you wish to continue? [Y / N] ");
-// } while (continueStory.trim().toUpperCase() != "Y" &&  continueStory.trim().toUpperCase() != "N");
-
-let enter;
-
-enter = prompt("\n\tPress ENTER to continue! ");
+prompt("\n\tPress ENTER to continue! ");
 
 // ATTRIBUTES
 
@@ -39,11 +24,11 @@ console.log(`\n\tCHOOSE YOUR ATTRIBUTES`);
 console.log(
   `\n\tYou have 3 attribute points. Choose where to spend them! \n\t(You CAN spend more than 1 point per attribute.)`
 );
-console.log(`\n\t[1] courage;
-\t[2] persuasion
-\t[3] justice
-\t[4] strength
-\t[5] compassion\n`);
+console.log(`\n\t[1] Courage;
+\t[2] Persuasion
+\t[3] Justice
+\t[4] Strength
+\t[5] Compassion\n`);
 
 let courage = 0;
 let persuasion = 0;
@@ -51,15 +36,19 @@ let justice = 0;
 let strength = 0;
 let compassion = 0;
 
-let attribute = " ";
-
 for (i = 0; i < 3; i++) {
-    do {
-        if (attribute < 1 || attribute > 5 || isNaN(attribute)) {
-            console.log(`\n\tYou must choose a number [1 - 5]`)
-        }
-        attribute = prompt(`\tAttribute #${i + 1}: `);
-    } while (attribute < 1 || attribute > 5 || isNaN(attribute));
+  while (true) {
+    attribute = prompt(`\tAttribute #${i + 1}: `);
+    if (
+      !isNaN(attribute) &&
+      attribute % 1 == 0 &&
+      attribute > 0 &&
+      attribute < 6
+    ) {
+      break;
+    }
+    console.log(`\n\tYou must choose a NUMBER [1 - 5]`);
+  }
 
   if (attribute == 1) {
     courage++;
@@ -74,7 +63,29 @@ for (i = 0; i < 3; i++) {
   }
 }
 
-// ** TODO - show attributes chosen, press enter to continue
+// SHOW CHOSEN ATTRIBUTES
+
+console.log(
+  `\t------------------------------ \n\tYour chosen attributes are:\n`
+);
+
+if (courage != 0) {
+  console.log(`\tCourage: ${courage}`);
+}
+if (persuasion != 0) {
+  console.log(`\tPersuasion: ${persuasion}`);
+}
+if (justice != 0) {
+  console.log(`\tJustice: ${justice}`);
+}
+if (strength != 0) {
+  console.log(`\tStrength: ${strength}`);
+}
+if (compassion != 0) {
+  console.log(`\tCompassion: ${compassion}`);
+}
+
+prompt("\n\tPress ENTER to continue! ");
 
 // DECISION #1 - find the killer
 
@@ -95,14 +106,18 @@ console.log(
 
 let decision1 = 0;
 
-do {
-  if (decision1 != 1 && decision1 != 2 && decision1 != 0) {
-    console.log("\n\tYou must type 1 or 2.");
+while (true) {
+  decision1 = prompt("\tChoose your answer! [1 / 2] ");
+  if (
+    !isNaN(decision1) &&
+    decision1 % 1 == 0 &&
+    decision1 > 0 &&
+    decision1 < 3
+  ) {
+    break;
   }
-  decision1 = +prompt("\tChoose your answer! [1 / 2] ");
-} while (decision1 != 1 && decision1 != 2);
-
-let bonusPoints = 0;
+  console.log(`\n\tYou must type 1 or 2.`);
+}
 
 if (decision1 == 1) {
   console.log(
@@ -125,14 +140,10 @@ if (decision1 == 1) {
     `Your brother, who's standing by your side, sees the same thing. He seizes the suspect and you inspect the vial that's been dropped.`
   );
   console.log(`You take a whiff and get a hint of almonds. Cyanide.\n`);
-  bonusPoints++;
+  courage++;
 }
 
-// console.log("\n\t.");
-// console.log("\n\t.");
-// console.log("\n\t.\n");
-
-enter = prompt("\n\tPress ENTER to continue! ");
+prompt("\n\tPress ENTER to continue! ");
 
 // DECISION 2 - discover the motive
 
@@ -148,9 +159,12 @@ console.log(
 
 console.log(`\n\tROLL THE DICE FOR PERSUASION`);
 
-console.log(
-  `\n\t+ If you decided to find the murderer as your previous choice, you will have a +1 bonus to your roll.`
-);
+if (persuasion != 0) {
+  console.log(
+    `\n\t+ You have ${persuasion} persuasion points. You will get a +${persuasion} to your roll.`
+  );
+}
+
 console.log(
   `\t+ If you roll 1, 2, or 3, you will not be able to persuade the servant into explosing their motives.`
 );
@@ -158,11 +172,11 @@ console.log(
   `\t+ If you roll 4, 5, or 6, you will discover the reason behind your spouse's murder.`
 );
 
-enter = prompt("\n\tPress ENTER to roll the dice! ");
+prompt("\n\tPress ENTER to roll the dice! ");
 
 // DICE ROLL
 
-let diceRoll = Math.floor(Math.random(7) * 10) + 1 + bonusPoints;
+let diceRoll = Math.floor(Math.random(6) * 10) + 1 + persuasion;
 
 if (diceRoll > 6) {
   diceRoll = 6;
@@ -187,13 +201,9 @@ if (diceRoll < 4) {
   console.log(
     `You were the object of their passion for many years, and when you found love yourself, they couldn't bear the thought of seeing you with another.`
   );
-  bonusPoints++;
+  persuasion++;
 }
 
-// console.log("\n\t.");
-// console.log("\n\t.");
-// console.log("\n\t.\n");
-
-enter = prompt("\n\tPress ENTER to continue! ");
+prompt("\n\tPress ENTER to continue! ");
 
 // DECISION 3 - the killer's fate

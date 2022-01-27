@@ -68,6 +68,35 @@ Others believe it is not in their hands to judge, and the accused deserves a fai
 
 [1] (+1 Justice) You are outraged that anyone would think you would commit such a heinous act! You take the killer to justice.
 
-[2] (-1 Justice)
+[2] (-1 Justice) How can they keep breathing when your beloved breathes no more? You draw you sword.
+
+(jokenpo for results)
+
+Somehow, the server gets ahold of a sword. The execution turns into a duel. What will you do?
+
+ATTACK beats DEFEND
+DEFEND beats PARRY
+PARRY beats ATTACK
+
+[1] Attack
+[2] Defend
+[3] Parry
+
+Your move: 
+
+You: XXX | your opponent: XXX
+You WIN / LOSE.
+
+It's a DRAW! 
+Press ENTER to try again.
+
+[WIN] (+1 Strength) You win the fight. You lift your sword for the final blow, but the guards stop you. This is not your decision to make.
+
+[LOSE] You are at your opponents mercy. A swift blow and you'll be dead. They take pity on you though, drop the sword, and let the guards guide them to the dungeons.
+
+---
+
+
+
 
 

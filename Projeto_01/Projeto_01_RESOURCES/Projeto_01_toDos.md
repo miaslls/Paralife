@@ -1,13 +1,8 @@
 + FUCKING START CODING, YOU DUMBASS!!!!! 
 
-## BACKGROUND
-
-+ choose skills
-+ validate skills
-
 ## DECISION #3
 
-+ implement battle
++ implement battle (jokenpo)
 
 # **CONTINUE TO WRITE THE MOTHERFUCKING STORY, DIPSHIT!**
 
