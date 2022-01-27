@@ -1,8 +1,9 @@
 const prompt = require("prompt-sync")();
 
-let background = `Você é um(a) jovem nobre. No dia do seu casamento, seu noivo(a) foi envenenado. \nVocê sai em uma quest para vingar a morte dele(a).`
+const background = `Você é um(a) jovem nobre. No dia do seu casamento, seu noivo(a) foi envenenado. 
+Você sai em uma quest para vingar a morte dele(a).`;
 
-let perguntas = [
+const perguntas = [
   "Você descobriu quem era o assassino? [S/N] ",
   "Você conseguiu que o assassino confessasse seus motivos? [S/N] ",
   "Você entregou o assassino às autoridades? [S/N] ",
@@ -10,26 +11,37 @@ let perguntas = [
   "Você foi escolhida pelo povo para liderá-los, por sua compaixão e senso de justiça? [S/N] ",
 ];
 
-console.log(`\n${background}\n`)
+console.log(`\n${background}\n`);
 
 let resposta;
 let s = 0;
 
 for (i = 0; i < perguntas.length; i++) {
-  resposta = prompt(perguntas[i]);
-  if (resposta.toUpperCase() == "S") {
+  while (true) {
+    resposta = prompt(perguntas[i]).trim().toUpperCase();
+    if (resposta == "S" || resposta == "N") {
+      break;
+    }
+    console.log(`\nVocê deve digitar [S] ou [N]`);
+  }
+  if (resposta == "S") {
     s++;
   }
 }
 
-if (s == 0) {
-  console.log(`\nVocê falha miseravelmente.\n`);
-} else if (s == 1 || s == 2) {
-  console.log(`\nVocê falha, mas ainda consegue fugir da situação.\n`);
-} else if (s == 3) {
-  console.log(`\nVocê chega perto de conseguir alcançar seu objetivo, mas acaba falhando por pouco.\n`);
-} else if (s == 4) {
-    console.log(`\nDepois de muito esforço você conquista seu objetivo, embora não de maneira perfeita.\n`);
-} else if (s == 5) {
-    console.log(`\nVocê triunfa de maneira inquestionável e seus feitos serão lembrados por muitas gerações.\n`)
+console.log(`\n\tVocê atingiu ${s} objetivos.`);
+
+const respostas = [
+  `\tVocê falha miseravelmente.\n`,
+  `\tVocê falha, mas ainda consegue fugir da situação.\n`,
+  `\tVocê falha, mas ainda consegue fugir da situação.\n`,
+  `\tVocê chega perto de conseguir alcançar seu objetivo, mas acaba falhando por pouco.\n`,
+  `\tDepois de muito esforço você conquista seu objetivo, embora não de maneira perfeita.\n`,
+  `\tVocê triunfa de maneira inquestionável e seus feitos serão lembrados por muitas gerações.\n`,
+];
+
+for (i = 0; i < respostas.length; i++) {
+  if (s == i) {
+    console.log(respostas[i]);
+  }
 }

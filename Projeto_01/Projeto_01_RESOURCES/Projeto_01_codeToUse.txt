@@ -1,6 +1,8 @@
 const prompt = require("prompt-sync")();
 
-+ senha.trim().toUpperCase()
+---
+
++ VAR.trim().toUpperCase()
 
 ---
 
