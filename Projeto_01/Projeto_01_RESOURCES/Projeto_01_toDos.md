@@ -2,9 +2,13 @@
 
 # **The Hero's Journey**
 
+## ATTRIBUTES
+
+TODO: adjust for bidimensional array
+
 ## DECISION #3
 
-+ TODO: implement battle (jokenpo)
++ implement battle (jokenpo) ✔
 + refactor story console.log()s ✔
 
 ---

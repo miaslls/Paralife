@@ -2,11 +2,13 @@ const prompt = require("prompt-sync")();
 
 ---
 
-+ VAR.trim().toUpperCase()
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
 
 ---
-
-VALIDAÇÃO:
 
 while (true) {
     VAR = prompt();
@@ -15,3 +17,8 @@ while (true) {
     }
     console.log(ERROR);
 }
+
+---
+
+a1.join(separator) - Join all elements of array a1 into a string separated by separator arg
+
