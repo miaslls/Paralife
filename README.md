@@ -1,6 +1,6 @@
 # PROJETOS Módulo 1
 
-## **PROJETO | A Jornada do Herói**
+## **PROJETO 1 | A Jornada do Herói**
 
 Hoje nós começamos o nosso primeiro projeto entregável! Esse projeto vai avaliar os conteúdos passados durante essa primeira semana, e se você consegue desenvolver uma programação utilizando todos eles.
 
@@ -87,3 +87,22 @@ O projeto é extenso, e temos muito o que fazer! Mas vamos começar por partes. 
 + Fazer a validação da entrada do usuário (o programa só deve aceitar o que foi definido por você como entradas válidas);
 + Exibir o elemento da lista correspondente à escolha de cada um;
 + Comparar os elementos e exibir quem foi o vencedor dessa rodada.
+
+---
+
+## **PROJETO 2 | Continuação**
+
+Agora o nosso programa já deve ser capaz de ler a entrada do usuário, escolher um elemento aleatório para o computador, e ver quem venceu a rodada.
+Vamos agora passar para as funcionalidades finais do nosso projeto:
+
++ Criar a variável que receberá a quantidade de rodadas que o jogador deseja jogar;
++ Criar o laço que irá repetir o jogo o número de vezes escolhida pelo jogador;
++ Depois de declarar o vencedor da rodada, adicionar 1 ponto para esse vencedor;
++ Ao final das rodadas mostrar quantos pontos cada um marcou;
++ Determinar quem fez mais pontos e portanto foi o campeão do jogo;
++ Perguntar ao final se ele quer jogar de novo e criar um laço que deve repetir todo o programa caso a resposta seja sim.
+
+Esses são os requisitos básicos para o seu projeto, que serão considerados essenciais na avaliação. Mas nada impede que você implemente novas funcionalidades! Você pode tanto usar o que foi visto em aula para tornar o seu programa ainda mais interessante, quanto usar coisas que ainda não foram vistas no curso, mas que você pode pesquisar por conta própria e implementar!
+
+Todos que apresentarem um projeto funcional receberão um certificado por ele! E aqueles que apresentarem funcionalidades inovadoras, ou seja, que vão além do que foi visto em aula, receberão um certificado de projeto destaque!
+Seja criativo, e caso tenha qualquer dúvida, não hesite em falar com o(a) professor(a)!

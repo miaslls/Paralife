@@ -13,10 +13,11 @@ const perguntas = [
 
 console.log(`\n${background}\n`);
 
-let resposta;
-let s = 0;
+let sCount = 0;
 
 for (i = 0; i < perguntas.length; i++) {
+  let resposta;
+
   while (true) {
     resposta = prompt(perguntas[i]).trim().toUpperCase();
     if (resposta == "S" || resposta == "N") {
@@ -24,12 +25,13 @@ for (i = 0; i < perguntas.length; i++) {
     }
     console.log(`\nVocê deve digitar [S] ou [N]`);
   }
+  
   if (resposta == "S") {
-    s++;
+    sCount++;
   }
 }
 
-console.log(`\n\tVocê atingiu ${s} objetivos.`);
+console.log(`\n\tVocê atingiu ${sCount} objetivos.`);
 
 const respostas = [
   `\tVocê falha miseravelmente.\n`,
@@ -40,8 +42,4 @@ const respostas = [
   `\tVocê triunfa de maneira inquestionável e seus feitos serão lembrados por muitas gerações.\n`,
 ];
 
-for (i = 0; i < respostas.length; i++) {
-  if (s == i) {
-    console.log(respostas[i]);
-  }
-}
+console.log(respostas[sCount]);

@@ -69,7 +69,7 @@ Others believe it is not in their hands to judge, and the accused deserves a fai
 [1] (+1 Justice) You are outraged that anyone would think you would commit such a heinous act! You take the killer to justice.
 [2] (-1 Justice) How can they keep breathing when your beloved breathes no more? You draw you sword.
 
-[1] TODO: TEXT
+[1] TODO: write text
 
 [2] FIXME: Somehow, the server gets ahold of a sword. The execution turns into a duel. What will you do?
 

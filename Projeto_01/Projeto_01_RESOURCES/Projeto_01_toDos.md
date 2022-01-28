@@ -4,9 +4,11 @@
 
 ## ATTRIBUTES
 
-TODO: adjust for bidimensional array
-
 ## DECISION #3
+
+[1] TODO: write text
+
+[2] FIXME: Answer 2
 
 + implement battle (jokenpo) ✔
 + refactor story console.log()s ✔

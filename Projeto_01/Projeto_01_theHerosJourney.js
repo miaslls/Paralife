@@ -15,7 +15,7 @@ You're sitting on a corner watching the guests drink and dance and laugh. You ca
 But instead of joy in their eyes, you see pain. You dart toward them, but it's too late.
 When you are finally able to reach them across the room, through a wave of alarmed guests, you find their lifeless body lying on the floor.\n`);
 
-prompt(`    Press ENTER to continue! `); 
+prompt(`    Press ENTER to continue! `);
 
 // ATTRIBUTES
 
@@ -35,7 +35,7 @@ let strength = 0;
 let compassion = 0;
 
 for (i = 0; i < 3; i++) {
-  let attribute; 
+  let attribute;
 
   while (true) {
     attribute = prompt(`    Attribute #${i + 1}: `);
@@ -69,7 +69,7 @@ console.log(
   `\t------------------------------ \n\tYour chosen attributes are:\n`
 );
 
-if (courage > 0) { 
+if (courage > 0) {
   console.log(`\tCourage: ${courage}`);
 }
 if (persuasion > 0) {
@@ -102,7 +102,7 @@ while (true) {
   decision1 = prompt(`    Choose your answer! [1 / 2] `);
   if (
     !isNaN(decision1) &&
-    decision1 % 1 == 0 && // validate integer
+    decision1 % 1 == 0 && 
     decision1 > 0 &&
     decision1 < 3
   ) {
@@ -184,7 +184,7 @@ while (true) {
   decision2 = prompt(`    Choose your answer! [1 / 2] `);
   if (
     !isNaN(decision2) &&
-    decision2 % 1 == 0 && // validate integer
+    decision2 % 1 == 0 &&
     decision2 > 0 &&
     decision2 < 3
   ) {
@@ -204,6 +204,7 @@ if (decision2 == 1) {
   prompt(`    Press ENTER to continue! `);
 
   // JOKENPO
+  
   let jokenpoPlayer;
   let jokenpoOpponent;
 
@@ -220,7 +221,7 @@ if (decision2 == 1) {
       jokenpoPlayer = +prompt(`    Choose your answer! [1 - 3] `);
       if (
         !isNaN(jokenpoPlayer) &&
-        jokenpoPlayer % 1 == 0 && // validate integer
+        jokenpoPlayer % 1 == 0 &&
         jokenpoPlayer > 0 &&
         jokenpoPlayer < 4
       ) {
