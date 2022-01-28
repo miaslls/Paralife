@@ -1,5 +1,12 @@
 const prompt = require("prompt-sync")();
 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 // BACKGROUND STORY
 
 console.log(`\n\tTHE HERO'S JOURNEY\n`);
@@ -8,15 +15,12 @@ You're sitting on a corner watching the guests drink and dance and laugh. You ca
 But instead of joy in their eyes, you see pain. You dart toward them, but it's too late.
 When you are finally able to reach them across the room, through a wave of alarmed guests, you find their lifeless body lying on the floor.\n`);
 
-prompt("\tPress ENTER to continue! ");
+prompt(`    Press ENTER to continue! `); 
 
 // ATTRIBUTES
 
 console.log(`\n\tCHOOSE YOUR ATTRIBUTES
 \n\tYou have 3 attribute points. Choose where to spend them! \n\t(You CAN spend more than 1 point per attribute.)`);
-
-// TODO: put attributes in a bidimensional array
-// TODO: a1.join(separator) Join all elements of array a1 into a string separated by separator arg
 
 console.log(`\n\t[1] Courage;
 \t[2] Persuasion
@@ -30,14 +34,14 @@ let justice = 0;
 let strength = 0;
 let compassion = 0;
 
-// TODO: ajust for bidimensional array (Aula 08)
-
 for (i = 0; i < 3; i++) {
+  let attribute; 
+
   while (true) {
-    attribute = prompt(`\tAttribute #${i + 1}: `);
+    attribute = prompt(`    Attribute #${i + 1}: `);
     if (
       !isNaN(attribute) &&
-      attribute % 1 == 0 &&
+      attribute % 1 == 0 && // validate integer
       attribute > 0 &&
       attribute < 6
     ) {
@@ -65,23 +69,23 @@ console.log(
   `\t------------------------------ \n\tYour chosen attributes are:\n`
 );
 
-if (courage != 0) {
+if (courage > 0) { 
   console.log(`\tCourage: ${courage}`);
 }
-if (persuasion != 0) {
+if (persuasion > 0) {
   console.log(`\tPersuasion: ${persuasion}`);
 }
-if (justice != 0) {
+if (justice > 0) {
   console.log(`\tJustice: ${justice}`);
 }
-if (strength != 0) {
+if (strength > 0) {
   console.log(`\tStrength: ${strength}`);
 }
-if (compassion != 0) {
+if (compassion > 0) {
   console.log(`\tCompassion: ${compassion}`);
 }
 
-prompt("\n\tPress ENTER to continue! ");
+prompt(`\n    Press ENTER to continue! `);
 
 // DECISION #1 - find the killer
 
@@ -95,10 +99,10 @@ console.log(`\n\t[1] I will lie down next to the one I love and mourn them.);
 let decision1 = 0;
 
 while (true) {
-  decision1 = prompt("\tChoose your answer! [1 / 2] ");
+  decision1 = prompt(`    Choose your answer! [1 / 2] `);
   if (
     !isNaN(decision1) &&
-    decision1 % 1 == 0 &&
+    decision1 % 1 == 0 && // validate integer
     decision1 > 0 &&
     decision1 < 3
   ) {
@@ -119,7 +123,7 @@ You take a whiff and get a hint of almonds. Cyanide.\n`);
   courage++;
 }
 
-prompt("\tPress ENTER to continue! ");
+prompt(`    Press ENTER to continue! `);
 
 // DECISION 2 - discover the motive
 
@@ -138,15 +142,9 @@ if (persuasion != 0) {
 console.log(`\n\t+ If you roll 1, 2, or 3, you will not be able to persuade the servant into explosing their motives.
 \t+ If you roll 4, 5, or 6, you will discover the reason behind your spouse's murder.\n`);
 
-prompt("\tPress ENTER to roll the dice! ");
+prompt(`    Press ENTER to roll the dice! `);
 
 // DICE ROLL
-
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
 let diceRoll = getRandomIntInclusive(1, 6) + persuasion;
 
@@ -168,7 +166,7 @@ You were the object of their passion for many years, and when you found love you
   persuasion++;
 }
 
-prompt("\tPress ENTER to continue! ");
+prompt(`    Press ENTER to continue! `);
 
 // DECISION 3 - the killer's fate
 
@@ -180,13 +178,13 @@ console.log(`\n\t[1] You are outraged that anyone would think you would commit s
 
 // TODO: Add console.log (+1 Justice)
 
-let decision2 = 0;
+let decision2;
 
 while (true) {
-  decision2 = prompt("\tChoose your answer! [1 / 2] ");
+  decision2 = prompt(`    Choose your answer! [1 / 2] `);
   if (
     !isNaN(decision2) &&
-    decision2 % 1 == 0 &&
+    decision2 % 1 == 0 && // validate integer
     decision2 > 0 &&
     decision2 < 3
   ) {
@@ -203,7 +201,7 @@ if (decision2 == 1) {
     `\n\t(-1 Justice) Somehow, the server gets ahold of a sword. The execution turns into a duel. What will you do?\n`
   );
 
-  prompt("\tPress ENTER to continue! ");
+  prompt(`    Press ENTER to continue! `);
 
   // JOKENPO
   let jokenpoPlayer;
@@ -219,10 +217,10 @@ if (decision2 == 1) {
 \t[3] Parry\n`);
 
     while (true) {
-      jokenpoPlayer = +prompt(`\tChoose your answer! [1 - 3] `);
+      jokenpoPlayer = +prompt(`    Choose your answer! [1 - 3] `);
       if (
         !isNaN(jokenpoPlayer) &&
-        jokenpoPlayer % 1 == 0 &&
+        jokenpoPlayer % 1 == 0 && // validate integer
         jokenpoPlayer > 0 &&
         jokenpoPlayer < 4
       ) {
@@ -238,49 +236,25 @@ if (decision2 == 1) {
     console.log(`\n\tYour choice: \t\t${jokenpoChoices[jokenpoPlayer - 1]}
   \tYour opponent's: \t${jokenpoChoices[jokenpoOpponent - 1]}`);
 
-    // FIXME: check ▼
-
     if (jokenpoPlayer != jokenpoOpponent) {
       break;
     }
     console.log(`\n\tIt's a DRAW!`);
-    prompt(`\tPress ENTER to play again.`);
+    prompt(`    Press ENTER to play again `);
   }
 
-  const resultsWin = [
-    [0, 2],
-    [1, 0],
-    [2, 1],
-  ];
-
-  const resultsLose = [
-    [0, 1],
-    [1, 2],
-    [2, 0],
-  ];
-
-  const results = [[jokenpoPlayer - 1, jokenpoOpponent - 1]];
-
-  for (i = 0; i < resultsWin.length; i++) {
-    if (
-      results[0][0] == resultsWin[i][0] &&
-      results[0][1] == resultsWin[i][1]
-    ) {
-      console.log(
-        `\n\t[WIN] (+1 Strength) You win the fight. You lift your sword for the final blow, but the guards stop you. This is not your decision to make.`
-      );
-      stength++;
-    }
-  }
-
-  for (i = 0; i < resultsLose.length; i++) {
-    if (
-      results[0][0] == resultsLose[i][0] &&
-      results[0][1] == resultsLose[i][1]
-    ) {
-      console.log(
-        `\n\t[LOSE] You are at your opponents mercy. A swift blow and you'll be dead. They take pity on you though, drop the sword, and let the guards guide them to the dungeons.`
-      );
-    }
+  if (
+    (jokenpoPlayer == 1 && jokenpoOpponent == 2) ||
+    (jokenpoPlayer == 2 && jokenpoOpponent == 3) ||
+    (jokenpoPlayer == 3 && jokenpoOpponent == 1)
+  ) {
+    console.log(
+      `\n\t[WIN] (+1 Strength) You win the fight. You lift your sword for the final blow, but the guards stop you. This is not your decision to make.`
+    );
+    stength++;
+  } else {
+    console.log(
+      `\n\t[LOSE] You are at your opponents mercy. A swift blow and you'll be dead. They take pity on you though, drop the sword, and let the guards guide them to the dungeons.`
+    );
   }
 }
