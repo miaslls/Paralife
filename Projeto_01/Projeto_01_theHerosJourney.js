@@ -10,12 +10,13 @@ function getRandomIntInclusive(min, max) {
 // BACKGROUND STORY
 
 console.log(`\n\tTHE HERO'S JOURNEY\n`);
-console.log(`Today is the happiest day of your life. Or it ought to be. You've just sworn your vows to the love of your life.
-You're sitting on a corner watching the guests drink and dance and laugh. You catch a glimpse of your beloved.
-But instead of joy in their eyes, you see pain. You dart toward them, but it's too late.
+console.log(`Today is the happiest day of your life. Or it ought to be. You have just sworn your vows to the love of your life.  
+You are sitting on a corner watching the guests drink and dance and laugh. You catch a glimpse of your beloved.  
+But instead of joy in their eyes, you see pain. You dart toward them, but it is too late. 
 When you are finally able to reach them across the room, through a wave of alarmed guests, you find their lifeless body lying on the floor.\n`);
 
 prompt(`    Press ENTER to continue! `);
+console.clear();
 
 // ATTRIBUTES
 
@@ -65,9 +66,7 @@ for (i = 0; i < 3; i++) {
 
 // SHOW CHOSEN ATTRIBUTES
 
-console.log(
-  `\t------------------------------ \n\tYour chosen attributes are:\n`
-);
+console.log(`    --------------- \n\n\tYour chosen attributes are:\n`);
 
 if (courage > 0) {
   console.log(`\tCourage: ${courage}`);
@@ -85,50 +84,54 @@ if (compassion > 0) {
   console.log(`\tCompassion: ${compassion}`);
 }
 
-prompt(`\n    Press ENTER to continue! `);
+console.log(``);
+prompt(`    Press ENTER to continue `);
+console.clear();
 
 // DECISION #1 - find the killer
 
-console.log(`\nAt this very moment, it feels like the ground has been pulled from under you.
-Everything goes silent, and the world is moving both too fast and too slow.
-You have a decision to make. Will you give in to grief, or will you set out to find who did this, and why?`);
+console.log(`\nAt this very moment, it feels like the ground has been pulled from under you.  
+Everything goes silent, and the world is moving both too fast and too slow. You have a decision to make. 
+Will you give in to grief, or will you set out to find who did this, and why? `);
 
-console.log(`\n\t[1] I will lie down next to the one I love and mourn them.);
-\t[2] I will find the one who did this, and avenge their death.\n`);
+console.log(`\n\t[1] I will lie down next to the one I love and mourn them.  
+\t[2] I will find the one who did this and avenge their death.\n`);
 
-let decision1 = 0;
+let decision1;
 
 while (true) {
-  decision1 = prompt(`    Choose your answer! [1 / 2] `);
+  decision1 = prompt(`    Choose your answer [1 / 2] `);
   if (
     !isNaN(decision1) &&
-    decision1 % 1 == 0 && 
+    decision1 % 1 == 0 &&
     decision1 > 0 &&
     decision1 < 3
   ) {
     break;
   }
-  console.log(`\n\tYou must type [1] or [2].`);
+  console.log(`\n\tYou must type [1] or [2]`);
 }
 
 if (decision1 == 1) {
-  console.log(`\n[1] You drop down to the floor and cry. You don't know how much time has passed, but you look out and see it's morning.
-You are alone. Through the window, you see your brother running towards the house, and waving wildly at you.
-At first, you can't quite make out whats he's saying. But as he gets closer, you understand. He's frantically announcing: "They found the murderer!"\n`);
+  console.log(`\n[1] (-1 courage) You drop down to the floor and cry. You do not know how much time has passed, but you look out and see it is morning.
+You are alone. Through the window, you see your brother running towards the house, and waving wildly at you. 
+At first, you can't quite make out what he is saying. But as he gets closer, you understand. He is frantically announcing: "They found the murderer!"\n`);
+  courage--;
 } else {
-  console.log(`\n[2] (+1 courage) You compose yourself at once and shouts at the guards to bar the doors. No one leaves until you find the one who did this.
-Out of the corner of your eye, you see a server drop something, and cautiously start heading to the kitchens.
-Your brother, who's standing by your side, sees the same thing. He seizes the suspect and you inspect the vial that's been dropped.
+  console.log(`\n[2] (+1 courage) You compose yourself at once and shouts at the guards to bar the doors. No one leaves until you find the one who did this. 
+Out of the corner of your eye, you see a server drop something, and cautiously start heading to the kitchens. 
+Your brother, who is standing by your side sees the same thing. He seizes the suspect, and you inspect the vial that has been dropped. 
 You take a whiff and get a hint of almonds. Cyanide.\n`);
   courage++;
 }
 
-prompt(`    Press ENTER to continue! `);
+prompt(`    Press ENTER to continue `);
+console.clear();
 
 // DECISION 2 - discover the motive
 
-console.log(`\nThey bring the accused forward. It's just one of the servants from the kitchens. You stand there for a minute, puzzled.
-What motive could they possibly have? Your bethrothed was loved by all, nobles and commonfolk alike. So why would someone do this?
+console.log(`\nThey bring the accused forward. It is just one of the servants from the kitchens. You stand there for a minute, puzzled. 
+What motive could they possibly have? Your betrothed was loved by all, nobles and commonfolk alike. So why would someone do this? 
 You interrogate the server, but they are not saying anything. Will your persuasion techniques be enough to convince them to talk?`);
 
 console.log(`\n\tROLL THE DICE FOR PERSUASION`);
@@ -139,10 +142,10 @@ if (persuasion != 0) {
   );
 }
 
-console.log(`\n\t+ If you roll 1, 2, or 3, you will not be able to persuade the servant into explosing their motives.
+console.log(`\n\t+ If you roll 1, 2, or 3, you will not be able to persuade the servant into exposing their motives. 
 \t+ If you roll 4, 5, or 6, you will discover the reason behind your spouse's murder.\n`);
 
-prompt(`    Press ENTER to roll the dice! `);
+prompt(`    Press ENTER to roll the dice `);
 
 // DICE ROLL
 
@@ -156,32 +159,32 @@ console.log(`\n\tYou roll a ${diceRoll}!`);
 
 if (diceRoll < 4) {
   console.log(
-    `\n[${diceRoll}] You try your best, but they are unyielding. You might never know why this tragedy was brought upon you.\n`
+    `\n[${diceRoll}] (-1 persuasion) You try your best, but they are unyielding. You might never know why this tragedy was brought upon you.\n`
   );
+  persuasion--;
 } else {
-  console.log(`\n[${diceRoll}] (+1 persuasion) After hours of interrogation, despair fills you, as you realize you might never know why this tragedy was brought upon you.
-In a frail last attempt to uncover the truth, you drop down to your knees and begs them to please tell you why, why they had to take away what is most precisous to you.
-Moved by this unexpected display of emotion, they confess. It was love and jealousy, the masterminds of this crime.
-You were the object of their passion for many years, and when you found love yourself, they couldn't bear the thought of seeing you with another.\n`);
+  console.log(`\n[${diceRoll}] (+1 persuasion) After hours of interrogation, despair fills you, as you realize you might never know why this tragedy was brought upon you. 
+In a frail last attempt to uncover the truth, you drop down to your knees and beg them to please tell you why, why they had to take your heart from you? 
+Moved by this unexpected display of emotion, they confess. It was love and jealousy, the masterminds of this crime. 
+You were the object of their passion for many years, and when you found love yourself, they could not bear the thought of seeing you with another.\n`);
   persuasion++;
 }
 
-prompt(`    Press ENTER to continue! `);
+prompt(`    Press ENTER to continue `);
+console.clear();
 
-// DECISION 3 - the killer's fate
+// DECISION 3 - the killer's fate (1)
 
-console.log(`\nOpinions are divided. Some claim there is no excuse for what this person did. They should be executed right then and there.
-Others believe it is not in their hands to judge, and the accused deserves a fair trial. What will it be?`);
+console.log(`\nOpinions are divided. Some claim there is no excuse for what this person did. They should be executed without delay. 
+Others believe it is not in their hands to judge, and the accused deserves a fair trial. What will it be? `);
 
-console.log(`\n\t[1] You are outraged that anyone would think you would commit such a heinous act! You take the killer to justice.
-\t[2] How can they keep breathing when your beloved breathes no more? You draw you sword.\n`);
-
-// TODO: Add console.log (+1 Justice)
+console.log(`\n\t[1] You are outraged that anyone would think you would commit such a heinous act! You take the killer to justice. 
+\t[2] How can they keep breathing when your beloved breathes no more? You draw your sword.\n`);
 
 let decision2;
 
 while (true) {
-  decision2 = prompt(`    Choose your answer! [1 / 2] `);
+  decision2 = prompt(`    Choose your answer [1 / 2] `);
   if (
     !isNaN(decision2) &&
     decision2 % 1 == 0 &&
@@ -190,21 +193,23 @@ while (true) {
   ) {
     break;
   }
-  console.log(`\n\tYou must type [1] or [2].`);
+  console.log(`\n    You must type [1] or [2]`);
 }
 
 if (decision2 == 1) {
   justice++;
+  console.log(`\n\t(+1 Justice)\n`);
 } else {
   justice--;
   console.log(
     `\n\t(-1 Justice) Somehow, the server gets ahold of a sword. The execution turns into a duel. What will you do?\n`
   );
 
-  prompt(`    Press ENTER to continue! `);
+  prompt(`    Press ENTER to continue `);
+  console.clear();
 
   // JOKENPO
-  
+
   let jokenpoPlayer;
   let jokenpoOpponent;
 
@@ -218,7 +223,7 @@ if (decision2 == 1) {
 \t[3] Parry\n`);
 
     while (true) {
-      jokenpoPlayer = +prompt(`    Choose your answer! [1 - 3] `);
+      jokenpoPlayer = +prompt(`    Choose your answer [1 - 3] `);
       if (
         !isNaN(jokenpoPlayer) &&
         jokenpoPlayer % 1 == 0 &&
@@ -240,8 +245,9 @@ if (decision2 == 1) {
     if (jokenpoPlayer != jokenpoOpponent) {
       break;
     }
-    console.log(`\n\tIt's a DRAW!`);
+    console.log(`\n\tIt's a DRAW!\n`);
     prompt(`    Press ENTER to play again `);
+    console.clear();
   }
 
   if (
@@ -250,12 +256,194 @@ if (decision2 == 1) {
     (jokenpoPlayer == 3 && jokenpoOpponent == 1)
   ) {
     console.log(
-      `\n\t[WIN] (+1 Strength) You win the fight. You lift your sword for the final blow, but the guards stop you. This is not your decision to make.`
+      `\n[WIN] (+1 Strength) You win the fight. You lift your sword for the final blow, but the guards stop you. \nThis is not your decision to make.\n`
     );
-    stength++;
+    strength++;
   } else {
     console.log(
-      `\n\t[LOSE] You are at your opponents mercy. A swift blow and you'll be dead. They take pity on you though, drop the sword, and let the guards guide them to the dungeons.`
+      `\n[LOSE] (-1 Strength) You are at your opponent's mercy. A swift blow and you would be dead. \nThey take pity on you though, drop the sword, and let the guards guide them to the dungeons.\n`
     );
+    strength--;
   }
+}
+
+prompt(`    Press ENTER to continue `);
+console.clear();
+
+// DECISION 4 - the killer's fate (2)
+
+console.log(`\nThe time has come to decide the murderer's fate. All are here. Judge, jury, and every soul for miles around.  
+You know the judge will heed your words. You know you have power here.  
+You hear people scream and curse and call for the gallows.  
+You think about that for a moment. Seems fair. Logical, even. A life for a life.  
+You also hear people pleading for mercy. Mercy... The word echoes in you. 
+You are not too sure now, are you? Well, there is no more time to think.  
+The judge calls your name. It is your turn to speak. What will you say?`);
+
+console.log(`\n\t[1] "My friend, what IS there to say? What I held closest to my heart has been ripped from me in the cruelest of ways.  
+\tThere is no other way. The killer should hang."
+\n\t[2] You say nothing at first. You consider it a bit more. It feels right. But the words are caught in your throat, tears flood your eyes. 
+\tHesitantly, you look up. Only two syllables escape your lips. The ones that have been ringing between your ears... "Mercy".\n`);
+
+let decision4;
+
+while (true) {
+  decision4 = prompt(`    Choose your answer [1 / 2] `);
+  if (
+    !isNaN(decision4) &&
+    decision4 % 1 == 0 &&
+    decision4 > 0 &&
+    decision4 < 3
+  ) {
+    break;
+  }
+  console.log(`\n\tYou must type [1] or [2]`);
+}
+
+if (decision4 == 1) {
+  console.log(
+    `\n[1] (-1 Compassion) The sentence is carried out, but it does not give you any comfort or closure. You head home with a heavy heart.\n`
+  );
+  compassion--;
+} else {
+  console.log(`\n[2] (+1 Compassion)\n`);
+  compassion++;
+}
+
+prompt(`    Press ENTER to continue `);
+console.clear();
+
+// DECISION #5 - the final "battle"
+
+// TODO: write STORY aspect
+
+// FIXME:
+console.log(
+  `\nThe king died. They will choose the new ruler from 2 opponents. You have a debate so that the people can choose the new ruler.\n`
+);
+
+prompt(`    Press ENTER to continue to debate `);
+
+// BATTLE SETUP
+
+const baseDmgMin = 15;
+const baseDmgMax = 20;
+const baseDefense = 100;
+
+const attributeDmgList = ["Courage", "Strength", "Persuasion"];
+const attributeDefenseList = ["Justice", "Compassion"];
+const attributeDmgValue = [courage, strength, persuasion];
+const attributeDefenseValue = [justice, compassion];
+const buffDmgValue = [courage / 10, strength / 10, persuasion / 10];
+const buffDefenseValue = [justice / 10, compassion / 10];
+
+let buffDmgTotal = 0;
+let buffDefenseTotal = 0;
+
+console.log(`\n\tTHE FINAL BATTLE - the Debate
+
+\tBASE DEFENSE: 100
+\tBASE DMG: 15 - 20`);
+
+console.log(
+  `\n\tFor each point in one of the following attributes, you will get +10% to your damage inflicted.\n`
+);
+
+for (i = 0; i < attributeDmgList.length; i++) {
+  console.log(`\t${attributeDmgList[i]} [${attributeDmgValue[i]}]`);
+  if (attributeDmgValue[i] > 0) {
+    console.log(`\t+${attributeDmgValue[i] * 10}% dmg`);
+    buffDmgTotal = buffDmgTotal + buffDmgValue[i];
+  }
+}
+
+console.log(
+  `\n\tFor each point in one of the following attributes, you will get +10% to your argument's defense.\n`
+);
+
+for (i = 0; i < attributeDefenseList.length; i++) {
+  console.log(`\t${attributeDefenseList[i]} [${attributeDefenseValue[i]}]`);
+  if (attributeDefenseValue[i] > 0) {
+    console.log(`\t+${attributeDefenseValue[i] * 10}% defense`);
+    buffDefenseTotal = buffDefenseTotal + buffDefenseValue[i];
+  }
+}
+
+console.log(
+  `\n\tFor any negative attribute, your opponent will get +10% to their damage inflicted.`
+);
+
+let attributeList = attributeDmgList.concat(attributeDefenseList);
+let attributeValue = attributeDmgValue.concat(attributeDefenseValue);
+let buffValue = buffDmgValue.concat(buffDefenseValue);
+
+let buffOpponentDmg = 0;
+
+for (i = 0; i < attributeList.length; i++) {
+  if (attributeValue[i] < 0) {
+    console.log(`\t${attributeList[i]} [${attributeValue[i]}]`);
+    console.log(`\t+${attributeValue[i] * 10 * -1}% opponent dmg`);
+    buffOpponentDmg = buffOpponentDmg + buffValue[i] * -1;
+  }
+}
+
+const playerDmgMin = baseDmgMin + baseDmgMin * buffDmgTotal;
+const playerDmgMax = baseDmgMax + baseDmgMax * buffDmgTotal;
+
+let playerDefense = baseDefense + baseDefense * buffDefenseTotal;
+
+const opponentDmgMin = baseDmgMin + baseDmgMin * buffOpponentDmg;
+const opponentDmgMax = baseDmgMax + baseDmgMax * buffOpponentDmg;
+
+let opponentDefense = baseDefense;
+
+console.log(`\n\t--------------------
+
+YOUR DAMAGE: \t${playerDmgMin} - ${playerDmgMax} \t| OPPONENT'S DAMAGE: \t${opponentDmgMin} - ${opponentDmgMax}
+YOUR DEFENSE: \t${playerDefense} \t\t| OPPONENT'S DEFENSE: \t${opponentDefense}\n`);
+
+prompt(`    Press ENTER to attack `);
+
+// BATTLE
+
+let roundCount = 1;
+
+while (true) {
+
+  let playerDmgRandom = getRandomIntInclusive(playerDmgMin, playerDmgMax);
+  let opponentDmgRandom = getRandomIntInclusive(opponentDmgMin, opponentDmgMax);
+
+  let playerDmg = playerDmgRandom;
+  let opponentDmg = opponentDmgRandom;
+
+  playerDefense = playerDefense - opponentDmg;
+  opponentDefense = opponentDefense - playerDmg;
+  
+  console.log(`\n\tROUND ${roundCount}
+  
+\tYou attack your opponent's argument for ${playerDmg} damage.
+\tYour opponent attacks your argument for ${opponentDmg} damage.
+
+\tYour defense:    ${playerDefense}
+\tYour opponent's: ${opponentDefense}\n`);
+
+  roundCount++;
+
+  prompt(`    Press ENTER for next round `);
+  
+  if (playerDefense <= 0 || opponentDefense <= 0) {
+    console.log(`\n    Oh, it looks like that was the last round...`)
+    prompt(`    Press ENTER for results `);
+    console.clear();
+    break;
+  }
+}
+
+// FIXME:
+if (playerDefense > opponentDefense) {
+  console.log(`\n[WIN] You win the argument and are chosen as leader.\n`);
+} else if (playerDefense < opponentDefense) {
+  console.log(`\n[LOSE] You lose the argument. Your opponent is the new leader.\n`);
+} else if (playerDefense == opponentDefense) {
+  console.log(`\n[DRAW] It's a draw. The search for a new leader continues.\n`)
 }

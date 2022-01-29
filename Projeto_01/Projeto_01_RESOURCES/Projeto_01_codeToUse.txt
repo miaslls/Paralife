@@ -2,23 +2,29 @@ const prompt = require("prompt-sync")();
 
 ---
 
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
-}
+// SET TIMEOUT
 
----
+var a = 1 + 3;
+var b;
+setTimeout(function() {
+    b = a + 4;
+}, (3 * 1000));
 
-while (true) {
-    VAR = prompt();
-    if (VALIDATION - data IN RANGE) {
-        break;
+// CODIGO DO AMIGO - leotinoco7
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if (new Date().getTime() - start > milliseconds) {
+      break;
     }
-    console.log(ERROR);
+  }
 }
 
 ---
 
-a1.join(separator) - Join all elements of array a1 into a string separated by separator arg
+const array1 = ['a', 'b', 'c'];
+const array2 = ['d', 'e', 'f'];
+const array3 = array1.concat(array2);
 
+---

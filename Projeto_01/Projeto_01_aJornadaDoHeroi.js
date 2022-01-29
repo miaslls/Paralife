@@ -7,13 +7,13 @@ const perguntas = [
   "Você descobriu quem era o assassino? [S/N] ",
   "Você conseguiu que o assassino confessasse seus motivos? [S/N] ",
   "Você entregou o assassino às autoridades? [S/N] ",
-  "Você interviu para que alterassem a pena de morte para prisão perpétua? [S/N] ",
+  "Você interveio para que alterassem a pena de morte para prisão perpétua? [S/N] ",
   "Você foi escolhida pelo povo para liderá-los, por sua compaixão e senso de justiça? [S/N] ",
 ];
 
 console.log(`\n${background}\n`);
 
-let sCount = 0;
+let contSim = 0;
 
 for (i = 0; i < perguntas.length; i++) {
   let resposta;
@@ -27,11 +27,11 @@ for (i = 0; i < perguntas.length; i++) {
   }
   
   if (resposta == "S") {
-    sCount++;
+    contSim++;
   }
 }
 
-console.log(`\n\tVocê atingiu ${sCount} objetivos.`);
+console.log(`\n\tVocê atingiu ${contSim} objetivos.`);
 
 const respostas = [
   `\tVocê falha miseravelmente.\n`,
@@ -42,4 +42,4 @@ const respostas = [
   `\tVocê triunfa de maneira inquestionável e seus feitos serão lembrados por muitas gerações.\n`,
 ];
 
-console.log(respostas[sCount]);
+console.log(respostas[contSim]);
