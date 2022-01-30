@@ -331,7 +331,7 @@ console.clear();
 // BATTLE SETUP
 
 console.log(`\nA debate was set up. You will have to convince the people that you are the one who should lead.
-At this time, the virtuous choices you took will count in yout favor, both strengthening your attack at the opponents argument, and solififying your own argument.
+At this time, the virtuous choices you took will count in your favor, both strengthening your attack at the opponent's argument, and solidifying your own argument.
 Consequently, any reprehensible choices you made will serve as fuel to your opponent's attack, discrediting your argument.\n`);
 
 prompt(`    Press ENTER to continue to debate `);
@@ -452,14 +452,14 @@ console.clear();
 
 if (playerDefense > opponentDefense) {
   console.log(
-    `\n[WIN] You carried yourself well. The positive attributes you've shown throughout this journey have earned you the title of Supreme Ruler. Congratulations.\n`
+    `\n[WIN] You carried yourself well. The positive attributes you have shown throughout this journey have earned you the title of Supreme Ruler. Congratulations.\n`
   );
 } else if (playerDefense < opponentDefense) {
   console.log(
-    `\n[LOSE] Your choices in life have led yo your inevitable defeat.\n`
+    `\n[LOSE] Your choices in life have led to your inevitable defeat.\n`
   );
 } else if (playerDefense == opponentDefense) {
   console.log(
-    `\n[DRAW] Neither you nor your opponent were able to convince the people that you are fit to rule.. The search for a new leader continues.\n`
+    `\n[DRAW] Neither you nor your opponent were able to convince the people that you are fit to rule... The search for a new leader continues.\n`
   );
 }

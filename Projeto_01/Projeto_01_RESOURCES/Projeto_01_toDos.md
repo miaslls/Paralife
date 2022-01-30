@@ -19,9 +19,9 @@
 
 ## DECISION #5 - the final battle
 
-+ TODO: battle setup
++ battle setup ✔
 
-+ TODO: win, lose, draw
++ win, lose, draw ✔
 
 ---
 
