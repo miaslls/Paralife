@@ -187,9 +187,9 @@ while (true) {
   decision3 = prompt(`    Choose your answer [1 / 2] `);
   if (
     !isNaN(decision3) &&
-    decision2 % 1 == 0 &&
-    decision2 > 0 &&
-    decision2 < 3
+    decision3 % 1 == 0 &&
+    decision3 > 0 &&
+    decision3 < 3
   ) {
     break;
   }
@@ -315,16 +315,14 @@ console.clear();
 
 // DECISION #5 - the final "battle"
 
-// TODO: write STORY aspect
-
 console.log(
   `\nMany years have passed now. You could never find love again, but you are content. Today has been just an ordinary day, one of many.
-  Until something happens. You hear the news: The king has just died, after 2 long years of suffering.
-  As soon as people find out, they flock to the main square, eager for more information. You head there as well of course.
-  Official news comes. 
-  As the king left no heirs, and there is no one in line for succession, the new Monarch will be chosen from among the nobles in town.
-  Two names have come up as possible rulers. You are not surprised to hear the first. The head of the oldest and most powerful family in the region.
-  Yet, as they announce the second name, your heart skips a beat. You did not expect to hear your own name.\n`
+Until something happens. You hear the news: The king has just died, after 2 long years of suffering.
+As soon as people find out, they flock to the main square, eager for more information. You head there as well of course.
+Official news comes. 
+As the king left no heirs, and there is no one in line for succession, the new Monarch will be chosen from among the nobles in town.
+Two names have come up as possible rulers. You are not surprised to hear the first. The head of the oldest and most powerful family in the region.
+Yet, as they announce the second name, your heart skips a beat. You did not expect to hear your own name.\n`
 );
 
 prompt(`    Press ENTER to continue `);
@@ -332,8 +330,12 @@ console.clear();
 
 // BATTLE SETUP
 
-// FIXME:
-console.log(`DEBATE SETUP - what and how`)
+console.log(`\nA debate was set up. You will have to convince the people that you are the one who should lead.
+At this time, the virtuous choices you took will count in yout favor, both strengthening your attack at the opponents argument, and solififying your own argument.
+Consequently, any reprehensible choices you made will serve as fuel to your opponent's attack, discrediting your argument.\n`);
+
+prompt(`    Press ENTER to continue to debate `);
+console.clear();
 
 const baseDmgMin = 15;
 const baseDmgMax = 20;
@@ -418,7 +420,6 @@ prompt(`    Press ENTER to attack `);
 let roundCount = 1;
 
 while (true) {
-
   let playerDmgRandom = getRandomIntInclusive(playerDmgMin, playerDmgMax);
   let opponentDmgRandom = getRandomIntInclusive(opponentDmgMin, opponentDmgMax);
 
@@ -427,7 +428,7 @@ while (true) {
 
   playerDefense = playerDefense - opponentDmg;
   opponentDefense = opponentDefense - playerDmg;
-  
+
   console.log(`\n\tROUND ${roundCount}
   
 \tYou attack your opponent's argument for ${playerDmg} damage.
@@ -439,9 +440,9 @@ while (true) {
   roundCount++;
 
   prompt(`    Press ENTER for next round `);
-  
+
   if (playerDefense <= 0 || opponentDefense <= 0) {
-    console.log(`\n    Oh, it looks like that was the last round...`)
+    console.log(`\n    Oh, it looks like that was the last round...`);
     prompt(`    Press ENTER for results `);
     break;
   }
@@ -449,11 +450,16 @@ while (true) {
 
 console.clear();
 
-// FIXME:
 if (playerDefense > opponentDefense) {
-  console.log(`\n[WIN] You win the argument and are chosen as leader.\n`);
+  console.log(
+    `\n[WIN] You carried yourself well. The positive attributes you've shown throughout this journey have earned you the title of Supreme Ruler. Congratulations.\n`
+  );
 } else if (playerDefense < opponentDefense) {
-  console.log(`\n[LOSE] You lose the argument. Your opponent is the new leader.\n`);
+  console.log(
+    `\n[LOSE] Your choices in life have led yo your inevitable defeat.\n`
+  );
 } else if (playerDefense == opponentDefense) {
-  console.log(`\n[DRAW] It's a draw. The search for a new leader continues.\n`)
+  console.log(
+    `\n[DRAW] Neither you nor your opponent were able to convince the people that you are fit to rule.. The search for a new leader continues.\n`
+  );
 }

@@ -2,7 +2,7 @@
 
 # **The Hero's Journey**
 
-## TODO: **README.md**
+## **README.md** ✔
 
 ## ATTRIBUTES
 
@@ -19,7 +19,10 @@
 
 ## DECISION #5 - the final battle
 
-+ TODO: write STORY aspect
++ TODO: battle setup
+
++ TODO: win, lose, draw
+
 ---
 
 + CONTINUE TO WRITE THE MOTHERFUCKING STORY, DIPSHIT!
