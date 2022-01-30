@@ -181,12 +181,12 @@ Others believe it is not in their hands to judge, and the accused deserves a fai
 console.log(`\n\t[1] You are outraged that anyone would think you would commit such a heinous act! You take the killer to justice. 
 \t[2] How can they keep breathing when your beloved breathes no more? You draw your sword.\n`);
 
-let decision2;
+let decision3;
 
 while (true) {
-  decision2 = prompt(`    Choose your answer [1 / 2] `);
+  decision3 = prompt(`    Choose your answer [1 / 2] `);
   if (
-    !isNaN(decision2) &&
+    !isNaN(decision3) &&
     decision2 % 1 == 0 &&
     decision2 > 0 &&
     decision2 < 3
@@ -196,7 +196,7 @@ while (true) {
   console.log(`\n    You must type [1] or [2]`);
 }
 
-if (decision2 == 1) {
+if (decision3 == 1) {
   justice++;
   console.log(`\n\t(+1 Justice)\n`);
 } else {
@@ -317,14 +317,23 @@ console.clear();
 
 // TODO: write STORY aspect
 
-// FIXME:
 console.log(
-  `\nThe king died. They will choose the new ruler from 2 opponents. You have a debate so that the people can choose the new ruler.\n`
+  `\nMany years have passed now. You could never find love again, but you are content. Today has been just an ordinary day, one of many.
+  Until something happens. You hear the news: The king has just died, after 2 long years of suffering.
+  As soon as people find out, they flock to the main square, eager for more information. You head there as well of course.
+  Official news comes. 
+  As the king left no heirs, and there is no one in line for succession, the new Monarch will be chosen from among the nobles in town.
+  Two names have come up as possible rulers. You are not surprised to hear the first. The head of the oldest and most powerful family in the region.
+  Yet, as they announce the second name, your heart skips a beat. You did not expect to hear your own name.\n`
 );
 
-prompt(`    Press ENTER to continue to debate `);
+prompt(`    Press ENTER to continue `);
+console.clear();
 
 // BATTLE SETUP
+
+// FIXME:
+console.log(`DEBATE SETUP - what and how`)
 
 const baseDmgMin = 15;
 const baseDmgMax = 20;
@@ -434,10 +443,11 @@ while (true) {
   if (playerDefense <= 0 || opponentDefense <= 0) {
     console.log(`\n    Oh, it looks like that was the last round...`)
     prompt(`    Press ENTER for results `);
-    console.clear();
     break;
   }
 }
+
+console.clear();
 
 // FIXME:
 if (playerDefense > opponentDefense) {
