@@ -9,7 +9,7 @@
 
 ![rockPaperScissorsLizardSpockDIAGRAM.png](https://i.ibb.co/GxdfmX6/rock-Paper-Scissors-Lizard-Spock-DIAGRAM.png 'rock, paper, scissors, lizard, Spock DIAGRAM')
 
-&ensp; | &ensp; | &ensp; 
+![❤](https://i.ibb.co/mRV4Hpp/1-pink.png "") ![❤](https://i.ibb.co/yqQBzQm/2-purple.png "") ![❤](https://i.ibb.co/z5G5TYQ/3-lilac.png "") | ![❤](https://i.ibb.co/yRSWjMb/4-blue.png "") ![❤](https://i.ibb.co/YXCNqhV/5-turquoise.png "") ![❤](https://i.ibb.co/wSkdt1X/6-green.png "") | ![❤](https://i.ibb.co/znzjbBk/7-yellow.png "") ![❤](https://i.ibb.co/k1gzwVY/8-orange.png "") ![❤](https://i.ibb.co/mRV4Hpp/1-pink.png "")
 ---|---|---
 SCISSORS | &ensp; cuts| &ensp; PAPER
 PAPER | &ensp; covers | &ensp; ROCK
