@@ -1,4 +1,4 @@
-# **PROJETO 1** | A Jornada do Herói
+# ![logo BLUE](https://i.ibb.co/sHBwqxz/BLUE.gif "BLUE") **PROJETO 1** | A Jornada do Herói
 
 ## **PARTE 1** - [theHerosJourney.js](https://github.com/miaslls/BLUE_Modulo_01_PROJETOS/blob/main/Projeto_01/Projeto_01_theHerosJourney.js)
 

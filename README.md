@@ -1,4 +1,4 @@
-# PROJETOS Módulo 1
+# ![logo BLUE](https://i.ibb.co/sHBwqxz/BLUE.gif "BLUE") PROJETOS Módulo 1
 
 ## **PROJETO 1** - A Jornada do Herói 
 

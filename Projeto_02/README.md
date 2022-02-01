@@ -1,4 +1,4 @@
-# **PROJETO 2** | rock, paper, scissors, lizard, Spock
+# ![logo BLUE](https://i.ibb.co/sHBwqxz/BLUE.gif "BLUE") **PROJETO 2** | rock, paper, scissors, lizard, Spock
 ( [Projeto_02_rockPaperScissorsLizardSpock.js](https://github.com/miaslls/BLUE_Modulo_01_PROJETOS/blob/main/Projeto_02/Projeto_02_RockPaperScissorsLizardSpock.js) )
 
 "Scissors cuts paper, paper covers rock, rock crushes lizard, lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors."
