@@ -16,3 +16,15 @@ while (true) {
   }
   console.log(`MENSAGEM DE ERRO`)
 }
+
+// qualquer número > 0 inteiro
+
+while (true) {
+  rodadas = prompt(`número de rodadas: `);
+  if (!isNaN(rodadas) && rodadas > 0 && rodadas % 1 == 0 && rodadas.length != 0) {
+    break;
+  }
+  console.log(`\nvocê deve digitar um NÚMERO INTEIRO > 0`);
+}
+
+console.log(rodadas);

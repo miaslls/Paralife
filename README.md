@@ -32,58 +32,31 @@ O programa deve contar a história inicial (background), fazer as perguntas, e a
 
 ## **PROJETO 2 | Jokenpô**
 
-O Jokenpô é o popular jogo do "Pedra, papel e tesoura". A premissa é simples, você tem 3 elementos para escolher, e cada um deles vence de um, e perde para o outro.
+Este projeto é individual e deverá ser entregue até domingo dia 06/02/2022 ás 23:59.
 
-- Pedra ganha da tesoura, mas perde para o papel;
-- Tesoura ganha do papel, mas perde para a pedra;
-- Papel ganha da pedra, mas perde para a tesoura.
++ Linguagem: JavaScript
++ Motor: NodeJS
++ Framework: JavaScript Vanilla
++ Lembrando que o tema da semana é: ARRAY e FOR.
 
-E para esse projeto você deve desenvolver um programa capaz de :
 
-- Receber o elemento escolhido pelo usuário;
-- Escolher um elemento aleatório para o computador;
-- Comparar os dois elementos e declarar um vencedor.
+Utilizando os conceitos aprendidos até estruturas de repetição, crie um programa que jogue pedra, papel
+e tesoura (Jokenpô) com você.
 
-Você pode adaptar o jogo ao seu projeto criado anteriormente (por exemplo fazer um: "Espada, Escudo e Magia") para incrementar ainda mais o seu projeto. Apenas lembre-se de deixar claro para o usuário como funcionará o jogo nesse caso (quem ganha e quem perde de quem).
-
-### **Requisitos**
-
-Para esse projeto, os requisitos fundamentais serão:
+### O programa tem que:
 
 + Permitir que eu decida quantas rodadas iremos fazer;
-+ Ler a minha escolha (Pedra, papel ou tesoura, ou os elementos escolhidos por você para o seu jogo);
++ Ler a minha escolha (Pedra, papel ou tesoura);
 + Decidir de forma aleatória a decisão do computador;
-+ Comparar os valores e declarar o vencedor (marcando 1 vitória para ele);
-+ Repetir os passos 2, 3 e 4 de acordo com o número de rodadas escolhido;
-+ Ao final das repetições, mostrar quantas rodadas cada jogador ganhou;
++ Mostrar quantas rodadas cada jogador ganhou;
 + Determinar quem foi o grande campeão de acordo com a quantidade de vitórias de cada um (computador e jogador);
-+ Perguntar se o Jogador quer jogar novamente: Se sim volte ao primeiro passo, se não finalize o programa.
++ Perguntar se o Jogador quer jogar novamente, se sim inicie volte a escolha de quantidade de rodadas, se não finalize o programa.
 
-## **Para hoje**
+### Critérios de avaliação:
 
-O projeto é extenso, e temos muito o que fazer! Mas vamos começar por partes. Para hoje seus objetivos são:
-
-+ Criar uma lista com os elementos a serem escolhidos;
-+ Criar as variáveis que receberão as escolhas do usuário e do computador (prompt para o usuário, e aleatório para o computador);
-+ Fazer a validação da entrada do usuário (o programa só deve aceitar o que foi definido por você como entradas válidas);
-+ Exibir o elemento da lista correspondente à escolha de cada um;
-+ Comparar os elementos e exibir quem foi o vencedor dessa rodada.
-
----
-
-## **PROJETO 2 | Continuação**
-
-Agora o nosso programa já deve ser capaz de ler a entrada do usuário, escolher um elemento aleatório para o computador, e ver quem venceu a rodada.
-Vamos agora passar para as funcionalidades finais do nosso projeto:
-
-+ Criar a variável que receberá a quantidade de rodadas que o jogador deseja jogar;
-+ Criar o laço que irá repetir o jogo o número de vezes escolhida pelo jogador;
-+ Depois de declarar o vencedor da rodada, adicionar 1 ponto para esse vencedor;
-+ Ao final das rodadas mostrar quantos pontos cada um marcou;
-+ Determinar quem fez mais pontos e portanto foi o campeão do jogo;
-+ Perguntar ao final se ele quer jogar de novo e criar um laço que deve repetir todo o programa caso a resposta seja sim.
-
-Esses são os requisitos básicos para o seu projeto, que serão considerados essenciais na avaliação. Mas nada impede que você implemente novas funcionalidades! Você pode tanto usar o que foi visto em aula para tornar o seu programa ainda mais interessante, quanto usar coisas que ainda não foram vistas no curso, mas que você pode pesquisar por conta própria e implementar!
-
-Todos que apresentarem um projeto funcional receberão um certificado por ele! E aqueles que apresentarem funcionalidades inovadoras, ou seja, que vão além do que foi visto em aula, receberão um certificado de projeto destaque!
-Seja criativo, e caso tenha qualquer dúvida, não hesite em falar com o(a) professor(a)!
++ Permitir que eu decida quantas rodadas iremos fazer (1 ponto) 
++ Ler a minha escolha: `pedra`, `papel` ou `tesoura` (2 pontos) 
++ Decidir de forma aleatória a decisão do computador (2 pontos)
++ Mostrar quantas rodadas cada jogador ganhou (2 pontos)
++ Determinar quem foi o grande campeão de acordo com a quantidade de vitórias de cada um (computador e jogador) (1,5 pontos)
++ Perguntar se o Jogador quer jogar novamente, se sim inicie volte a escolha de quantidade de rodadas, se não finalize o programa. (1,5 pontos)

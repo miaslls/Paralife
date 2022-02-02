@@ -20,6 +20,8 @@ SPOCK       vaporizes   ROCK
 ROCK        crushes     SCISSORS
 `;
 
+console.clear();
+
 while (true) {
   console.log(`
 -------------------------------------
@@ -161,7 +163,7 @@ RESULTS
           DRAWS:  ${drawCount}
     PLAYER WINS:  ${playerWinCount}
   COMPUTER WINS:  ${computerWinCount}
- -------------------`);
+--------------------`);
 
   if (playerWinCount > computerWinCount) {
     console.log(`YOU are the WINNER!\n`);
