@@ -34,14 +34,18 @@ while (true) {
   // executa as rodadas de acordo com o número selecionado pelo jogador
 
   for (i = 0; i < numberOfRounds; i++) {
-    console.log(`\n--------------------------------\n\nrodada #${i + 1} de ${numberOfRounds}`);
+    console.log(`
+--------------------------------
+
+rodada #${i + 1} de ${numberOfRounds}
+`);
 
     // solicita a escolha do jogador e valida a resposta (PEDRA, PAPEL ou TESOURA)
 
     let jokenpoPlayer;
 
     while (true) {
-      console.log(`\n[PEDRA] [PAPEL] [TESOURA]\n`);
+      console.log(`[PEDRA] [PAPEL] [TESOURA]\n`);
       jokenpoPlayer = prompt(`> sua escolha: `).trim().toUpperCase();
 
       if (jokenpoPlayer == "PEDRA" || jokenpoPlayer == "PAPEL" || jokenpoPlayer == "TESOURA") {
@@ -108,7 +112,7 @@ RESULTADO DA PARTIDA
 
   // pergunta se o jogador deseja iniciar uma nova partida
 
-  let playAgain = prompt(`jogar novamente [SIM] ou [NÃO] `).trim().toUpperCase();
+  let playAgain = prompt(`jogar novamente? [SIM] ou [NÃO] `).trim().toUpperCase();
 
   if (playAgain != "SIM") {
     break;
