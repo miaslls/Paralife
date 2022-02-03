@@ -1,28 +1,21 @@
 const prompt = require("prompt-sync")();
 
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
 // executa uma nova partida caso playAgain == 'SIM'
 
 while (true) {
-  console.log(`JOKENPO\n+ PEDRA ganha de TESOURA\n+ TESOURA ganha de PAPEL\n+ PAPEL ganha de PEDRA\n`);
+  console.log(`\nJOKENPO\n\n+ PEDRA\t\tganha de\tTESOURA\n+ TESOURA\tganha de\tPAPEL\n+ PAPEL\t\tganha de\tPEDRA\n\n-----------------------\n`);
 
   // solicita número de rodadas ao jogador, e valida a resposta (número inteiro > 0)
 
   let numberOfRounds;
 
   while (true) {
-    numberOfRounds = prompt(`número de rodadas: `);
+    numberOfRounds = prompt(`> número de rodadas: `);
 
     if (!isNaN(numberOfRounds) && numberOfRounds % 1 == 0 && numberOfRounds > 0) {
       break;
     }
-    console.log(`\nVocê deve escolher um NÚMERO > 0`);
+    console.log(`\nvocê deve escolher um NÚMERO > 0`);
   }
 
   // redefine o placar para 0 ao começo da partida
@@ -34,28 +27,27 @@ while (true) {
   // executa as rodadas de acordo com o número selecionado pelo jogador
 
   for (i = 0; i < numberOfRounds; i++) {
-    console.log(`\n------------------------\n\nrodada #${i + 1} de ${numberOfRounds}`);
+    console.log(`\n-----------------------\n\nrodada #${i + 1} de ${numberOfRounds}`);
 
     // solicita a escolha do jogador e valida a resposta (PEDRA, PAPEL ou TESOURA)
 
     let jokenpoPlayer;
 
-    console.log(`\n[PEDRA] [PAPEL] [TESOURA]`);
+    console.log(`\n\n[PEDRA] [PAPEL] [TESOURA]\n`);
 
     while (true) {
-      jokenpoPlayer = prompt(`sua escolha: `).trim().toUpperCase();
+      jokenpoPlayer = prompt(`> sua escolha: `).trim().toUpperCase();
       if (jokenpoPlayer == "PEDRA" || jokenpoPlayer == "PAPEL" || jokenpoPlayer == "TESOURA") {
         break;
       }
-      console.log(`\nvocê deve digitar [PEDRA], [PAPEL] ou [TESOURA]`);
+      console.log(`\nvocê deve digitar [PEDRA], [PAPEL] ou [TESOURA]\n`);
     }
 
     // seleciona aleatoriamente a escolha do computador
 
     const jokenpoChoices = ["PEDRA", "PAPEL", "TESOURA"];
 
-    let jokenpoComputerIndex = getRandomIntInclusive(0, jokenpoChoices.length - 1 );
-
+    let jokenpoComputerIndex = Math.floor(Math.random() * 3);
     jokenpoComputer = jokenpoChoices[jokenpoComputerIndex];
 
     console.log(`\nVOCÊ:        ${jokenpoPlayer}\nCOMPUTADOR:  ${jokenpoComputer}`);
@@ -81,7 +73,7 @@ while (true) {
   // exibe o placar final da partida
 
   console.log(`
-------------------------
+-----------------------
 
 RESULTADO DA PARTIDA
 
