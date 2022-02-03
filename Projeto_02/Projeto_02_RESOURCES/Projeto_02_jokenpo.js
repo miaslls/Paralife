@@ -7,18 +7,10 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// limpa o console de informações desnecessárias antes de rodar o código
-console.clear();
-
 // executa uma nova partida caso playAgain == 'SIM'
 
 while (true) {
-  console.log(`JOKENPO
-  
-  + PEDRA ganha de TESOURA
-  + TESOURA ganha de PAPEL
-  + PAPEL ganha de PEDRA
-  `);
+  console.log(`JOKENPO\n+ PEDRA ganha de TESOURA\n+ TESOURA ganha de PAPEL\n+ PAPEL ganha de PEDRA\n`);
 
   // solicita número de rodadas ao jogador, e valida a resposta (número inteiro > 0)
 
@@ -27,17 +19,13 @@ while (true) {
   while (true) {
     numberOfRounds = prompt(`número de rodadas: `);
 
-    if (
-      !isNaN(numberOfRounds) &&
-      numberOfRounds % 1 == 0 &&
-      numberOfRounds > 0
-    ) {
+    if (!isNaN(numberOfRounds) && numberOfRounds % 1 == 0 && numberOfRounds > 0) {
       break;
     }
     console.log(`\nVocê deve escolher um NÚMERO > 0`);
   }
 
-  // define o placar em 0 ao começo da partida
+  // redefine o placar para 0 ao começo da partida
 
   let drawCount = 0;
   let playerWinCount = 0;
@@ -46,7 +34,7 @@ while (true) {
   // executa as rodadas de acordo com o número selecionado pelo jogador
 
   for (i = 0; i < numberOfRounds; i++) {
-    console.log(`\nrodada #${i + 1} de ${numberOfRounds}`);
+    console.log(`\n------------------------\n\nrodada #${i + 1} de ${numberOfRounds}`);
 
     // solicita a escolha do jogador e valida a resposta (PEDRA, PAPEL ou TESOURA)
 
@@ -56,11 +44,7 @@ while (true) {
 
     while (true) {
       jokenpoPlayer = prompt(`sua escolha: `).trim().toUpperCase();
-      if (
-        jokenpoPlayer == "PEDRA" ||
-        jokenpoPlayer == "PAPEL" ||
-        jokenpoPlayer == "TESOURA"
-      ) {
+      if (jokenpoPlayer == "PEDRA" || jokenpoPlayer == "PAPEL" || jokenpoPlayer == "TESOURA") {
         break;
       }
       console.log(`\nvocê deve digitar [PEDRA], [PAPEL] ou [TESOURA]`);
@@ -74,22 +58,22 @@ while (true) {
 
     jokenpoComputer = jokenpoChoices[jokenpoComputerIndex];
 
-    console.log(`\nVOCÊ:       ${jokenpoPlayer}\nCOMPUTADOR: ${jokenpoComputer}`);
+    console.log(`\nVOCÊ:        ${jokenpoPlayer}\nCOMPUTADOR:  ${jokenpoComputer}`);
 
     // valida o resultado da rodada, exibe se o jogador ganhou, perdeu, ou se houve empate, e adiciona ao placar final da partida
 
     if (jokenpoPlayer == jokenpoComputer) {
-      console.log(`\n[EMPATE]`);
+      console.log(`\n|| EMPATE ||`);
       drawCount++;
     } else if (
       (jokenpoPlayer == "PEDRA" && jokenpoComputer == "TESOURA") ||
       (jokenpoPlayer == "PAPEL" && jokenpoComputer == "PEDRA") ||
       (jokenpoPlayer == "TESOURA" && jokenpoComputer == "PAPEL")
     ) {
-      console.log(`\n[VENCEU]`);
+      console.log(`\n|| VENCEU ||`);
       playerWinCount++;
     } else {
-      console.log(`\n[PERDEU]`);
+      console.log(`\n|| PERDEU ||`);
       computerWinCount++;
     }
   }
@@ -97,35 +81,33 @@ while (true) {
   // exibe o placar final da partida
 
   console.log(`
-  ----------------------
-  RESULTADOS:
-  
-            RODADAS:  ${numberOfRounds}
-  
-            EMPATES:  ${drawCount}
-     PONTOS JOGADOR:  ${playerWinCount}
-  PONTOS COMPUTADOR:  ${computerWinCount}
-  ----------------------
+------------------------
+
+RESULTADO DA PARTIDA
+
+ 
+           RODADAS:  ${numberOfRounds}
+ 
+           EMPATES:  ${drawCount}
+    PONTOS JOGADOR:  ${playerWinCount}
+ PONTOS COMPUTADOR:  ${computerWinCount}
+
+-----------------------
   `);
 
   if (playerWinCount > computerWinCount) {
-    console.log(`VOCÊ é o VENCEDOR\n`);
+    console.log(`|| VOCÊ é o VENCEDOR ||\n`);
   } else if (playerWinCount < computerWinCount) {
-    console.log(`o COMPUTADOR é o vencedor\n`);
+    console.log(`|| o COMPUTADOR é o vencedor ||\n`);
   } else {
-    console.log(`foi um EMPATE\n`);
+    console.log(`|| foi um EMPATE ||\n`);
   }
 
   // pergunta se o jogador deseja iniciar uma nova partida
 
-  let playAgain = prompt(`jogar novamente [SIM] or [NÃO] `)
-    .trim()
-    .toUpperCase();
+  let playAgain = prompt(`jogar novamente [SIM] ou [NÃO] `).trim().toUpperCase();
 
   if (playAgain != "SIM") {
     break;
   }
-
-  // limpa o console antes de iniciar a nova partida
-  console.clear();
-}
+} 
