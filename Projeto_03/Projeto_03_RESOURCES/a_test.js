@@ -2,9 +2,9 @@ const prompt = require("prompt-sync")();
 
 // valida números inteiros > 0
 
-let validatePositiveInt = (question, errorMessage) => {
+let validatePromptPositiveInt = (message, errorMessage) => {
   while (true) {
-    let num = prompt(`> ${question} `);
+    let num = prompt(`> ${message} `);
 
     if (!isNaN(num) && num > 0 && num % 1 == 0) {
       return num;
@@ -46,3 +46,21 @@ formatPrompt("digite ENTER para continuar");
 let name = formatPrompt("digite seu nome");
 
 console.log(name);
+
+// ----------
+
+// validate for empty string TODO: apply to code
+
+const validatePromptString = (message = "", errorMessage) => {
+  while (true) {
+    let string = prompt(message);
+
+    if (string.length > 0) {
+      return string;
+    }
+
+    console.log(errorMessage);
+  }
+}
+
+validatePromptString("nome:", "nome não pode ser vazio")
