@@ -11,6 +11,22 @@ function sleep(milliseconds) {
   }
 }
 
+// validate for empty string
+
+const validatePromptString = (message = "", errorMessage = "INVÁLIDO") => {
+  while (true) {
+    let string = formatPrompt(message);
+
+    if (string.length > 0) {
+      return string;
+    }
+
+    console.log(`\n${errorMessage}\n`));
+  }
+}
+
+validatePromptString("nome:", "nome não pode ser vazio")
+
 // get random integer between min and max (inclusive)
 
 const getRandomIntInclusive = (min, max) => {
@@ -22,9 +38,9 @@ const getRandomIntInclusive = (min, max) => {
 
 // validade prompt - integer > 0
 
-const validatePositiveInt = (question, errorMessage) => {
+const validatePromptPositiveInt = (message, errorMessage = "INVÁLIDO") => {
   while (true) {
-    let num = prompt(question);
+    let num = prompt(message);
 
     if (!isNaN(num) && num > 0 && num % 1 == 0) {
       return num;
@@ -36,9 +52,9 @@ const validatePositiveInt = (question, errorMessage) => {
 
 // validade prompt - integer between max and min (inclusive)
 
-const validateIntMinMax = (question, errorMessage, max, min = 0) => {
+const validatePromptIntMinMax = (message, min, max, errorMessage = "INVÁLIDO") => {
   while (true) {
-    let num = prompt(question);
+    let num = prompt(message);
 
     if (!isNaN(num) && num >= min && num <= max && num % 1 == 0) {
       return num;
@@ -75,7 +91,7 @@ const formatToTitle = (text, separator = "-") => {
 
 };
 
-// formata o prompt. ex: `> prompt message `
+// formata o prompt. ex: "> prompt message "
 
 const formatPrompt = (message) => prompt(`> ${message} `);
 

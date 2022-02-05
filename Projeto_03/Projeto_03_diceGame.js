@@ -21,16 +21,16 @@ const formatToTitle = (text, separator = "-") => {
   console.log(`\n${separatorLine}\n${text}\n${separatorLine}\n`);
 };
 
-// formata o prompt. ex: `> prompt message `
+// formata o prompt. ex: "> prompt message "
 
 const formatPrompt = (message) => prompt(`> ${message} `);
 
 // valida números inteiros > min
 
-const validatePositiveIntMin = (question, errorMessage, min) => {
+const validatePromptPositiveIntMin = (message, errorMessage, min) => {
   while (true) {
 
-    let num = formatPrompt(question);
+    let num = formatPrompt(message);
 
     if (!isNaN(num) && num >= min && num % 1 == 0) {
       return num;
@@ -39,6 +39,20 @@ const validatePositiveIntMin = (question, errorMessage, min) => {
     console.log(`\n${errorMessage}\n`);
   }
 };
+
+// valida string não vazia
+
+const validatePromptString = (message = "", errorMessage) => {
+  while (true) {
+    let string = formatPrompt(message);
+
+    if (string.length > 0) {
+      return string;
+    }
+
+    console.log(`\n${errorMessage}\n`);
+  }
+}
 
 // retorna valor inteiro aleatório ente min e max (inclusive min e max)
 
@@ -72,13 +86,13 @@ vencedor da PARTIDA - aquele que vencer o maior número de rodadas.
 
 console.log(`SELECIONE:\n`);
 
-const numberOfPlayers = validatePositiveIntMin(
+const numberOfPlayers = validatePromptPositiveIntMin(
   "número de jogadores:",
   "digite um NÚMERO INTEIRO >= 2",
   2
 );
 
-const numberOfRounds = validatePositiveIntMin(
+const numberOfRounds = validatePromptPositiveIntMin(
   "número de rodadas:",
   "digite um NÚMERO INTEIRO >= 1",
   1
@@ -92,7 +106,7 @@ let playerObject;
 // cria um objeto para cada jogador
 
 for (i = 0; i < numberOfPlayers; i++) {
-  let playerName = formatPrompt(`nome do jogador ${i + 1}:`);
+  let playerName = validatePromptString(`nome do jogador #${i + 1}`, "nome não pode ser vazio");
   playerObject = new Player(i, playerName);
   playerObjectList.push(playerObject);
 }
