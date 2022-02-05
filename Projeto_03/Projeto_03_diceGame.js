@@ -15,8 +15,9 @@ qualquer texto
 const formatToTitle = (text, separator = "-") => {
   let separatorLine = "";
 
-  for (i = 0; i < text.length; i++)
+  for (let i = 0; i < text.length; i++) {
     separatorLine = separatorLine.concat(separator);
+  }
 
   console.log(`\n${separatorLine}\n${text}\n${separatorLine}\n`);
 };
@@ -29,7 +30,6 @@ const formatPrompt = (message) => prompt(`> ${message} `);
 
 const validatePromptPositiveIntMin = (message, errorMessage, min) => {
   while (true) {
-
     let num = formatPrompt(message);
 
     if (!isNaN(num) && num >= min && num % 1 == 0) {
@@ -105,7 +105,7 @@ let playerObject;
 
 // cria um objeto para cada jogador
 
-for (i = 0; i < numberOfPlayers; i++) {
+for (let i = 0; i < numberOfPlayers; i++) {
   let playerName = validatePromptString(`nome do jogador #${i + 1}`, "nome não pode ser vazio");
   playerObject = new Player(i, playerName);
   playerObjectList.push(playerObject);
@@ -116,24 +116,24 @@ formatPrompt("digite ENTER para começar a partida");
 
 // repete pelo número de rodadas selecionado
 
-for (j = 0; j < numberOfRounds; j++) {
+for (let j = 0; j < numberOfRounds; j++) {
   formatToTitle(`rodada ${j + 1}`);
 
   // define e exibe o resultado da rodada para cada jogador
 
   playerObjectList.forEach((instance) => {
     diceRoll = getRandomIntInclusive(1, 6);
-    instance.result = diceRoll;
-    console.log(`\t${instance.name} rolou ${instance.result}`);
+    instance.lastRoll = diceRoll;
+    console.log(`\t${instance.name} rolou ${instance.lastRoll}`);
   });
 
   // organiza os objetos (player) por ordem decrescente de resultado (por rodada)
 
-  playerObjectList.sort((a, b) => b.result - a.result);
+  playerObjectList.sort((a, b) => b.lastRoll - a.lastRoll);
 
   // exibe o vencedor da rodada
 
-  if (playerObjectList[0].result == playerObjectList[1].result) {
+  if (playerObjectList[0].lastRoll == playerObjectList[1].lastRoll) {
     console.log(`\nempate, ninguém vence a rodada.`);
   } else {
     console.log(`\no vencedor da rodada é ${playerObjectList[0].name}.`);
