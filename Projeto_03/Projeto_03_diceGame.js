@@ -19,7 +19,6 @@ const formatToTitle = (text, separator = "-") => {
     separatorLine = separatorLine.concat(separator);
 
   console.log(`\n${separatorLine}\n${text}\n${separatorLine}\n`);
-
 };
 
 // valida números inteiros > min
@@ -48,7 +47,9 @@ const getRandomIntInclusive = (min, max) => {
 // construtor do objeto player
 
 function Player(index, name, wins = 0) {
-  (this.index = index), (this.name = name), (this.wins = wins);
+  this.index = index, 
+  this.name = name, 
+  this.wins = wins;
 }
 
 //----- CODE START -----
@@ -97,19 +98,13 @@ prompt("> digite ENTER para começar a partida ");
 // repete pelo número de rodadas selecionado
 
 for (j = 0; j < numberOfRounds; j++) {
-
   formatToTitle(`rodada ${j + 1}`);
 
-  // define o resultado da rodada para cada jogador
+  // define e exibe o resultado da rodada para cada jogador
 
   playerObjectList.forEach((instance) => {
     diceRoll = getRandomIntInclusive(1, 6);
     instance.result = diceRoll;
-  });
-
-  // exibe o resultado de cada jogador na rodada
-
-  playerObjectList.forEach((instance) => {
     console.log(`\t${instance.name} rolou ${instance.result}`);
   });
 
@@ -156,8 +151,6 @@ playerObjectList.sort((a, b) => b.wins - a.wins);
 if (playerObjectList[0].wins == playerObjectList[1].wins) {
   console.log(`\nempate, ninguém vence a partida.`);
 } else {
-  console.log(
-    `\no vencedor da partida é ${playerObjectList[0].name}!`
-  );
+  console.log(`\no vencedor da partida é ${playerObjectList[0].name}!`);
 }
 console.log();
