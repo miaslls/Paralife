@@ -42,7 +42,7 @@ const validatePromptPositiveIntMin = (message, errorMessage, min) => {
 
 // valida string não vazia
 
-const validatePromptString = (message = "", errorMessage) => {
+const validatePromptString = (message, errorMessage) => {
   while (true) {
     let string = formatPrompt(message);
 

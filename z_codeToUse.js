@@ -13,7 +13,7 @@ function sleep(milliseconds) {
 
 // validate for empty string
 
-const validatePromptString = (message = "", errorMessage = "INVÁLIDO") => {
+const validatePromptString = (message, errorMessage = "INVÁLIDO") => {
   while (true) {
     let string = formatPrompt(message);
 
@@ -21,7 +21,7 @@ const validatePromptString = (message = "", errorMessage = "INVÁLIDO") => {
       return string;
     }
 
-    console.log(`\n${errorMessage}\n`));
+    console.log(`\n${errorMessage}\n`);
   }
 }
 
@@ -52,7 +52,7 @@ const validatePromptPositiveInt = (message, errorMessage = "INVÁLIDO") => {
 
 // validade prompt - integer between max and min (inclusive)
 
-const validatePromptIntMinMax = (message, min, max, errorMessage = "INVÁLIDO") => {
+const validatePromptIntMinMax = (message, max, min = 0, errorMessage = "INVÁLIDO") => {
   while (true) {
     let num = prompt(message);
 
