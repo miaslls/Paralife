@@ -50,10 +50,6 @@ const validateIntMinMax = (question, errorMessage, max, min = 0) => {
 
 // sort an object array by key
 
-// objectList.sort((a, b) => {
-//   return a.key1 - b.key2;
-// });
-
 objectList.sort((a, b) => a.key - b.key); // crescente
 objectList.sort((a, b) => b.key - a.key); // descrescente
 
@@ -78,6 +74,14 @@ const formatToTitle = (text, separator = "-") => {
   console.log(`\n${separatorLine}\n${text}\n${separatorLine}\n`);
 
 };
+
+// formata o prompt. ex: `> prompt message `
+
+const formatPrompt = (message) => prompt(`> ${message} `);
+
+formatPrompt("digite ENTER para continuar");
+
+let name = formatPrompt("digite seu nome");
 
 // validação geral
 

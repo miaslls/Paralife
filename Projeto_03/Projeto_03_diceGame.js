@@ -4,7 +4,7 @@
 
 const prompt = require("prompt-sync")();
 
-/* formata o texto como título ex:
+/* formata o texto como título. ex:
 
 --------------
 qualquer texto
@@ -21,11 +21,16 @@ const formatToTitle = (text, separator = "-") => {
   console.log(`\n${separatorLine}\n${text}\n${separatorLine}\n`);
 };
 
+// formata o prompt. ex: `> prompt message `
+
+const formatPrompt = (message) => prompt(`> ${message} `);
+
 // valida números inteiros > min
 
 const validatePositiveIntMin = (question, errorMessage, min) => {
   while (true) {
-    let num = prompt(`> ${question} `);
+
+    let num = formatPrompt(question);
 
     if (!isNaN(num) && num >= min && num % 1 == 0) {
       return num;
@@ -68,13 +73,13 @@ vencedor da PARTIDA - aquele que vencer o maior número de rodadas.
 console.log(`SELECIONE:\n`);
 
 const numberOfPlayers = validatePositiveIntMin(
-  "número de jogadores",
+  "número de jogadores:",
   "digite um NÚMERO INTEIRO >= 2",
   2
 );
 
 const numberOfRounds = validatePositiveIntMin(
-  "número de rodadas",
+  "número de rodadas:",
   "digite um NÚMERO INTEIRO >= 1",
   1
 );
@@ -87,13 +92,13 @@ let playerObject;
 // cria um objeto para cada jogador
 
 for (i = 0; i < numberOfPlayers; i++) {
-  let playerName = prompt(`> nome do jogador ${i + 1}: `);
+  let playerName = formatPrompt(`nome do jogador ${i + 1}:`);
   playerObject = new Player(i, playerName);
   playerObjectList.push(playerObject);
 }
 
 console.log();
-prompt("> digite ENTER para começar a partida ");
+formatPrompt("digite ENTER para começar a partida");
 
 // repete pelo número de rodadas selecionado
 
@@ -123,10 +128,10 @@ for (j = 0; j < numberOfRounds; j++) {
 
   if (j < numberOfRounds - 1) {
     console.log();
-    prompt("> digite ENTER para próxima rodada ");
+    formatPrompt("digite ENTER para próxima rodada");
   } else {
     console.log();
-    prompt("> digite ENTER para resultados da partida ");
+    formatPrompt("digite ENTER para resultados da partida")
   }
 
   // reseta os objetos (player) por ordem de entrada
@@ -151,6 +156,6 @@ playerObjectList.sort((a, b) => b.wins - a.wins);
 if (playerObjectList[0].wins == playerObjectList[1].wins) {
   console.log(`\nempate, ninguém vence a partida.`);
 } else {
-  console.log(`\no vencedor da partida é ${playerObjectList[0].name}!`);
+  console.log(`\no vencedor da partida é ${playerObjectList[0].name} ❤`);
 }
 console.log();

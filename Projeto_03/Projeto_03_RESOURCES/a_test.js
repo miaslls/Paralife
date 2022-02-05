@@ -36,3 +36,13 @@ const formatStringToTitle = (text, separator = "-") => {
 };
 
 formatStringToTitle("qualquer texto");
+
+// ----------
+
+const formatPrompt = (message) => prompt(`> ${message} `);
+
+formatPrompt("digite ENTER para continuar");
+
+let name = formatPrompt("digite seu nome");
+
+console.log(name);
