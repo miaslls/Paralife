@@ -1,5 +1,16 @@
 const prompt = require("prompt-sync")();
 
+// sleep function
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if (new Date().getTime() - start > milliseconds) {
+      break;
+    }
+  }
+}
+
 // get random integer between min and max (inclusive)
 
 const getRandomIntInclusive = (min, max) => {
@@ -39,22 +50,26 @@ const validateIntMinMax = (question, errorMessage, max, min = 0) => {
 
 // sort an object array by key
 
-objectList.sort((a, b) => {
-  return a.key1 - b.key2;
-});
+// objectList.sort((a, b) => {
+//   return a.key1 - b.key2;
+// });
+
+objectList.sort((a, b) => a.key - b.key); // crescente
+objectList.sort((a, b) => b.key - a.key); // descrescente
 
 objectList.forEach((instance) => {
-console.log(`${instance.key1} ${instance.key2}`);
+console.log(`${instance.key} ${instance.key2}`);
 });
 
 /* formata o texto como título ex:
-//
-// --------------
-// qualquer texto
-// --------------
+
+--------------
+qualquer texto
+--------------
+
 */
 
-const formatStringToTitle = (text, separator = "-") => {
+const formatToTitle = (text, separator = "-") => {
   let separatorLine = "";
 
   for (i = 0; i < text.length; i++)
@@ -63,3 +78,13 @@ const formatStringToTitle = (text, separator = "-") => {
   console.log(`\n${separatorLine}\n${text}\n${separatorLine}\n`);
 
 };
+
+// validação geral
+
+while (true) {
+  VARIAVEL =  prompt(`PERGUNTA`);
+  if (VALIDACAOVERDADEIRA) {
+    break;
+  }
+  console.log(`MENSAGEM DE ERRO`)
+}

@@ -4,7 +4,7 @@ Utilizando os conceitos aprendidos até objetos, crie um programa onde jogadores
 
 ---
 
-## O programa tem que:
+## **REQUISITOS**
 
 + Perguntar quantas rodadas você quer fazer; (1,0 ponto)
 + Perguntar quantos jogadores vão jogar; (1,5 pontos)

@@ -30,7 +30,7 @@ O programa deve contar a história inicial (background), fazer as perguntas, e a
 
 ---
 
-## **PROJETO 2 | Jokenpô**
+## **PROJETO 2** | Jokenpô
 
 Este projeto é individual e deverá ser entregue até domingo dia 06/02/2022 ás 23:59.
 
@@ -43,16 +43,7 @@ Este projeto é individual e deverá ser entregue até domingo dia 06/02/2022 á
 Utilizando os conceitos aprendidos até estruturas de repetição, crie um programa que jogue pedra, papel
 e tesoura (Jokenpô) com você.
 
-### O programa tem que:
-
-+ Permitir que eu decida quantas rodadas iremos fazer;
-+ Ler a minha escolha (Pedra, papel ou tesoura);
-+ Decidir de forma aleatória a decisão do computador;
-+ Mostrar quantas rodadas cada jogador ganhou;
-+ Determinar quem foi o grande campeão de acordo com a quantidade de vitórias de cada um (computador e jogador);
-+ Perguntar se o Jogador quer jogar novamente, se sim inicie volte a escolha de quantidade de rodadas, se não finalize o programa.
-
-### Critérios de avaliação:
+### **REQUISITOS**
 
 + Permitir que eu decida quantas rodadas iremos fazer (1 ponto) 
 + Ler a minha escolha: `pedra`, `papel` ou `tesoura` (2 pontos) 
@@ -60,3 +51,42 @@ e tesoura (Jokenpô) com você.
 + Mostrar quantas rodadas cada jogador ganhou (2 pontos)
 + Determinar quem foi o grande campeão de acordo com a quantidade de vitórias de cada um (computador e jogador) (1,5 pontos)
 + Perguntar se o Jogador quer jogar novamente, se sim inicie volte a escolha de quantidade de rodadas, se não finalize o programa. (1,5 pontos)
+
+---
+
+## **PROJETO 3** | Dice Game
+
+Utilizando os conceitos aprendidos até objetos, crie um programa onde jogadores joguem um dado e tenham resultados aleatórios.
+
+### **REQUISITOS**
+
++ Perguntar quantas rodadas você quer fazer; (1,0 ponto)
++ Perguntar quantos jogadores vão jogar; (1,5 pontos)
++ Criar um objeto pra cada jogador com nome e número tirado; (1,5 pontos)
++ Guarda todos os objetos em uma lista; (2,0 pontos)
++ Ordenar esses objetos, sabendo que o vencedor tirou o maior número
+no dado. (2,0 pontos)
++ Mostrar no final qual jogador ganhou mais rodadas e foi o grande
+campeão. (2,0 pontos)
+
+---
+
+## **PROJETO FINAL** | Projeto Final - Jogo de Ficção Interativa
+
+Para o desenvolvimento do projeto final será permitido que os alunos trabalhem em trios para troca de ideias e de conhecimento e que vocês já se acostumem a trabalhar em colaboração, a entrega do projeto deve ser feita individualmente pelo classroom entregando o link do projeto desenvolvido por vocês pelo github. Vocês irão em trio desenvolver o projeto porém todos devem entregar o link do GitHub pelo classroom.
+
+Você irá criar um jogo de ficção interativa que simule a rotina diária de um personagem. Você pode escolher entre rotinas matinais, rotinas de trabalho, rotinas de estudos, aventuras épicas, histórias assustadoras, entre outras. A ideia do jogo é que o jogador faça as escolhas para o seu personagem e o conduza pela história. Cada escolha irá gerar uma consequência diferente para o seu personagem. Você será responsável por determinar o inicio e término da história, além de avançar o tempo a cada escolha.
+
+É importante que haja uma passagem de tempo e períodos determinados que determinarão os ciclos de repetição das possibilidades do personagem, por exemplo: Manhã, tarde, noite, dormir - Recomeça o ciclo.
+
+
+### **REQUISITOS**
+
++ Variáveis para armazenar os status do personagem (1,0 ponto);
++ Perguntas que alterarão esses status do personagem (1,0 ponto);
++ Laço de repetição que determinará os ciclos em que a história vai se passar. Determinar o que acontecerá ao final do ciclo e como ficarão os status. (1,0 ponto);
++ Variável para controle da passagem do tempo (1,0 ponto);
++ Variáveis de controle dos status e situações da história (1,0 ponto);
++ Condicionais para alterações dessas variáveis (1,5 ponto);
++ Funções para executar cada uma das tarefas (1,5 ponto);
++ Conteúdo de condicionais, laços, funções e objetos bem aplicados (2,0 pontos);

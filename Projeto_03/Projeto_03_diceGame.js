@@ -4,9 +4,15 @@
 
 const prompt = require("prompt-sync")();
 
-// formata o texto como título
+/* formata o texto como título ex:
 
-const formatStringToTitle = (text, separator = "-") => {
+--------------
+qualquer texto
+--------------
+
+*/
+
+const formatToTitle = (text, separator = "-") => {
   let separatorLine = "";
 
   for (i = 0; i < text.length; i++)
@@ -47,7 +53,7 @@ function Player(index, name, wins = 0) {
 
 //----- CODE START -----
 
-formatStringToTitle("DICE GAME");
+formatToTitle("DICE GAME");
 
 console.log(`+ mínimo 2 jogadores
 
@@ -55,7 +61,6 @@ vencedor da RODADA  - aquele que rolar o maior valor no dado.
 vencedor da PARTIDA - aquele que vencer o maior número de rodadas.
 
 `);
-
 
 // solicita e valida jogadores e rodadas
 
@@ -93,7 +98,7 @@ prompt("> digite ENTER para começar a partida ");
 
 for (j = 0; j < numberOfRounds; j++) {
 
-  formatStringToTitle(`rodada ${j + 1}`);
+  formatToTitle(`rodada ${j + 1}`);
 
   // define o resultado da rodada para cada jogador
 
@@ -110,9 +115,7 @@ for (j = 0; j < numberOfRounds; j++) {
 
   // organiza os objetos (player) por ordem decrescente de resultado (por rodada)
 
-  playerObjectList.sort((a, b) => {
-    return b.result - a.result;
-  });
+  playerObjectList.sort((a, b) => b.result - a.result);
 
   // exibe o vencedor da rodada
 
@@ -133,12 +136,10 @@ for (j = 0; j < numberOfRounds; j++) {
 
   // reseta os objetos (player) por ordem de entrada
 
-  playerObjectList.sort((a, b) => {
-    return a.index - b.index;
-  });
+  playerObjectList.sort((a, b) => a.index - b.index);
 }
 
-formatStringToTitle("RESULTADOS");
+formatToTitle("RESULTADOS");
 
 // exibe o número de rodadas que cada jogador venceu
 
@@ -148,9 +149,7 @@ playerObjectList.forEach((instance) => {
 
 // organiza os objetos (player) por ordem decrescente de vitórias
 
-playerObjectList.sort((a, b) => {
-  return b.wins - a.wins;
-});
+playerObjectList.sort((a, b) => b.wins - a.wins);
 
 // exibe o vencedor da partida
 
@@ -158,7 +157,7 @@ if (playerObjectList[0].wins == playerObjectList[1].wins) {
   console.log(`\nempate, ninguém vence a partida.`);
 } else {
   console.log(
-    `\no vencedor da partida é ${playerObjectList[0].name}! `
+    `\no vencedor da partida é ${playerObjectList[0].name}!`
   );
 }
 console.log();
