@@ -1,6 +1,6 @@
 let persuasion = 0;
 
-let diceRoll = 3
+let diceRoll = 7
 
 if (diceRoll > 6) {
     diceRoll = 6;

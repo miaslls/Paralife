@@ -10,17 +10,6 @@ setTimeout(function() {
     b = a + 4;
 }, (3 * 1000));
 
-// CODIGO DO AMIGO - leotinoco7
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if (new Date().getTime() - start > milliseconds) {
-      break;
-    }
-  }
-}
-
 // ---
 
 const array1 = ['a', 'b', 'c'];
