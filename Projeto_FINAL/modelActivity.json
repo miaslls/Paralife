@@ -1,0 +1,14 @@
+{
+    "index": 0,
+    "title": "",
+    "timeToComplete": 0,
+    "cost": 0,
+    "needsModification": {
+        "nutrition": 0,
+        "energy": 0,
+        "hygiene": 0,
+        "toilet": 0,
+        "fun": 0,
+        "social": 0
+    }
+}

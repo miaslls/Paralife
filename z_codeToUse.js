@@ -115,6 +115,10 @@ objectList.forEach((instance) => {
 console.log(`${instance.key} ${instance.key2}`);
 });
 
+// requires json file
+
+const variableName = require('./fileName.json');
+
 // ----- CODE TO ANALIZE
 
 // TODO: função do colega SuiCarrot para criação de objetos

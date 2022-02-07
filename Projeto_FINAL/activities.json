@@ -1,0 +1,31 @@
+        
+    [
+        {
+            "index": 0,
+            "title": "toilet #1",
+            "timeToComplete": 5,
+            "cost": 0,
+            "needsModification": {
+                "nutrition": 0,
+                "energy": 0,
+                "hygiene": -1,
+                "toilet": 1,
+                "fun": 0,
+                "social": 0
+            }
+        },
+        {
+            "index": 1,
+            "title": "toilet #2",
+            "timeToComplete": 20,
+            "cost": 0,
+            "needsModification": {
+                "nutrition": 0,
+                "energy": 0,
+                "hygiene": -2,
+                "toilet": 3,
+                "fun": 0,
+                "social": 0
+            }
+        }
+    ]

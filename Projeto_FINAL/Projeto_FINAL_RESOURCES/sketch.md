@@ -1,5 +1,6 @@
 # **PROJETO FINAL** | Jogo de Ficção Interativa
- BASIC STRUCTURE sketch
+
+BASIC STRUCTURE sketch
 
 ## TIME
 
@@ -10,7 +11,7 @@ let days = 0;
 let endGame = false;
 
 if (days > 7) {
-    endGame = true;
+  endGame = true;
 }
 ```
 
@@ -20,8 +21,8 @@ if (days > 7) {
 let hours = 0;
 
 if (hours >= 24) {
-    hours -= 24;
-    days++;
+  hours -= 24;
+  days++;
 }
 ```
 
@@ -31,8 +32,8 @@ if (hours >= 24) {
 let minutes = 0;
 
 if (minutes >= 60) {
-    minutes -= 60;
-    hours++;
+  minutes -= 60;
+  hours++;
 }
 ```
 
@@ -54,24 +55,36 @@ if (hours >= 5 && < 12) {
 
 ## **OBJECT** | player
 
-TODO: create methods for activities / events
-
 ```javascript
 const player = {
     name: '',
     hoursWorked: 0,
     moneyOwned: 0,
-    needNutrition: 5,
-    needEnergy: 5,
-    needHygiene: 5,
-    needToilet: 5,
-    needFun: 5,
-    needSocial: 5
+    needs: {
+        nutrition: 5,
+        energy: 5,
+        hygiene: 5,
+        toilet: 5,
+        fun: 5,
+        social: 5
+    },
     jobTitle: '',
-    jobDays: [0, 1, 2, 3, 4, 5, 6],
-    jobPeriod: ['morning', 'afternoon', 'night'],
+    jobDays: {
+        mon: true,
+        tue: true,
+        wed: true,
+        thu: true,
+        fri: true,
+        sat: true,
+        sun: true
+    },
+    jobPeriod: {
+        morning: true,
+        afternoon: true,
+        night: true
+    }
     jobMinHours: 0,
-    jobPay: 0,
+    jobPay: 0
 }
 ```
 
@@ -79,32 +92,18 @@ const player = {
 
 ## **OBJECT** | activity
 
-```javascript
-const activity = {
-    title: '',
-    timeToCompleteMinutes: 0,
-    timeToCompleteHours: 0,
-    cost: 0,
-    buffNeed: player.needHygiene, // FIXME: doable?
-    buffAmount: 0,
-    debuffNeed: player.NeedToilet,
-    debuffAmount: 0,
-}
-```
-
----
-
-## **OBJECT** | event triggered by low need
-
-```javascript
-const eventLowNeed = {
-    lowNeed: player.needToilet,
-    timeToCompleteMinutes: 0,
-    timeToCompleteHours: 0,
-    cost: 0,
-    buffNeed: player.needToilet, // FIXME: doable?
-    buffAmount: 0,
-    debuffNeed: player.NeedHygiene,
-    debuffAmount: 0,
+```json
+{
+  "index": 0,
+  "title": "eat",
+  "cost": 15,
+  "needs": {
+    "nutrition": 3,
+    "energy": 0,
+    "hygiene": 0,
+    "toilet": -2,
+    "fun": 0,
+    "social": 0
+  }
 }
 ```
