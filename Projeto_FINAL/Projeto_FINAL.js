@@ -115,7 +115,8 @@ const player = {
   doActivity: function (index) {
     this.moneyOwned -= activityList[index].cost; // atualiza a carteira: ganhos/gastos
 
-    minutesElapsed += activityList[index].timeToComplete; // atualiza o relógio
+    // FIXME: - a função doActivity pode receber a atividade ao invés do índice, o ideal é que a função não dependa e nem altere nada que esteja declarado fora dela
+    minutesElapsed += activityList[index].timeToComplete; // atualiza o relógio 
 
     // atualiza os atributos do jogador
 
@@ -142,7 +143,7 @@ const player = {
 let daysElapsed = 0;
 let hoursElapsed = 5;
 let minutesElapsed = 0;
-let period = "";''
+let period = "";
 
 // ----- GAME START -----
 
@@ -165,16 +166,6 @@ console.clear();
 
 // TELA PRINCIPAL
 
-let weekDays = [
-  "Segunda Feira",
-  "Terça Feira",
-  "Quarta Feira",
-  "Quinta Feira",
-  "Sexta Feira",
-  "Sábado",
-  "Domingo",
-];
-
 // repete a escolha da atividade até o fim do jogo
 
 while (true) {
@@ -189,18 +180,34 @@ while (true) {
     period = "noite/madrugada";
   }
 
+  // determina os dias da semana
+
+  let weekDays = [
+    "Segunda Feira",
+    "Terça Feira",
+    "Quarta Feira",
+    "Quinta Feira",
+    "Sexta Feira",
+    "Sábado",
+    "Domingo",
+  ];
+
+  // determina o dia/hora atual
+
   let today = weekDays[daysElapsed];
-  let timeNow = `${hoursElapsed.toString().padStart(2, "0")}:${minutesElapsed.toString().padStart(2, "0")}`; //FIXME: prettier
+  let timeNow = `${hoursElapsed.toString().padStart(2, "0")}:${minutesElapsed.toString().padStart(2, "0")}`; // FIXME: prettier
+
+  // exibe dia/hora + status dos atributos
 
   console.log(`${gameName}
-  📆 DIA ${daysElapsed + 1} | ${today} | 🕑 ${timeNow} (${period}) 
+📆 DIA ${daysElapsed + 1} | ${today} | 🕑 ${timeNow} (${period}) 
   
-  Nutrição: ${player.needs.nutrition}\t\tHigiene: ${player.needs.hygiene}\t\tDiversão: ${player.needs.fun}
-   Energia: ${player.needs.energy}\t\tBanheiro: ${player.needs.toilet}\t\tSocial: ${player.needs.social}
+Nutrição: ${player.needs.nutrition}\t\tHigiene: ${player.needs.hygiene}\t\tDiversão: ${player.needs.fun}
+Energia: ${player.needs.energy}\t\tBanheiro: ${player.needs.toilet}\t\tSocial: ${player.needs.social}
   
-  `);
+`);
 
-  // TODO: adicionar atividades à lista
+  // TODO: build menu
 
   let activityChoice = validatePromptPositiveInt("O que você deseja fazer?");
 

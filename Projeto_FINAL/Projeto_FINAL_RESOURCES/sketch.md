@@ -10,7 +10,7 @@ BASIC STRUCTURE sketch
 let days = 0;
 let endGame = false;
 
-if (days > 7) {
+if (daysElapsed >= 7) {
   endGame = true;
 }
 ```
@@ -18,23 +18,21 @@ if (days > 7) {
 ### hours
 
 ```javascript
-let hours = 0;
-
-if (hours >= 24) {
-  hours -= 24;
-  days++;
-}
+if (hoursElapsed >= 24) {
+    daysToAdd = Math.floor(hoursElapsed / 24);
+    daysElapsed += daysToAdd;
+    hoursElapsed = hoursElapsed % 24;
+  }
 ```
 
 ### minutes
 
 ```javascript
-let minutes = 0;
-
-if (minutes >= 60) {
-  minutes -= 60;
-  hours++;
-}
+if (minutesElapsed >= 60) {
+    hoursToAdd = Math.floor(minutesElapsed / 60);
+    hoursElapsed += hoursToAdd;
+    minutesElapsed = minutesElapsed % 60;
+  }
 ```
 
 ### periods
@@ -42,13 +40,13 @@ if (minutes >= 60) {
 ```javascript
 let period = '';
 
-if (hours >= 5 && < 12) {
-    period = 'morning';
-} else if (hours >= 12 && hours < 18) {
-    period = 'afternoon';
-} else {
-    period = 'night';
-}
+if (hoursElapsed >= 5 && hoursElapsed < 12) {
+    period = "manhã";
+  } else if (hoursElapsed >= 12 && hoursElapsed < 18) {
+    period = "tarde";
+  } else if (hoursElapsed < 5 || hoursElapsed >= 18) {
+    period = "noite/madrugada";
+  }
 ```
 
 ---
