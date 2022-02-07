@@ -9,7 +9,6 @@ let validatePromptPositiveInt = (message, errorMessage) => {
     if (!isNaN(num) && num > 0 && num % 1 == 0) {
       return num;
     }
-
     console.log(`\n${errorMessage}`);
   }
 };
@@ -28,12 +27,13 @@ let getRandomIntInclusive = (min, max) => {
 const formatStringToTitle = (text, separator = "-") => {
   let separatorLine = "";
 
-  for (i = 0; i < text.length; i++)
+  for (i = 0; i < text.length; i++) {
     separatorLine = separatorLine.concat(separator);
+  }
 
   console.log(`${separatorLine}\n${text}\n${separatorLine}\n`);
 
-};
+}
 
 formatStringToTitle("qualquer texto");
 
@@ -49,7 +49,7 @@ console.log(name);
 
 // ----------
 
-// validate for empty string TODO: apply to code
+// validate for empty string
 
 const validatePromptString = (message = "", errorMessage) => {
   while (true) {
@@ -58,7 +58,6 @@ const validatePromptString = (message = "", errorMessage) => {
     if (string.length > 0) {
       return string;
     }
-
     console.log(errorMessage);
   }
 }

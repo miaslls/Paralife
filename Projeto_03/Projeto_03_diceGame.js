@@ -21,16 +21,26 @@ const formatToTitle = (text, separator = "-") => {
   console.log(`\n${separatorLine}\n${text}\n${separatorLine}\n`);
 };
 
-// formata o prompt. ex: "> prompt message "
+// formata o prompt em uma linha única . ex: > message (prompt)
 
 const formatPrompt = (message) => prompt(`> ${message} `);
+
+/* formata o prompt em múltiplas linhas. ex: 
+> message 
+> (prompt)
+*/
+
+const formatPromptMultipleLines = (message) => {
+  console.log(message)
+  return prompt(`> `);
+}
 
 // valida números inteiros > min
 
 const validatePromptPositiveIntMin = (message, errorMessage, min) => {
   while (true) {
 
-    let num = formatPrompt(message);
+    let num = formatPromptMultipleLines(message);
 
     if (!isNaN(num) && num >= min && num % 1 == 0) {
       return num;
@@ -38,13 +48,13 @@ const validatePromptPositiveIntMin = (message, errorMessage, min) => {
 
     console.log(`\n${errorMessage}\n`);
   }
-};
+}
 
 // valida string não vazia
 
 const validatePromptString = (message, errorMessage) => {
   while (true) {
-    let string = formatPrompt(message);
+    let string = formatPromptMultipleLines(message);
 
     if (string.length > 0) {
       return string;
