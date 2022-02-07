@@ -142,9 +142,7 @@ const player = {
 let daysElapsed = 0;
 let hoursElapsed = 5;
 let minutesElapsed = 0;
-let period = "";
-
-let endGame = false;
+let period = "";''
 
 // ----- GAME START -----
 
@@ -179,7 +177,7 @@ let weekDays = [
 
 // repete a escolha da atividade até o fim do jogo
 
-while (!endGame) {
+while (true) {
 
   // determina o período atual
 
@@ -187,7 +185,7 @@ while (!endGame) {
     period = "manhã";
   } else if (hoursElapsed >= 12 && hoursElapsed < 18) {
     period = "tarde";
-  } else {
+  } else if (hoursElapsed < 5 || hoursElapsed >= 18) {
     period = "noite/madrugada";
   }
 
@@ -229,7 +227,7 @@ while (!endGame) {
 
   // condição para finalizar o jogo
 
-  if (daysElapsed > 7) { //FIXME:
-    endGame = true;
+  if (daysElapsed >= 7) {
+    break;
   }
 }
