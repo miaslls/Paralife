@@ -21,7 +21,7 @@ const formatToTitle = (text, separator = "-") => {
   for (i = 0; i < text.length; i++) {
     separatorLine = separatorLine.concat(separator);
   }
-  return `\n${separatorLine}\n${text}\n${separatorLine}\n`;
+  return `${separatorLine}\n${text}\n${separatorLine}\n`;
 };
 
 // formata o prompt em linha única ex: > message (prompt)
@@ -137,31 +137,14 @@ const player = {
   },
 };
 
-// define: calendário e relógio
+// define: calendário / relógio
 
 let daysElapsed = 0;
 let hoursElapsed = 5;
 let minutesElapsed = 0;
-
-// define os períodos do dia
-
 let period = "";
 
-if (hoursElapsed >= 5 && hoursElapsed < 12) {
-  period = "manhã";
-} else if (hoursElapsed >= 12 && hoursElapsed < 18) {
-  period = "tarde";
-} else {
-  period = "noite/madrugada";
-}
-
-// condição para finalizar o jogo
-
 let endGame = false;
-
-if (daysElapsed > 7) {
-  endGame = true;
-}
 
 // ----- GAME START -----
 
@@ -173,10 +156,12 @@ console.clear();
 
 console.log(gameName);
 
+// adiciona o nome do jogador no objeto player
+
 player.name = validatePromptString(
   "Qual é o seu nome?",
   "O nome não pode ser vazio!"
-); // adiciona o nome do jogador no objeto player
+); 
 
 console.clear();
 
@@ -195,16 +180,15 @@ let weekDays = [
 // repete a escolha da atividade até o fim do jogo
 
 while (!endGame) {
-  // avança o relógio em minutos/hotas
 
-  if (minutesElapsed >= 60) {
-    minutesElapsed -= 60;
-    hoursElapsed++;
-  }
+  // determina o período atual
 
-  if (hoursElapsed >= 24) {
-    hoursElapsed -= 24;
-    daysElapsed++;
+  if (hoursElapsed >= 5 && hoursElapsed < 12) {
+    period = "manhã";
+  } else if (hoursElapsed >= 12 && hoursElapsed < 18) {
+    period = "tarde";
+  } else {
+    period = "noite/madrugada";
   }
 
   let today = weekDays[daysElapsed];
@@ -213,12 +197,8 @@ while (!endGame) {
   console.log(`${gameName}
   📆 DIA ${daysElapsed + 1} | ${today} | 🕑 ${timeNow} (${period}) 
   
-  Nutrição: ${player.needs.nutrition}    Higiene: ${
-    player.needs.hygiene
-  }   Diversão: ${player.needs.fun}
-   Energia: ${player.needs.energy}   Banheiro: ${
-    player.needs.toilet
-  }     Social: ${player.needs.social}
+  Nutrição: ${player.needs.nutrition}\t\tHigiene: ${player.needs.hygiene}\t\tDiversão: ${player.needs.fun}
+   Energia: ${player.needs.energy}\t\tBanheiro: ${player.needs.toilet}\t\tSocial: ${player.needs.social}
   
   `);
 
@@ -229,4 +209,27 @@ while (!endGame) {
   player.doActivity(activityChoice);
 
   console.clear();
+
+  // avança o relógio em minutos/horas
+
+  let hoursToAdd = 0;
+  let daysToAdd = 0;
+
+  if (minutesElapsed >= 60) {
+    hoursToAdd = Math.floor(minutesElapsed / 60);
+    hoursElapsed += hoursToAdd;
+    minutesElapsed = minutesElapsed % 60;
+  }
+
+  if (hoursElapsed >= 24) {
+    daysToAdd = Math.floor(hoursElapsed / 24);
+    daysElapsed += daysToAdd;
+    hoursElapsed = hoursElapsed % 24;
+  }
+
+  // condição para finalizar o jogo
+
+  if (daysElapsed > 7) { //FIXME:
+    endGame = true;
+  }
 }

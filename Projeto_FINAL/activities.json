@@ -27,5 +27,19 @@
                 "fun": 0,
                 "social": 0
             }
+        },
+        {
+            "index": 2,
+            "title": "something",
+            "timeToComplete": 500,
+            "cost": 100,
+            "needsModification": {
+                "nutrition": 5,
+                "energy": 0,
+                "hygiene": -2,
+                "toilet": 3,
+                "fun": 0,
+                "social": 0
+            }
         }
     ]
