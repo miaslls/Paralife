@@ -40,13 +40,8 @@ const formatPromptMultipleLines = (message) => {
 
 const validatePromptPositiveIntMin = (message, errorMessage, min) => {
   while (true) {
-<<<<<<< HEAD
-
     let num = formatPromptMultipleLines(message);
-=======
-    let num = formatPrompt(message);
->>>>>>> 8e6445d68099393b1f5753f23eff71d7dc3028c7
-
+   
     if (!isNaN(num) && num >= min && num % 1 == 0) {
       return num;
     }
