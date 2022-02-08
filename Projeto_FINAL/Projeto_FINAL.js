@@ -3,7 +3,7 @@
 // solicita recursos necessários (prompt/jSON)
 
 const prompt = require("prompt-sync")();
-const activityList = require("./activities.json");
+const activityList = require("./activityList.json");
 
 // ----- FORMAT FUNCTIONS ----- TODO: REMOVE UNUSED FUNCTIONS ⚠
 
@@ -97,10 +97,9 @@ const getRandomIntInclusive = (min, max) => {
 
 // ----- CODE START -----
 
-// define objeto player (jogador): chaves / valores iniciais / métodos
+// define objeto player (jogador)
 
 const player = {
-  // TODO: build modelJobs object/jSON
   name: "",
   moneyOwned: 0,
   needs: {
@@ -112,20 +111,17 @@ const player = {
     social: 5,
   },
 
-  doActivity: function (index) {
-    this.moneyOwned -= activityList[index].cost; // atualiza a carteira: ganhos/gastos
-
-    // FIXME: - a função doActivity pode receber a atividade ao invés do índice, o ideal é que a função não dependa e nem altere nada que esteja declarado fora dela
-    minutesElapsed += activityList[index].timeToComplete; // atualiza o relógio 
+  doActivity: function(activity) {
+    this.moneyOwned -= activity.cost; // atualiza a carteira: ganhos/gastos
 
     // atualiza os atributos do jogador
 
-    this.needs.nutrition += activityList[index].needsModification.nutrition;
-    this.needs.energy += activityList[index].needsModification.energy;
-    this.needs.hygiene += activityList[index].needsModification.hygiene;
-    this.needs.toilet += activityList[index].needsModification.toilet;
-    this.needs.fun += activityList[index].needsModification.fun;
-    this.needs.social += activityList[index].needsModification.social;
+    this.needs.nutrition += activity.needsModification.nutrition;
+    this.needs.energy += activity.needsModification.energy;
+    this.needs.hygiene += activity.needsModification.hygiene;
+    this.needs.toilet += activity.needsModification.toilet;
+    this.needs.fun += activity.needsModification.fun;
+    this.needs.social += activity.needsModification.social;
 
     // garante que o valor máximo do atributo seja 5
 
@@ -135,15 +131,77 @@ const player = {
     if (this.needs.toilet > 5) this.needs.toilet = 5;
     if (this.needs.fun > 5) this.needs.fun = 5;
     if (this.needs.social > 5) this.needs.social = 5;
-  },
+
+    return activity.timeToComplete; // retorna a quantidade de minutos da atividade
+  }
 };
 
-// define: calendário / relógio
+// define o objeto time (tempo)
 
-let daysElapsed = 0;
-let hoursElapsed = 5;
-let minutesElapsed = 0;
-let period = "";
+const time = {
+  days: 0,
+  hours: 5,
+  minutes: 0,
+
+  // avança o relógio
+
+  increment: function(activityMinutes) {
+    let hoursToAdd = 0;
+    let daysToAdd = 0;
+    let newMinutes = this.minutes + activityMinutes;
+
+    if (newMinutes >= 60) {
+      hoursToAdd = Math.floor(newMinutes / 60);
+      this.hours += hoursToAdd;
+      this.minutes = newMinutes % 60;
+    }
+
+    if (this.hours >= 24) {
+      daysToAdd = Math.floor(this.hours / 24);
+      this.days += daysToAdd;
+      this.hours %= 24;
+    }
+  },
+
+  // retorna a hora atual no formato 00:00
+
+  getTime: function() {
+    const currentTime = `${this.hours.toString().padStart(2, "0")}:${this.minutes.toString().padStart(2, "0")}`;
+    return currentTime;
+  },
+
+  // retorna o período atual
+
+  getPeriod: function() {
+    let currentPeriod;
+
+    if (this.hours >= 5 && this.hours < 12) {
+      currentPeriod = "manhã";
+    } else if (this.hours >= 12 && this.hours < 18) {
+      currentPeriod = "tarde";
+    } else if (this.hours < 5 || this.hours >= 18) {
+      currentPeriod = "noite/madrugada"; 
+    }
+
+    return currentPeriod;
+  },
+
+  // retorna o dia da semana
+
+  getWeekDay: function() {
+    const weekDays = [
+      "Segunda Feira",
+      "Terça Feira",
+      "Quarta Feira",
+      "Quinta Feira",
+      "Sexta Feira",
+      "Sábado",
+      "Domingo",
+    ];
+
+    return  weekDays[this.days];
+  }
+};
 
 // ----- GAME START -----
 
@@ -168,73 +226,38 @@ console.clear();
 
 // repete a escolha da atividade até o fim do jogo
 
-while (true) {
-
-  // determina o período atual
-
-  if (hoursElapsed >= 5 && hoursElapsed < 12) {
-    period = "manhã";
-  } else if (hoursElapsed >= 12 && hoursElapsed < 18) {
-    period = "tarde";
-  } else if (hoursElapsed < 5 || hoursElapsed >= 18) {
-    period = "noite/madrugada";
-  }
-
-  // determina os dias da semana
-
-  let weekDays = [
-    "Segunda Feira",
-    "Terça Feira",
-    "Quarta Feira",
-    "Quinta Feira",
-    "Sexta Feira",
-    "Sábado",
-    "Domingo",
-  ];
-
-  // determina o dia/hora atual
-
-  let today = weekDays[daysElapsed];
-  let timeNow = `${hoursElapsed.toString().padStart(2, "0")}:${minutesElapsed.toString().padStart(2, "0")}`; // FIXME: prettier
+while (true) { 
 
   // exibe dia/hora + status dos atributos
 
   console.log(`${gameName}
-📆 DIA ${daysElapsed + 1} | ${today} | 🕑 ${timeNow} (${period}) 
+📆 DIA ${time.days + 1} | ${time.getWeekDay()} | 🕑 ${time.getTime()} (${time.getPeriod()}) 
   
 Nutrição: ${player.needs.nutrition}\t\tHigiene: ${player.needs.hygiene}\t\tDiversão: ${player.needs.fun}
 Energia: ${player.needs.energy}\t\tBanheiro: ${player.needs.toilet}\t\tSocial: ${player.needs.social}
+
+TODO: Você fez tal coisa
+TODO: Sua energia subiu blá
+TODO: blá blá blá
   
 `);
 
   // TODO: build menu
 
+  // solicita a escolha da atividade pelo índice da activityList
   let activityChoice = validatePromptPositiveInt("O que você deseja fazer?");
 
-  player.doActivity(activityChoice);
+  // atualiza os atributos do jogador de acordo com a atividade e retorna o tempo da atividade
+  let activityMinutes = player.doActivity(activityList[activityChoice]);
+
+  // avança o relógio
+  time.increment(activityMinutes)
 
   console.clear();
 
-  // avança o relógio em minutos/horas
-
-  let hoursToAdd = 0;
-  let daysToAdd = 0;
-
-  if (minutesElapsed >= 60) {
-    hoursToAdd = Math.floor(minutesElapsed / 60);
-    hoursElapsed += hoursToAdd;
-    minutesElapsed = minutesElapsed % 60;
-  }
-
-  if (hoursElapsed >= 24) {
-    daysToAdd = Math.floor(hoursElapsed / 24);
-    daysElapsed += daysToAdd;
-    hoursElapsed = hoursElapsed % 24;
-  }
-
   // condição para finalizar o jogo
 
-  if (daysElapsed >= 7) {
+  if (time.days >= 7) {
     break;
   }
 }
