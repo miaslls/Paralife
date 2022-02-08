@@ -4,9 +4,9 @@
     "timeToComplete": 5,
     "cost": 0,
     "needsModification": {
-        "nutrition": 0,
+        "nutrition": 3,
         "energy": 0,
-        "hygiene": -1,
+        "hygiene": -7,
         "toilet": 1,
         "fun": 0,
         "social": 0

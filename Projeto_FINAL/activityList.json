@@ -4,12 +4,12 @@
             "index": 0,
             "title": "toilet #1",
             "timeToComplete": 5,
-            "cost": 0,
+            "cost": 50,
             "needsModification": {
-                "nutrition": 0,
+                "nutrition": 3,
                 "energy": 0,
                 "hygiene": -1,
-                "toilet": 1,
+                "toilet": -7,
                 "fun": 0,
                 "social": 0
             }

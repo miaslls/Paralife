@@ -53,27 +53,9 @@ const validatePromptString = (message, errorMessage = "INVÁLIDO") => {
   }
 };
 
-// valida número inteiro >= 0
-
-const validatePromptPositiveInt = (message, errorMessage = "INVÁLIDO") => {
-  while (true) {
-    let num = formatPromptMultipleLines(message);
-
-    if (!isNaN(num) && num >= 0 && num % 1 == 0) {
-      return num;
-    }
-    console.log(errorMessage);
-  }
-};
-
 // valida número inteiro entre min e max (inclusice min e max)
 
-const validatePromptIntMinMax = (
-  message,
-  max,
-  min = 0,
-  errorMessage = "INVÁLIDO"
-) => {
+const validatePromptIntMinMax = (message, max, min = 0, errorMessage = "INVÁLIDO") => { //FIXME: prettier
   while (true) {
     let num = formatPromptMultipleLines(message);
 
@@ -101,7 +83,7 @@ const getRandomIntInclusive = (min, max) => {
 
 const player = {
   name: "",
-  moneyOwned: 0,
+  wallet: 0,
   needs: {
     nutrition: 5,
     energy: 5,
@@ -111,28 +93,37 @@ const player = {
     social: 5,
   },
 
-  doActivity: function(activity) {
-    this.moneyOwned -= activity.cost; // atualiza a carteira: ganhos/gastos
+  updateNeeds: function (activity) {
+    const keysList = Object.keys(this.needs);
 
-    // atualiza os atributos do jogador
+    for (key of keysList) {
+        this.needs[key] += activity.needsModification[key];
 
-    this.needs.nutrition += activity.needsModification.nutrition;
-    this.needs.energy += activity.needsModification.energy;
-    this.needs.hygiene += activity.needsModification.hygiene;
-    this.needs.toilet += activity.needsModification.toilet;
-    this.needs.fun += activity.needsModification.fun;
-    this.needs.social += activity.needsModification.social;
+        if (this.needs[key] > 5) {
+            this.needs[key] = 5;
+          } else if (this.needs[key] < 0) {
+            this.needs[key] = 0;
+          }
+    }
 
-    // garante que o valor máximo do atributo seja 5
+    // for (let i = 0; i < keys.length; i++) {
+    //   this.needs[keys[i]] += activity.needsModification[keys[i]];
 
-    if (this.needs.nutrition > 5) this.needs.nutrition = 5;
-    if (this.needs.energy > 5) this.needs.energy = 5;
-    if (this.needs.hygiene > 5) this.needs.hygiene = 5;
-    if (this.needs.toilet > 5) this.needs.toilet = 5;
-    if (this.needs.fun > 5) this.needs.fun = 5;
-    if (this.needs.social > 5) this.needs.social = 5;
+    //   if (this.needs[keys[i]] > 5) {
+    //     this.needs[keys[i]] = 5;
+    //   } else if (this.needs[keys[i]] < 0) {
+    //     this.needs[keys[i]] = 0;
+    //   }
+    // }
+  },
 
-    return activity.timeToComplete; // retorna a quantidade de minutos da atividade
+  updateWallet: function (activity) {
+    this.wallet -= activity.cost;
+  },
+
+  doActivity: function (activity) {
+    this.updateNeeds(activity);
+    this.updateWallet(activity);
   }
 };
 
@@ -148,13 +139,14 @@ const time = {
   increment: function(activityMinutes) {
     let hoursToAdd = 0;
     let daysToAdd = 0;
-    let newMinutes = this.minutes + activityMinutes;
 
-    if (newMinutes >= 60) {
-      hoursToAdd = Math.floor(newMinutes / 60);
+    this.minutes += activityMinutes;
+
+    if (this.minutes >= 60) {
+      hoursToAdd = Math.floor(this.minutes / 60);
       this.hours += hoursToAdd;
-      this.minutes = newMinutes % 60;
-    }
+      this.minutes %= 60;
+    } 
 
     if (this.hours >= 24) {
       daysToAdd = Math.floor(this.hours / 24);
@@ -180,7 +172,7 @@ const time = {
     } else if (this.hours >= 12 && this.hours < 18) {
       currentPeriod = "tarde";
     } else if (this.hours < 5 || this.hours >= 18) {
-      currentPeriod = "noite/madrugada"; 
+      currentPeriod = "noite"; 
     }
 
     return currentPeriod;
@@ -190,13 +182,13 @@ const time = {
 
   getWeekDay: function() {
     const weekDays = [
-      "Segunda Feira",
-      "Terça Feira",
-      "Quarta Feira",
-      "Quinta Feira",
-      "Sexta Feira",
-      "Sábado",
-      "Domingo",
+      "SEG",
+      "TER",
+      "QUA",
+      "QUI",
+      "SEX",
+      "SAB",
+      "DOM",
     ];
 
     return  weekDays[this.days];
@@ -231,10 +223,13 @@ while (true) {
   // exibe dia/hora + status dos atributos
 
   console.log(`${gameName}
-📆 DIA ${time.days + 1} | ${time.getWeekDay()} | 🕑 ${time.getTime()} (${time.getPeriod()}) 
+📆 DIA ${(time.days + 1).toString().padStart(2, "0")} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})\t\
+
+👤 ${player.name}
+💲 ${`R$ ${player.wallet.toFixed(2)}`}
   
-Nutrição: ${player.needs.nutrition}\t\tHigiene: ${player.needs.hygiene}\t\tDiversão: ${player.needs.fun}
-Energia: ${player.needs.energy}\t\tBanheiro: ${player.needs.toilet}\t\tSocial: ${player.needs.social}
+🍔  ${player.needs.nutrition}      🧼  ${player.needs.hygiene}      🎈  ${player.needs.fun}
+💤  ${player.needs.energy}      🚽  ${player.needs.toilet}      💬  ${player.needs.social}
 
 TODO: Você fez tal coisa
 TODO: Sua energia subiu blá
@@ -245,13 +240,15 @@ TODO: blá blá blá
   // TODO: build menu
 
   // solicita a escolha da atividade pelo índice da activityList
-  let activityChoice = validatePromptPositiveInt("O que você deseja fazer?");
+  let activityChoice = validatePromptIntMinMax("O que você deseja fazer?", 2);
 
-  // atualiza os atributos do jogador de acordo com a atividade e retorna o tempo da atividade
-  let activityMinutes = player.doActivity(activityList[activityChoice]);
+  let chosenActivity = activityList[activityChoice];
+
+  // atualiza os atributos do jogador de acordo com a atividade
+  player.doActivity(chosenActivity);
 
   // avança o relógio
-  time.increment(activityMinutes)
+  time.increment(chosenActivity["timeToComplete"]);
 
   console.clear();
 
