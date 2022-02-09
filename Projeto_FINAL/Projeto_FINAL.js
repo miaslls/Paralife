@@ -53,7 +53,7 @@ const validatePromptString = (message, errorMessage = "INVÁLIDO") => {
   }
 };
 
-// valida número inteiro entre min e max (inclusice min e max)
+// valida número inteiro entre min e max (inclusive min e max)
 
 const validatePromptIntMinMax = (message, max, min = 0, errorMessage = "INVÁLIDO") => { //FIXME: prettier
   while (true) {
@@ -68,16 +68,21 @@ const validatePromptIntMinMax = (message, max, min = 0, errorMessage = "INVÁLID
 
 // ----- OTHER FUNCTIONS -----
 
-// retorna número inteiro aleatório entre min e max (inclusive min e max)
+// realiza a atividade escolhida pelo jogador
 
-const getRandomIntInclusive = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
+const doActivity = (activity) => {
+    needsModified = player.updateNeeds(activity);
+    player.updateWallet(activity);
+    time.increment(activity["timeToComplete"]);
 
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
+    // TODO: add getperiod + var for current time + var for new time
 
-// ----- CODE START -----
+    return needsModified;
+  }
+
+// ----- OBJECTS DEFINITION -----
+
+// ----- OBJECT PLAYER -----
 
 // define objeto player (jogador)
 
@@ -90,13 +95,17 @@ const player = {
     hygiene: 5,
     toilet: 5,
     fun: 5,
-    social: 5,
+    social: 5
   },
 
-  updateNeeds: function (activity) {
-    const keysList = Object.keys(this.needs);
+  // atualiza os atributos do jogador de acordo com a atividade escolhida
 
-    for (key of keysList) {
+  updateNeeds: function (activity) {
+
+    const activityKeysList = Object.keys(activity.needsModification);
+    const needsModified = [];
+
+    for (key of activityKeysList) {
         this.needs[key] += activity.needsModification[key];
 
         if (this.needs[key] > 5) {
@@ -104,28 +113,22 @@ const player = {
           } else if (this.needs[key] < 0) {
             this.needs[key] = 0;
           }
+
+          needsModified.push([`${activity.needsModification[key].toString().padStart(2, "+")} ${key}`]);
+          needsModifiedString = needsModified.join("\n\t");
     }
 
-    // for (let i = 0; i < keys.length; i++) {
-    //   this.needs[keys[i]] += activity.needsModification[keys[i]];
-
-    //   if (this.needs[keys[i]] > 5) {
-    //     this.needs[keys[i]] = 5;
-    //   } else if (this.needs[keys[i]] < 0) {
-    //     this.needs[keys[i]] = 0;
-    //   }
-    // }
+    return needsModifiedString;
   },
+
+  // atualiza a carteira
 
   updateWallet: function (activity) {
     this.wallet -= activity.cost;
   },
-
-  doActivity: function (activity) {
-    this.updateNeeds(activity);
-    this.updateWallet(activity);
-  }
 };
+
+// ----- OBJECT TIME -----
 
 // define o objeto time (tempo)
 
@@ -195,7 +198,7 @@ const time = {
   }
 };
 
-// ----- GAME START -----
+// ----- CODE START -----
 
 let gameName = formatToTitle("NOME DO JOGO!"); // TODO: define game name
 
@@ -218,7 +221,7 @@ console.clear();
 
 // repete a escolha da atividade até o fim do jogo
 
-while (true) { 
+while (true) {
 
   // exibe dia/hora + status dos atributos
 
@@ -226,31 +229,43 @@ while (true) {
 📆 DIA ${(time.days + 1).toString().padStart(2, "0")} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})\t\
 
 👤 ${player.name}
-💲 ${`R$ ${player.wallet.toFixed(2)}`}
+💲 ${`$ ${player.wallet.toFixed(2)}`}
   
 🍔  ${player.needs.nutrition}      🧼  ${player.needs.hygiene}      🎈  ${player.needs.fun}
 💤  ${player.needs.energy}      🚽  ${player.needs.toilet}      💬  ${player.needs.social}
-
-TODO: Você fez tal coisa
-TODO: Sua energia subiu blá
-TODO: blá blá blá
-  
 `);
 
-  // TODO: build menu
-
   // solicita a escolha da atividade pelo índice da activityList
-  let activityChoice = validatePromptIntMinMax("O que você deseja fazer?", 2);
 
+  let activityChoice = validatePromptIntMinMax("O que você deseja fazer?", 2);
   let chosenActivity = activityList[activityChoice];
 
-  // atualiza os atributos do jogador de acordo com a atividade
-  player.doActivity(chosenActivity);
+  // 
 
-  // avança o relógio
-  time.increment(chosenActivity["timeToComplete"]);
+  let needsModified = doActivity(chosenActivity);
 
   console.clear();
+
+  console.log(gameName);
+
+  // FIXME: beautify this
+
+  console.log(`ATIVIDADE REALIZADA | ${chosenActivity.title}
+--------------------
+
+       custo: \t$${chosenActivity.cost.toFixed(2)}
+     duração: \t${chosenActivity.timeToComplete} minutos
+
+
+ATRIBUTOS MODIFICADOS
+---------------------
+
+\t${needsModified}
+
+`);
+
+formatPrompt("digite ENTER para continuar");
+console.clear();
 
   // condição para finalizar o jogo
 
