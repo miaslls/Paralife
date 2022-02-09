@@ -5,7 +5,7 @@
 const prompt = require("prompt-sync")();
 const activityList = require("./activityList.json");
 
-// ----- FORMAT FUNCTIONS ----- TODO: REMOVE UNUSED FUNCTIONS ⚠
+// ----- FORMAT FUNCTIONS ----- 
 
 /* formata o texto como título. ex:
 ------------
@@ -52,8 +52,7 @@ const validatePromptString = (message, errorMessage = "INVÁLIDO") => {
   }
 };
 
-// valida número inteiro entre min e max (inclusive min e max)
-//FIXME: prettier
+// FIXME: prettier | valida número inteiro entre min e max (inclusive min e max)
 
 const validatePromptIntMinMax = (
   message,
@@ -87,7 +86,7 @@ const doActivity = (activity) => {
 
 // ----- OBJECTS DEFINITION -----
 
-// ----- OBJECT PLAYER -----
+// ----- PLAYER -----
 
 // define objeto player (jogador)
 
@@ -117,6 +116,8 @@ const player = {
       } else if (this.needs[key] < 0) {
         this.needs[key] = 0;
       }
+
+      // adiciona os valores em um array e formata o retorno da função
 
       needsModified.push([
         activity.needsModification[key].toString().padStart(2, "+"),
@@ -148,7 +149,7 @@ const player = {
   },
 };
 
-// ----- OBJECT TIME -----
+// ----- TIME -----
 
 // define o objeto time (tempo)
 
@@ -178,7 +179,7 @@ const time = {
     }
   },
 
-  // retorna a hora atual no formato 00:00
+  // retorna a hora atual no formato 00:00 
 
   getTime: function () {
     const currentTime = `${this.hours
@@ -187,7 +188,7 @@ const time = {
     return currentTime;
   },
 
-  // retorna o período atual
+  // retorna o período atual FIXME: current time/new time - if current != new -> event triggered by low need
 
   getPeriod: function () {
     let currentPeriod;
@@ -218,7 +219,7 @@ const time = {
 
 let gameName = formatToTitle("ռօʍɛ ɖօ ʝօɢօ"); // TODO: define game name
 
-// TELA INCIAL
+// TELA INCIAL  FIXME: add JOB options
 
 console.clear();
 
@@ -238,6 +239,7 @@ console.clear();
 // repete a escolha da atividade até o fim do jogo
 
 while (true) {
+
   // exibe dia/hora + status dos atributos
 
   console.log(`${gameName}
@@ -264,7 +266,7 @@ while (true) {
   let activityChoice = validatePromptIntMinMax("O que você deseja fazer?", 2);
   let chosenActivity = activityList[activityChoice];
 
-  //
+  // executa a atividade escolhida
 
   let needsModified = doActivity(chosenActivity);
 
