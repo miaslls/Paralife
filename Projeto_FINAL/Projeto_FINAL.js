@@ -3,71 +3,24 @@
 // ----- solicita recursos necessários (prompt/jSON)
 
 const prompt = require("prompt-sync")();
-const activityList = require("./data/activityList.json");
+const activityList = require("./data/activityList.json"); // FIXME:
 const jobList = require("./data/jobList.json");
 const formatFunctions = require("./functions/format.js");
 const validateFunctions = require("./functions/validate.js");
 
-// ----- solicita a escolha da profissão do jogador
+const displayPlayerInfo = () => {
+  console.log(gameName);
 
-const chooseJob = () => {
-  let jobChoice;
-  let chosenJob;
+  console.log(`📆 DIA ${(time.days + 1).toString().padStart(2, "0")} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
 
-  let confirmChoice;
+👤 ${player.name}\t💲 ${`$ ${player.wallet}`}
+💼 ${player.job.title}
 
-  // repete a escolha da profissão até que o jogador confirme a escolha
-
-  while (true) {
-    console.log(gameName);
-
-    console.log("Qual a sua profissão?\n");
-
-    for (job of jobList) {
-      console.log(`[${job.index}] ${job.title}`);
-    }
-
-    console.log();
-
-    jobChoice = validateFunctions.validatePromptIntMinMax(
-      "Digite o número correspondente a uma das profissões acima",
-      jobList.length,
-      0,
-      `Você deve digitar um NÚMERO INTEIRO entre 0 e ${jobList.length}`
-    );
-
-    chosenJob = jobList[jobChoice];
-
-    console.clear();
-    console.log(gameName);
-
-    // exibe a opção selecionada
-
-    console.log(`Você selecionou ${chosenJob.title.toUpperCase()}!
-
-dias: ${chosenJob.daysToWork}
-horário: ${chosenJob.periodsToWork}
-salário: $${chosenJob.salaryPerHour}/hora
-carga horária mínima: ${chosenJob.minHoursPerWeek}h/semana
+---------------------------
+🍔  ${player.needs.nutrition}      🧼  ${player.needs.hygiene}      🎈  ${player.needs.fun}
+💤  ${player.needs.energy}      🚽  ${player.needs.toilet}      💬  ${player.needs.social}
+---------------------------
 `);
-
-    // dá ao jogador a opção de confirmar a escolha ou voltar e escolher novamente
-
-    confirmChoice = validateFunctions.validatePromptIntMinMax(
-      "digite [0] para voltar\ndigite [1] para confirmar",
-      1,
-      0,
-      "Você deve digitar [0] ou [1]"
-    );
-
-    console.clear();
-
-    if (confirmChoice == 1) {
-      break;
-    }
-  }
-
-  return chosenJob;
 };
 
 // ---- atualiza o objeto player de acordo com a seleção da profissão
@@ -239,8 +192,6 @@ const time = {
 
 // ----- CODE START -----
 
-// FIXME: font: https://coolsymbol.com/cool-fancy-text-generator.html | style: Sorcerer Font
-
 let gameName = formatFunctions.formatToTitle("քǟʀǟʟɨʄɛ");
 
 // ----- TELA INCIAL
@@ -257,9 +208,63 @@ player.name = validateFunctions.validatePromptString(
 
 console.clear();
 
-// solicita a escolha da profissão do jogador
+// ----- solicita a escolha da profissão do jogador
 
-const chosenJob = chooseJob();
+  let jobChoice;
+  let chosenJob
+  let confirmChoice;
+
+  // repete a escolha da profissão até que o jogador confirme a escolha
+
+  while (true) {
+    formatFunctions.formatToTitle("քǟʀǟʟɨʄɛ");
+
+    console.log("selecione sua profissão\n");
+
+    for (job of jobList) {
+      console.log(`[${job.index}] ${job.title}`);
+    }
+
+    console.log();
+
+    jobChoice = validateFunctions.validatePromptIntMinMax(
+      "sua escolha:",
+      jobList.length,
+      0,
+      `digite um NÚMERO INTEIRO entre 0 e ${jobList.length}`
+    );
+
+    chosenJob = jobList[jobChoice];
+
+    console.clear();
+    formatFunctions.formatToTitle("քǟʀǟʟɨʄɛ");
+
+    // exibe a opção selecionada
+
+    console.log(`profissão selecionada | ${chosenJob.title.toUpperCase()}
+  
+  dias: ${chosenJob.daysToWork}
+  horário: ${chosenJob.periodsToWork}
+  salário: $${chosenJob.salaryPerHour}/hora
+  carga horária mínima: ${chosenJob.minHoursPerWeek}h/semana
+  `);
+
+    // dá ao jogador a opção de confirmar a escolha ou voltar e escolher novamente
+
+    confirmChoice = validateFunctions.validatePromptIntMinMax(
+      "digite [0] para voltar\ndigite [1] para confirmar",
+      1,
+      0,
+      "Você deve digitar [0] ou [1]"
+    );
+
+    console.clear();
+
+    if (confirmChoice == 1) {
+      break;
+    }
+  }
+
 updatePlayerJob(chosenJob);
 
 // ----- TELA PRINCIPAL
@@ -267,28 +272,31 @@ updatePlayerJob(chosenJob);
 // ----- repete a escolha da atividade até o fim do jogo
 
 while (true) {
-  // exibe dia/hora + status dos atributos
 
-  console.log(`📆 DIA ${(time.days + 1)
-    .toString()
-    .padStart(
-      2,
-      "0"
-    )} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
+//   // exibe dia/hora + status dos atributos
 
-👤 ${player.name}
-💼 ${player.job.title}
-💲 ${`$ ${player.wallet}`}
+displayPlayerInfo();
 
----------------------------
-🍔  ${player.needs.nutrition}      🧼  ${player.needs.hygiene}      🎈  ${
-    player.needs.fun
-  }
-💤  ${player.needs.energy}      🚽  ${player.needs.toilet}      💬  ${
-    player.needs.social
-  }
----------------------------
-`); // TODO: create a function to put needs at every page's bottom
+//   console.log(`📆 DIA ${(time.days + 1)
+//     .toString()
+//     .padStart(
+//       2,
+//       "0"
+//     )} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
+
+// 👤 ${player.name}
+// 💼 ${player.job.title}
+// 💲 ${`$ ${player.wallet}`}
+
+// ---------------------------
+// 🍔  ${player.needs.nutrition}      🧼  ${player.needs.hygiene}      🎈  ${
+//     player.needs.fun
+//   }
+// 💤  ${player.needs.energy}      🚽  ${player.needs.toilet}      💬  ${
+//     player.needs.social
+//   }
+// ---------------------------
+// `);
 
   // ----- PRIMEIRO MENU
 
@@ -334,6 +342,7 @@ while (true) {
   }
 
   if (firstMenuChoice == "OUTRA ATIVIDADE") {
+
     // ----- submenu OUTRA ATIVIDADE
 
     console.clear();
