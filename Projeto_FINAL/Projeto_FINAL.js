@@ -13,7 +13,8 @@ const displayPlayerInfo = () => {
 
   console.log(`📆 DIA ${(time.days + 1).toString().padStart(2, "0")} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
 
-👤 ${player.name}\t💲 ${`$ ${player.wallet}`}
+👤 ${player.name}
+💲 ${`$ ${player.wallet}`}
 💼 ${player.job.title}
 
 ---------------------------
