@@ -274,30 +274,9 @@ updatePlayerJob(chosenJob);
 
 while (true) {
 
-//   // exibe dia/hora + status dos atributos
+  // exibe dia/hora + status dos atributos
 
-displayPlayerInfo();
-
-//   console.log(`📆 DIA ${(time.days + 1)
-//     .toString()
-//     .padStart(
-//       2,
-//       "0"
-//     )} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
-
-// 👤 ${player.name}
-// 💼 ${player.job.title}
-// 💲 ${`$ ${player.wallet}`}
-
-// ---------------------------
-// 🍔  ${player.needs.nutrition}      🧼  ${player.needs.hygiene}      🎈  ${
-//     player.needs.fun
-//   }
-// 💤  ${player.needs.energy}      🚽  ${player.needs.toilet}      💬  ${
-//     player.needs.social
-//   }
-// ---------------------------
-// `);
+  displayPlayerInfo();
 
   // ----- PRIMEIRO MENU
 
