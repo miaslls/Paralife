@@ -1,0 +1,34 @@
+[
+  {
+    "index": 0,
+    "title": "nenhuma",
+    "daysToWork": ["nenhum"],
+    "periodsToWork": ["nenhum"],
+    "minHoursPerWeek": "0",
+    "salaryPerHour": "0"
+  },
+  {
+    "index": 1,
+    "title": "desenvolvedor",
+    "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
+    "periodsToWork": ["qualquer"],
+    "minHoursPerWeek": "40",
+    "salaryPerHour": "50"
+  },
+  {
+    "index": 2,
+    "title": "médico",
+    "daysToWork": ["SEG", "TER", "QUI", "SEX"],
+    "periodsToWork": ["manhã", "tarde"],
+    "minHoursPerWeek": "30",
+    "salaryPerHour": "80"
+  },
+  {
+    "index": 3,
+    "title": "meio período",
+    "daysToWork": ["qualquer"],
+    "periodsToWork": ["tarde"],
+    "minHoursPerWeek": "20",
+    "salaryPerHour": "0"
+  }
+]
