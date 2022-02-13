@@ -67,8 +67,7 @@ const player = {
     this.needs.toilet -= 4;
     this.needs.fun -= 1;
     this.needs.social -= 1;
-  }
-
+  },
 };
 
 // ----- TIME ----- BOOKMARK:
@@ -152,7 +151,7 @@ const records = {
     totalTimesDelivery: 0,
     totalTimesEatOut: 0,
     totalCostNutrition: 0,
-    totalMinutesNutrition: 0
+    totalMinutesNutrition: 0,
   },
   hygiene: {
     totalTimesHygiene: 0,
@@ -194,12 +193,18 @@ const displayPlayerInfo = () => {
 💼 ${player.job.title}
 
 ---------------------------
-🍔  ${player.needs.nutrition.toString().padStart(2, "0")}      🧼  ${player.needs.hygiene.toString().padStart(2, "0")}      🎈  ${
-    player.needs.fun.toString().padStart(2, "0")
-  }
-💤  ${player.needs.energy.toString().padStart(2, "0")}      🚽  ${player.needs.toilet.toString().padStart(2, "0")}      💬  ${
-    player.needs.social.toString().padStart(2, "0")
-  }
+🍔  ${player.needs.nutrition
+    .toString()
+    .padStart(2, "0")}      🧼  ${player.needs.hygiene
+    .toString()
+    .padStart(2, "0")}      🎈  ${player.needs.fun.toString().padStart(2, "0")}
+💤  ${player.needs.energy
+    .toString()
+    .padStart(2, "0")}      🚽  ${player.needs.toilet
+    .toString()
+    .padStart(2, "0")}      💬  ${player.needs.social
+    .toString()
+    .padStart(2, "0")}
 ---------------------------
 `);
 };
@@ -261,9 +266,8 @@ const doSleep = (hours) => {
 
 const doNutritionActivity = (activity, type) => {
   player.updateNeeds(activity);
-  
-  switch (type) {
 
+  switch (type) {
     // COZINHAR
 
     case 0: {
@@ -351,7 +355,7 @@ let confirmChoice;
 
 // ----- TELA INCIAL -----
 
-TODO:
+// TODO:
 
 // ----- seleção das características do jogador (nome e profissão)
 
@@ -454,74 +458,71 @@ const mainMenu = [
 // ----- solicita a seleção da próxima atividade até o fim do jogo (> 7 dias)
 
 while (true) {
-  
   let currentPeriod = time.getPeriod(); // variáveis para definição de update autônomo baseado na mudança de período
   let newPeriod;
 
-// ----- repete a seleção da atividade até a confirmação do jogador
+  // ----- repete a seleção da atividade até a confirmação do jogador
 
-while (true) {
+  while (true) {
+    // exibe dia/hora + status dos atributos
 
+    displayPlayerInfo();
 
-  // exibe dia/hora + status dos atributos
-
-  displayPlayerInfo();
-
-  console.log(`selecione a próxima atividade
+    console.log(`selecione a próxima atividade
 `);
 
-  // exibe as opções (MENU PRINCIPAL)
+    // exibe as opções (MENU PRINCIPAL)
 
-  for (let option of mainMenu) {
-    console.log(`[${mainMenu.indexOf(option)}] ${option}`);
-  }
+    for (let option of mainMenu) {
+      console.log(`[${mainMenu.indexOf(option)}] ${option}`);
+    }
 
-  console.log();
+    console.log();
 
-  // solicita a seleção da atividade
+    // solicita a seleção da atividade
 
-  mainMenuChoice = validateFunctions.validatePromptIntMinMax(
-    "sua escolha:",
-    mainMenu.length - 1,
-    0,
-    `digite um NÚMERO INTEIRO entre 0 e ${mainMenu.length - 1}`
-  );
+    mainMenuChoice = validateFunctions.validatePromptIntMinMax(
+      "sua escolha:",
+      mainMenu.length - 1,
+      0,
+      `digite um NÚMERO INTEIRO entre 0 e ${mainMenu.length - 1}`
+    );
 
-  console.log();
+    console.log();
 
-  // ----- exibe opções adicionais de acordo com a opção selecionada no menu principal
+    // ----- exibe opções adicionais de acordo com a opção selecionada no menu principal
 
-  switch (mainMenuChoice) {
-    // ----- TRABALHAR -----
+    switch (mainMenuChoice) {
+      // ----- TRABALHAR -----
 
-    case 0: {
-      let today = time.getWeekDay();
-      let now = time.getPeriod();
+      case 0: {
+        let today = time.getWeekDay();
+        let now = time.getPeriod();
 
-      // executa a tarefa se dia/período de trabalho permitido
+        // executa a tarefa se dia/período de trabalho permitido
 
-      if (
-        (player.job.daysToWork == "qualquer" ||
-          player.job.daysToWork.includes(today)) &&
-        (player.job.periodsToWork == "qualquer" ||
-          player.job.periodsToWork.includes(now))
-      ) {
-        // solicita a quantidade de horas a trabalhar
+        if (
+          (player.job.daysToWork == "qualquer" ||
+            player.job.daysToWork.includes(today)) &&
+          (player.job.periodsToWork == "qualquer" ||
+            player.job.periodsToWork.includes(now))
+        ) {
+          // solicita a quantidade de horas a trabalhar
 
-        hoursWorked = validateFunctions.validatePromptIntMinMax(
-          "trabalhar quantas horas?",
-          4,
-          1,
-          "você deve selecionar um NÚMERO INTEIRO entre 1 e 4"
-        );
+          hoursWorked = validateFunctions.validatePromptIntMinMax(
+            "trabalhar quantas horas?",
+            4,
+            1,
+            "você deve selecionar um NÚMERO INTEIRO entre 1 e 4"
+          );
 
-        console.clear();
+          console.clear();
 
-        displayPlayerInfo();
+          displayPlayerInfo();
 
-        // exibe detalhes da ação TRABALHAR
+          // exibe detalhes da ação TRABALHAR
 
-        console.log(`atividade selecionada | TRABALHAR ${hoursWorked}h
+          console.log(`atividade selecionada | TRABALHAR ${hoursWorked}h
       
   \t- ${hoursWorked} 🎈
   \t+ $${hoursWorked * player.job.salaryPerHour.toFixed(2)}
@@ -530,13 +531,13 @@ while (true) {
   \tTOTAL horas trabalhadas essa semana: ${records.work.totalHoursWorked}
   `);
 
-        // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+          // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-        confirmChoice = confirmation();
-      } else {
-        // exibe um erro se dia/período de trabalho não permitido
+          confirmChoice = confirmation();
+        } else {
+          // exibe um erro se dia/período de trabalho não permitido
 
-        console.log(`você não pode trabalhar agora!
+          console.log(`você não pode trabalhar agora!
         
 seu cronograma de trabalho:
 
@@ -545,57 +546,58 @@ horário: ${chosenJob.periodsToWork}
 
      `);
 
-        confirmChoice = 0;
+          confirmChoice = 0;
 
-        formatFunctions.formatPrompt("digite ENTER para voltar");
+          formatFunctions.formatPrompt("digite ENTER para voltar");
+        }
+
+        break;
       }
 
-      break;
-    }
+      //----- NUTRIÇÃO -----
 
-    //----- NUTRIÇÃO -----
+      case 1: {
+        console.clear();
 
-    case 1: {
-      console.clear();
+        displayPlayerInfo();
 
-      displayPlayerInfo();
+        console.log(`NUTRIÇÃO | selecione o que comer`);
+        console.log();
 
-      console.log(`NUTRIÇÃO | selecione o que comer`);
-      console.log();
+        // exibe as opções de comida (menu NUTRIÇÃO)
 
-      // exibe as opções de comida (menu NUTRIÇÃO)
+        for (let nutritionActivity of activityList_nutrition) {
+          console.log(
+            `[${
+              nutritionActivity.index
+            }] ${nutritionActivity.title.toUpperCase()}`
+          );
+        }
 
-      for (let nutritionActivity of activityList_nutrition) {
-        console.log(
-          `[${
-            nutritionActivity.index
-          }] ${nutritionActivity.title.toUpperCase()}`
-        );
-      }
+        console.log();
 
-      console.log();
+        // solicita a escolha da comida
 
-      // solicita a escolha da comida
+        nutritionActivityChoiceIndex =
+          validateFunctions.validatePromptIntMinMax(
+            "sua escolha:",
+            activityList_nutrition.length - 1,
+            0,
+            `digite um NÚMERO INTEIRO entre 0 e ${
+              activityList_nutrition.length - 1
+            }`
+          );
 
-      nutritionActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
-        "sua escolha:",
-        activityList_nutrition.length - 1,
-        0,
-        `digite um NÚMERO INTEIRO entre 0 e ${
-          activityList_nutrition.length - 1
-        }`
-      );
+        chosenNutritionActivity =
+          activityList_nutrition[nutritionActivityChoiceIndex];
 
-      chosenNutritionActivity =
-        activityList_nutrition[nutritionActivityChoiceIndex];
+        console.clear();
 
-      console.clear();
+        // solicita a escolha entre COZINHAR, DELIVERY e RESTAURANTE
 
-      // solicita a escolha entre COZINHAR, DELIVERY e RESTAURANTE
+        displayPlayerInfo();
 
-      displayPlayerInfo();
-
-      console.log(`alimento selecionado | ${chosenNutritionActivity.title.toUpperCase()}
+        console.log(`alimento selecionado | ${chosenNutritionActivity.title.toUpperCase()}
 
 \t---------------------------------------
 \t[0]  |   COZINHAR    |  🕑🕑🕑   💲    
@@ -606,374 +608,377 @@ horário: ${chosenJob.periodsToWork}
 \t---------------------------------------
 `);
 
-      nutritionPrepMethod = validateFunctions.validatePromptIntMinMax(
-        "sua escolha:",
-        2,
-        0,
-        `digite um NÚMERO INTEIRO entre 0 e 2`
-      );
+        nutritionPrepMethod = validateFunctions.validatePromptIntMinMax(
+          "sua escolha:",
+          2,
+          0,
+          `digite um NÚMERO INTEIRO entre 0 e 2`
+        );
 
-      console.clear();
+        console.clear();
 
-      // exibe detalhes da atividade selecionada
+        // exibe detalhes da atividade selecionada
 
-      displayPlayerInfo();
+        displayPlayerInfo();
 
-      switch (nutritionPrepMethod) {
+        switch (nutritionPrepMethod) {
+          // ----- COZINHAR
 
-        // ----- COZINHAR
-
-        case 0: {
-          console.log(`atividade selecionada | COZINHAR ${chosenNutritionActivity.title.toUpperCase()}
+          case 0: {
+            console.log(`atividade selecionada | COZINHAR ${chosenNutritionActivity.title.toUpperCase()}
 
       custo: \t$${chosenNutritionActivity.cost.toFixed(2)}
     duração: \t${chosenNutritionActivity.timeToComplete * 2} minutos
-  atributos: \t+${
-          chosenNutritionActivity.needsModification.nutrition
-        } 🍔 | ${chosenNutritionActivity.needsModification.toilet} 🚽
+  atributos: \t+${chosenNutritionActivity.needsModification.nutrition} 🍔 | ${
+              chosenNutritionActivity.needsModification.toilet
+            } 🚽
 `);
 
-          // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+            // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-          confirmChoice = confirmation();
+            confirmChoice = confirmation();
 
-          break;
-        }
+            break;
+          }
 
-        // ----- DELIVERY
-        
-        case 1: {
-          console.log(`atividade selecionada | DELIVERY - ${chosenNutritionActivity.title.toUpperCase()}
+          // ----- DELIVERY
+
+          case 1: {
+            console.log(`atividade selecionada | DELIVERY - ${chosenNutritionActivity.title.toUpperCase()}
 
       custo: \t$${(chosenNutritionActivity.cost * 1.5).toFixed(2)}
     duração: \t${chosenNutritionActivity.timeToComplete * 1.5} minutos
-  atributos: \t+${
-          chosenNutritionActivity.needsModification.nutrition
-        } 🍔 | ${chosenNutritionActivity.needsModification.toilet} 🚽
+  atributos: \t+${chosenNutritionActivity.needsModification.nutrition} 🍔 | ${
+              chosenNutritionActivity.needsModification.toilet
+            } 🚽
 `);
 
-          // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+            // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-          confirmChoice = confirmation();
+            confirmChoice = confirmation();
 
-          break;
-        }
+            break;
+          }
 
-        // ----- RESTAURANTE
-        
-        case 2: {
-          console.log(`atividade selecionada | RESTAURANTE - ${chosenNutritionActivity.title.toUpperCase()}
+          // ----- RESTAURANTE
+
+          case 2: {
+            console.log(`atividade selecionada | RESTAURANTE - ${chosenNutritionActivity.title.toUpperCase()}
 
       custo: \t$${(chosenNutritionActivity.cost * 2).toFixed(2)}
     duração: \t${chosenNutritionActivity.timeToComplete} minutos
-  atributos: \t+${
-          chosenNutritionActivity.needsModification.nutrition
-        } 🍔 | ${chosenNutritionActivity.needsModification.toilet} 🚽
+  atributos: \t+${chosenNutritionActivity.needsModification.nutrition} 🍔 | ${
+              chosenNutritionActivity.needsModification.toilet
+            } 🚽
 `);
 
-          // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+            // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-          confirmChoice = confirmation();
+            confirmChoice = confirmation();
 
-          break;
+            break;
+          }
         }
+
+        break;
       }
 
-      break;
-    }
+      // ----- ENERGIA -----
 
-    // ----- ENERGIA -----
+      case 2: {
+        // solicita a quantidade de horas a dormir
 
-    case 2: {
-      // solicita a quantidade de horas a dormir
+        hoursSlept = validateFunctions.validatePromptIntMinMax(
+          "dormir quantas horas?",
+          8,
+          1,
+          "você deve selecionar um NÚMERO INTEIRO entre 1 e 8"
+        );
 
-      hoursSlept = validateFunctions.validatePromptIntMinMax(
-        "dormir quantas horas?",
-        8,
-        1,
-        "você deve selecionar um NÚMERO INTEIRO entre 1 e 8"
-      );
+        console.clear();
 
-      console.clear();
+        displayPlayerInfo();
 
-      displayPlayerInfo();
+        // exibe detalhes da ação DORMIR
 
-      // exibe detalhes da ação DORMIR
-
-      console.log(`atividade selecionada | DORMIR ${hoursSlept}h
+        console.log(`atividade selecionada | DORMIR ${hoursSlept}h
 
 \t+ ${hoursSlept} 💤
 
 \tTOTAL horas dormidas essa semana: ${records.energy.totalHoursSlept}
 `);
 
-      // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+        // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-      confirmChoice = confirmation();
+        confirmChoice = confirmation();
 
-      break;
-    }
-
-    // ----- HIGIENE -----
-
-    case 3: {
-      console.clear();
-
-      displayPlayerInfo();
-
-      console.log(`HIGIENE | selecione a atividade`);
-      console.log();
-
-      // exibe as opções (menu HIGIENE)
-
-      for (let hygieneActivity of activityList_hygiene) {
-        console.log(
-          `[${hygieneActivity.index}] ${hygieneActivity.title.toUpperCase()}`
-        );
+        break;
       }
 
-      console.log();
+      // ----- HIGIENE -----
 
-      // solicita a escolha da atividade
+      case 3: {
+        console.clear();
 
-      hygieneActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
-        "sua escolha:",
-        activityList_hygiene.length - 1,
-        0,
-        `digite um NÚMERO INTEIRO entre 0 e ${activityList_hygiene.length - 1}`
-      );
+        displayPlayerInfo();
 
-      chosenHygieneActivity = activityList_hygiene[hygieneActivityChoiceIndex];
+        console.log(`HIGIENE | selecione a atividade`);
+        console.log();
 
-      console.clear();
+        // exibe as opções (menu HIGIENE)
 
-      // exibe detalhes da atividade selecionada
+        for (let hygieneActivity of activityList_hygiene) {
+          console.log(
+            `[${hygieneActivity.index}] ${hygieneActivity.title.toUpperCase()}`
+          );
+        }
 
-      displayPlayerInfo();
+        console.log();
 
-      console.log(`atividade selecionada | ${chosenHygieneActivity.title.toUpperCase()}
+        // solicita a escolha da atividade
+
+        hygieneActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
+          "sua escolha:",
+          activityList_hygiene.length - 1,
+          0,
+          `digite um NÚMERO INTEIRO entre 0 e ${
+            activityList_hygiene.length - 1
+          }`
+        );
+
+        chosenHygieneActivity =
+          activityList_hygiene[hygieneActivityChoiceIndex];
+
+        console.clear();
+
+        // exibe detalhes da atividade selecionada
+
+        displayPlayerInfo();
+
+        console.log(`atividade selecionada | ${chosenHygieneActivity.title.toUpperCase()}
       
       custo: \t$${chosenHygieneActivity.cost.toFixed(2)}
     duração: \t${chosenHygieneActivity.timeToComplete} minutos
   atributos: \t+${chosenHygieneActivity.needsModification.hygiene} 🧼
 `);
 
-      // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+        // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-      confirmChoice = confirmation();
+        confirmChoice = confirmation();
 
-      break;
-    }
-
-    // ----- BANHEIRO -----
-
-    case 4: {
-      console.clear();
-
-      displayPlayerInfo();
-
-      console.log(`BANHEIRO | selecione a atividade`);
-      console.log();
-
-      // exibe as opções (menu BANHEIRO)
-
-      for (let toiletActivity of activityList_toilet) {
-        console.log(
-          `[${toiletActivity.index}] ${toiletActivity.title.toUpperCase()}`
-        );
+        break;
       }
 
-      console.log();
+      // ----- BANHEIRO -----
 
-      // solicita a escolha da atividade
+      case 4: {
+        console.clear();
 
-      toiletActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
-        "sua escolha:",
-        2,
-        1,
-        `digite um [1] ou [2]`
-      );
+        displayPlayerInfo();
 
-      chosenToiletActivity = activityList_toilet[toiletActivityChoiceIndex - 1]; // gambiarra de leve p/ começar as opções com num 1 ao invés de zero
+        console.log(`BANHEIRO | selecione a atividade`);
+        console.log();
 
-      console.clear();
+        // exibe as opções (menu BANHEIRO)
 
-      // exibe detalhes da atividade selecionada
+        for (let toiletActivity of activityList_toilet) {
+          console.log(
+            `[${toiletActivity.index}] ${toiletActivity.title.toUpperCase()}`
+          );
+        }
 
-      displayPlayerInfo();
+        console.log();
 
-      console.log(`atividade selecionada | ${chosenToiletActivity.title.toUpperCase()}
+        // solicita a escolha da atividade
+
+        toiletActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
+          "sua escolha:",
+          2,
+          1,
+          `digite um [1] ou [2]`
+        );
+
+        chosenToiletActivity =
+          activityList_toilet[toiletActivityChoiceIndex - 1]; // gambiarra de leve p/ começar as opções com num 1 ao invés de zero
+
+        console.clear();
+
+        // exibe detalhes da atividade selecionada
+
+        displayPlayerInfo();
+
+        console.log(`atividade selecionada | ${chosenToiletActivity.title.toUpperCase()}
       
     duração: \t${chosenToiletActivity.timeToComplete} minutos
   atributos: \t+${chosenToiletActivity.needsModification.toilet} 🚽 | ${
-        chosenToiletActivity.needsModification.hygiene
-      } 🧼
+          chosenToiletActivity.needsModification.hygiene
+        } 🧼
 `);
 
-      // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+        // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-      confirmChoice = confirmation();
+        confirmChoice = confirmation();
 
-      break;
-    }
-
-    // ----- DIVERSÃO -----
-
-    case 5: {
-      console.clear();
-
-      displayPlayerInfo();
-
-      console.log(`DIVERSÃO | selecione a atividade`);
-      console.log();
-
-      // exibe as opções (menu DIVERSÃO)
-
-      for (let funActivity of activityList_fun) {
-        console.log(
-          `[${funActivity.index}] ${funActivity.title.toUpperCase()}`
-        );
+        break;
       }
 
-      console.log();
+      // ----- DIVERSÃO -----
 
-      // solicita a escolha da atividade
+      case 5: {
+        console.clear();
 
-      funActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
-        "sua escolha:",
-        activityList_fun.length - 1,
-        0,
-        `digite um NÚMERO INTERO entre 0 e ${activityList_fun.length - 1}`
-      );
+        displayPlayerInfo();
 
-      chosenFunActivity = activityList_fun[funActivityChoiceIndex];
+        console.log(`DIVERSÃO | selecione a atividade`);
+        console.log();
 
-      console.clear();
+        // exibe as opções (menu DIVERSÃO)
 
-      // exibe detalhes da atividade seleconada
+        for (let funActivity of activityList_fun) {
+          console.log(
+            `[${funActivity.index}] ${funActivity.title.toUpperCase()}`
+          );
+        }
 
-      displayPlayerInfo();
+        console.log();
 
-      console.log(`atividade selecionada | ${chosenFunActivity.title.toUpperCase()}
+        // solicita a escolha da atividade
+
+        funActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
+          "sua escolha:",
+          activityList_fun.length - 1,
+          0,
+          `digite um NÚMERO INTERO entre 0 e ${activityList_fun.length - 1}`
+        );
+
+        chosenFunActivity = activityList_fun[funActivityChoiceIndex];
+
+        console.clear();
+
+        // exibe detalhes da atividade seleconada
+
+        displayPlayerInfo();
+
+        console.log(`atividade selecionada | ${chosenFunActivity.title.toUpperCase()}
     
       custo: \t$${chosenFunActivity.cost.toFixed(2)}
     duração: \t${chosenFunActivity.timeToComplete} minutos
   atributos: \t+${chosenFunActivity.needsModification.fun} 🎈
 `);
 
-      // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+        // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-      confirmChoice = confirmation();
+        confirmChoice = confirmation();
 
-      break;
-    }
-    // ----- SOCIAL -----
-
-    case 6: {
-      console.clear();
-
-      displayPlayerInfo();
-
-      console.log(`SOCIAL | selecione a atividade`);
-      console.log();
-
-      // exibe as opções (menu SOCIAL)
-
-      for (let socialActivity of activityList_social) {
-        console.log(
-          `[${socialActivity.index}] ${socialActivity.title.toUpperCase()}`
-        );
+        break;
       }
+      // ----- SOCIAL -----
 
-      console.log();
+      case 6: {
+        console.clear();
 
-      // solicita a escolha da atividade
+        displayPlayerInfo();
 
-      socialActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
-        "sua escolha:",
-        activityList_social.length - 1,
-        0,
-        `digite um NÚMERO INTERO entre 0 e ${activityList_social.length - 1}`
-      );
+        console.log(`SOCIAL | selecione a atividade`);
+        console.log();
 
-      chosenSocialActivity = activityList_social[socialActivityChoiceIndex];
+        // exibe as opções (menu SOCIAL)
 
-      console.clear();
+        for (let socialActivity of activityList_social) {
+          console.log(
+            `[${socialActivity.index}] ${socialActivity.title.toUpperCase()}`
+          );
+        }
 
-      // exibe detalhes da atividade selecionada
+        console.log();
 
-      displayPlayerInfo();
+        // solicita a escolha da atividade
 
-      console.log(`atividade selecionada | ${chosenSocialActivity.title.toUpperCase()}
+        socialActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
+          "sua escolha:",
+          activityList_social.length - 1,
+          0,
+          `digite um NÚMERO INTERO entre 0 e ${activityList_social.length - 1}`
+        );
+
+        chosenSocialActivity = activityList_social[socialActivityChoiceIndex];
+
+        console.clear();
+
+        // exibe detalhes da atividade selecionada
+
+        displayPlayerInfo();
+
+        console.log(`atividade selecionada | ${chosenSocialActivity.title.toUpperCase()}
     
       custo: \t$${chosenSocialActivity.cost.toFixed(2)}
     duração: \t${chosenSocialActivity.timeToComplete} minutos
   atributos: \t+${chosenSocialActivity.needsModification.social} 💬
 `);
 
-      // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+        // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
-      confirmChoice = confirmation();
+        confirmChoice = confirmation();
 
+        break;
+      }
+    }
+
+    if (confirmChoice == 1) {
       break;
     }
   }
 
-  if (confirmChoice == 1) {
+  // ----- executa a atividade selecionada
+
+  switch (mainMenuChoice) {
+    case 0: {
+      doWork(hoursWorked); // executa a atividade TRABALHAR
+      break;
+    }
+    case 1: {
+      doNutritionActivity(chosenNutritionActivity, nutritionPrepMethod); // executa a atividade NUTRIÇÃO
+      break;
+    }
+    case 2: {
+      doSleep(hoursSlept); // executa a atividade DORMIR
+      break;
+    }
+    case 3: {
+      doHigieneActivity(chosenHygieneActivity); // executa a atividade HIGIENE
+      break;
+    }
+    case 4: {
+      doToiletActivity(chosenToiletActivity); // executa a atividade BANHEIRO
+      break;
+    }
+    case 5: {
+      doFunActivity(chosenFunActivity); // excuta a atividade DIVERSÃO
+      break;
+    }
+    case 6: {
+      doSocialActivity(chosenSocialActivity); // executa a atividade SOCIAL
+      break;
+    }
+  }
+
+  console.clear();
+
+  // ----- atualiza os atributos de forma autônoma a cada troca de período
+
+  newPeriod = time.getPeriod();
+
+  if (currentPeriod != newPeriod) {
+    player.updateNeedsAutonomous();
+  }
+
+  // ----- atividades autônomas disparadas por necessidade <= 0
+
+  // TODO:
+
+  // ----- finaliza o jogo após 7 dias completos
+
+  if (time.days > 7) {
     break;
   }
-}
-
-// ----- executa a atividade selecionada
-
-switch (mainMenuChoice) {
-  case 0: {
-    doWork(hoursWorked); // executa a atividade TRABALHAR
-    break;
-  }
-  case 1: {
-    doNutritionActivity(chosenNutritionActivity, nutritionPrepMethod); // executa a atividade NUTRIÇÃO
-    break;
-  }
-  case 2: {
-    doSleep(hoursSlept); // executa a atividade DORMIR
-    break;
-  }
-  case 3: {
-    doHigieneActivity(chosenHygieneActivity); // executa a atividade HIGIENE
-    break;
-  }
-  case 4: {
-    doToiletActivity(chosenToiletActivity); // executa a atividade BANHEIRO
-    break;
-  }
-  case 5: {
-    doFunActivity(chosenFunActivity); // excuta a atividade DIVERSÃO
-    break;
-  }
-  case 6: {
-    doSocialActivity(chosenSocialActivity); // executa a atividade SOCIAL
-    break;
-  }
-}
-
-console.clear();
-
-// ----- atualiza os atributos de forma autônoma a cada troca de período
-
-newPeriod = time.getPeriod();
-
-if (currentPeriod != newPeriod) {
-  player.updateNeedsAutonomous();
-}
-
-// ----- atividades autônomas disparadas por necessidade <= 0
-
-TODO:
-
-// ----- finaliza o jogo após 7 dias completos
-
-if (time.days > 7) {
-  break;
-}
 }
