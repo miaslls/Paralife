@@ -98,8 +98,6 @@ const time = {
     return currentTime;
   },
 
-  // retorna o período atual FIXME: current time/new time - if current != new -> event triggered by low need
-
   getPeriod: function () {
     let currentPeriod;
 
