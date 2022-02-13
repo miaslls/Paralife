@@ -14,7 +14,7 @@ const validateFunctions = require("./functions/validate.js");
 
 // ----- OBJECTS DEFINITION -----
 
-// ----- PLAYER -----
+// ----- PLAYER ----- BOOKMARK:
 
 // ----- define objeto player (jogador)
 
@@ -57,9 +57,21 @@ const player = {
   updateWallet: function (activity) {
     this.wallet -= activity.cost;
   },
+
+  // atualiza os atributos de forma autônoma a cada troca de período
+
+  updateNeedsAutonomous: function () {
+    this.needs.nutrition -= 3;
+    this.needs.energy -= 2;
+    this.needs.hygiene -= 3;
+    this.needs.toilet -= 4;
+    this.needs.fun -= 1;
+    this.needs.social -= 1;
+  }
+
 };
 
-// ----- TIME -----
+// ----- TIME ----- BOOKMARK:
 
 // ----- define o objeto time (tempo)
 
@@ -121,7 +133,7 @@ const time = {
   },
 };
 
-// ----- RECORDS -----
+// ----- RECORDS ----- BOOKMARK:
 
 // ----- define o objeto records
 
@@ -163,7 +175,7 @@ const records = {
   },
 };
 
-// ----- FUNCTIONS -----
+// ----- FUNCTIONS ----- BOOKMARK:
 
 // ----- exibe as informações do jogador
 
@@ -182,11 +194,11 @@ const displayPlayerInfo = () => {
 💼 ${player.job.title}
 
 ---------------------------
-🍔  ${player.needs.nutrition}      🧼  ${player.needs.hygiene}      🎈  ${
-    player.needs.fun
+🍔  ${player.needs.nutrition.toString().padStart(2, "0")}      🧼  ${player.needs.hygiene.toString().padStart(2, "0")}      🎈  ${
+    player.needs.fun.toString().padStart(2, "0")
   }
-💤  ${player.needs.energy}      🚽  ${player.needs.toilet}      💬  ${
-    player.needs.social
+💤  ${player.needs.energy.toString().padStart(2, "0")}      🚽  ${player.needs.toilet.toString().padStart(2, "0")}      💬  ${
+    player.needs.social.toString().padStart(2, "0")
   }
 ---------------------------
 `);
@@ -332,12 +344,16 @@ const doSocialActivity = (activity) => {
   records.social.totalMinutesSocial += activity.timeToComplete;
 };
 
-// ----- CODE START -----
+// ----- CODE START ----- BOOKMARK:
 
 let gameName = formatFunctions.formatToTitle("քǟʀǟʟɨʄɛ");
 let confirmChoice;
 
 // ----- TELA INCIAL -----
+
+TODO:
+
+// ----- seleção das características do jogador (nome e profissão)
 
 console.clear();
 console.log(gameName);
@@ -351,7 +367,7 @@ player.name = validateFunctions.validatePromptString(
 
 console.clear();
 
-// ----- solicita a seleção da profissão do jogador
+// solicita a seleção da profissão do jogador
 
 let jobChoiceIndex;
 let chosenJob;
@@ -423,7 +439,7 @@ let chosenFunActivity;
 let socialActivityChoiceIndex;
 let chosenSocialActivity;
 
-// ----- MENU PRINCIPAL -----
+// ----- MENU PRINCIPAL ----- BOOKMARK:
 
 const mainMenu = [
   "TRABALHO",
@@ -435,9 +451,18 @@ const mainMenu = [
   "SOCIAL",
 ];
 
+// ----- solicita a seleção da próxima atividade até o fim do jogo (> 7 dias)
+
+while (true) {
+  
+  let currentPeriod = time.getPeriod(); // variáveis para definição de update autônomo baseado na mudança de período
+  let newPeriod;
+
 // ----- repete a seleção da atividade até a confirmação do jogador
 
 while (true) {
+
+
   // exibe dia/hora + status dos atributos
 
   displayPlayerInfo();
@@ -572,13 +597,13 @@ horário: ${chosenJob.periodsToWork}
 
       console.log(`alimento selecionado | ${chosenNutritionActivity.title.toUpperCase()}
 
-\t-----------------------------------------
-\t[0]  |   COZINHAR    |  🕑🕑🕑   💲    |
-\t-----------------------------------------
-\t[1]  |   DELIVERY    |   🕑🕑    💲💲   |
-\t-----------------------------------------
-\t[2]  |  RESTAURANTE  |    🕑     💲💲💲  |
-\t-----------------------------------------
+\t---------------------------------------
+\t[0]  |   COZINHAR    |  🕑🕑🕑   💲    
+\t---------------------------------------
+\t[1]  |   DELIVERY    |   🕑🕑    💲💲   
+\t---------------------------------------
+\t[2]  |  RESTAURANTE  |    🕑     💲💲💲  
+\t---------------------------------------
 `);
 
       nutritionPrepMethod = validateFunctions.validatePromptIntMinMax(
@@ -932,6 +957,23 @@ switch (mainMenuChoice) {
   }
 }
 
-console.log("player", player); //FIXME:
-console.log("time", time);
-console.log("records", records);
+console.clear();
+
+// ----- atualiza os atributos de forma autônoma a cada troca de período
+
+newPeriod = time.getPeriod();
+
+if (currentPeriod != newPeriod) {
+  player.updateNeedsAutonomous();
+}
+
+// ----- atividades autônomas disparadas por necessidade <= 0
+
+TODO:
+
+// ----- finaliza o jogo após 7 dias completos
+
+if (time.days > 7) {
+  break;
+}
+}

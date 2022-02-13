@@ -1,0 +1,90 @@
+const prompt = require("prompt-sync")();
+
+/*usando para testa, apagar apos os testes*/
+let nutrição = 0;
+let energia = 0;
+let higiene = 0;
+let banheiro = 0;
+let diversão = 0;
+let social = 0;
+
+/*usando para testa, apagar apos os testes*/
+let nome = 'carlos';
+let horas = 0;
+let minutos = 0;
+let custos = 100;
+
+ /*CODIGO*/
+function script() {
+
+    if (0 == nutrição) {
+        horas += 3;
+        custos -= 200;
+        nutrição += 5;
+
+        console.log(`${nome} você desmaiou por estar com o corpo desnutrido.`);
+        console.log(`Você foi encaminhado para o hospital, para receber os cuidados necessários`);
+
+        /*status    camila colocar o codigo*/  
+    };
+
+    if (0 == energia) {
+        horas += 8;
+        energia += 5;
+
+        console.log(`${nome} você dormiu por 8 Horas, para recuperar a sua energia. `);
+        console.log(' ');
+
+        /*status    camila colocar o codigo*/  
+    };
+
+    if (0 == higiene) {
+        horas += 1;
+        custos -= 50;
+        social -= 1;
+        higiene += 5;
+
+        console.log(`${nome} as pessoas não queria ficar próxima a você, devido ao seu mau cheiro.`);
+        console.log(`Você foi até sua casa tomou banho e retornou`);
+        console.log(' ');
+
+        /*status    camila colocar o codigo*/  
+    };
+
+    if (0 == banheiro) {
+        horas += 1;
+        custos -= 50
+        social -= 1;
+        banheiro += 5;
+
+        console.log(`${nome} Você fez xixi na roupa.`);
+        console.log(`Você foi até sua casa tomou banho e retornou`);
+        console.log(' ');
+
+        /*status    camila colocar o codigo*/  
+    };
+
+    if (0 == diversão) {
+        horas += 2;
+        custos -= 140;
+        diversão += 5;
+
+        console.log(`${nome} você foi a uma consulta com médico, no hospital psiquiátrico`);
+        console.log(`Devido a falta de diversões, você estava com problema psicológicos`);
+        console.log(' ');
+
+        /*status    camila colocar o codigo*/  
+    };
+
+    if (0 == social) {
+        minutos += 25;
+        social += 5;
+
+        console.log(`${nome} Devido a falta de encontros com amigos, está se sentindo sozinho, abandonado`);
+        console.log(`Você chora deprimido`);
+        console.log(' ');
+
+        /*status    camila colocar o codigo*/  
+    }
+}
+script();   /*usando para testar*/
