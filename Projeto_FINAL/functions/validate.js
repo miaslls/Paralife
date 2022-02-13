@@ -26,7 +26,7 @@ exports.validatePromptIntMinMax = (
     let num = formatFunctions.formatPromptMultipleLines(message);
 
     if (!isNaN(num) && num >= min && num <= max && num % 1 == 0) {
-      return num;
+      return parseInt(num);
     }
     console.log(errorMessage);
   }

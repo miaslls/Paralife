@@ -1,0 +1,30 @@
+[
+  {
+    "index": 0,
+    "title": "banho",
+    "timeToComplete": 20,
+    "cost": 0,
+    "needsModification": {
+      "hygiene": 8
+    }
+  },
+
+  {
+    "index": 1,
+    "title": "escovar os dentes",
+    "timeToComplete": 5,
+    "cost": 0,
+    "needsModification": {
+      "hygiene": 2
+    }
+  },
+  {
+    "index": 3,
+    "title": "lavar as mãos",
+    "timeToComplete": 5,
+    "cost": 0,
+    "needsModification": {
+      "hygiene": 2
+    }
+  }
+]

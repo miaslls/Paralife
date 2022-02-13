@@ -1,0 +1,102 @@
+[
+  {
+    "index": 0,
+    "title": "salada de quinoa",
+    "timeToComplete": 15,
+    "cost": 35,
+    "needsModification": {
+      "nutrition": 2,
+      "toilet": -1
+    }
+  },
+
+  {
+    "index": 1,
+    "title": "lasanha",
+    "timeToComplete": 30,
+    "cost": 50,
+    "needsModification": {
+      "nutrition": 5,
+      "toilet": -3
+    }
+  },
+
+  {
+    "index": 2,
+    "title": "sanduiche",
+    "timeToComplete": 10,
+    "cost": 20,
+    "needsModification": {
+      "nutrition": 3,
+      "toilet": -2
+    }
+  },
+
+  {
+    "index": 3,
+    "title": "salada de frutas",
+    "timeToComplete": 15,
+    "cost": 35,
+    "needsModification": {
+      "nutrition": 3,
+      "toilet": -2
+    }
+  },
+  {
+    "index": 4,
+    "title": "legumes",
+    "timeToComplete": 25,
+    "cost": 40,
+    "needsModification": {
+      "nutrition": 3,
+      "toilet": -1
+    }
+  },
+
+  {
+    "index": 5,
+    "title": "macarrão",
+    "timeToComplete": 20,
+    "cost": 25,
+    "needsModification": {
+      "nutrition": 5,
+      "toilet": -3
+    }
+  },
+  {
+    "index": 6,
+    "title": "energético",
+    "timeToComplete": 5,
+    "cost": 15,
+    "needsModification": {
+      "nutrition": 1,
+      "energy": 4,
+      "toilet": -3,
+      "fun": 1
+    }
+  },
+
+  {
+    "index": 7,
+    "title": "gatorate",
+    "timeToComplete": 5,
+    "cost": 10,
+    "needsModification": {
+      "nutrition": 2,
+      "energy": 2,
+      "hygiene": 0,
+      "toilet": -2
+    }
+  },
+  {
+    "index": 8,
+    "title": "cafe",
+    "timeToComplete": 10,
+    "cost": 10,
+    "needsModification": {
+      "nutrition": 1,
+      "energy": 5,
+      "toilet": -5
+    }
+  }
+]

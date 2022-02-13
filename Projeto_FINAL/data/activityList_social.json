@@ -1,0 +1,60 @@
+[
+  {
+    "index": 0,
+    "title": "Barzinho",
+    "timeToComplete": 180,
+    "cost": 250,
+    "needsModification": {
+      "nutrition": 0,
+      "energy": 0,
+      "hygiene": 0,
+      "toilet": 0,
+      "fun": 0,
+      "social": 0
+    }
+  },
+
+  {
+    "index": 1,
+    "title": "Parque",
+    "timeToComplete": 180,
+    "cost": 30,
+    "needsModification": {
+      "nutrition": 0,
+      "energy": 0,
+      "hygiene": 0,
+      "toilet": 0,
+      "fun": 0,
+      "social": 0
+    }
+  },
+
+  {
+    "index": 2,
+    "title": "Visitar amigo",
+    "timeToComplete": 170,
+    "cost": 30,
+    "needsModification": {
+      "nutrition": 0,
+      "energy": 0,
+      "hygiene": 0,
+      "toilet": 0,
+      "fun": 0,
+      "social": 0
+    }
+  },
+  {
+    "index": 3,
+    "title": "Ir a uma festa",
+    "timeToComplete": 8,
+    "cost": 0,
+    "needsModification": {
+      "nutrition": 0,
+      "energy": 0,
+      "hygiene": 0,
+      "toilet": 0,
+      "fun": 0,
+      "social": 0
+    }
+  }
+]

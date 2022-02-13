@@ -1,12 +1,16 @@
+'use strict';
+
 // ----- FUNCTIONS -----//
 
 // ----- solicita recursos necessários (prompt/jSON)
 
 const prompt = require("prompt-sync")();
-const activityList = require("./data/activityList.json"); // FIXME:
+const activityList = require("./data/activityList.json");
 const jobList = require("./data/jobList.json");
 const formatFunctions = require("./functions/format.js");
 const validateFunctions = require("./functions/validate.js");
+
+// ----- exibe as informações do jogador
 
 const displayPlayerInfo = () => {
   console.log(gameName);
@@ -30,11 +34,11 @@ const updatePlayerJob = (job) => {
   player.job.title = job.title;
   player.job.daysToWork = job.daysToWork;
   player.job.periodsToWork = job.periodsToWork;
-  player.job.minHoursPerWeek = parseInt(job.minHoursPerWeek);
-  player.job.salaryPerHour = parseInt(job.salaryPerHour);
+  player.job.minHoursPerWeek = job.minHoursPerWeek;
+  player.job.salaryPerHour = job.salaryPerHour;
 };
 
-// ----- executa a atividade TRABALHAR
+// ----- executa a atividade TRABALHAR 
 
 const doWork = (hours) => {
   time.increment(hours * 60);
@@ -42,10 +46,10 @@ const doWork = (hours) => {
   player.wallet += hours * player.job.salaryPerHour;
 };
 
-// ----- executa a atividade escolhida pelo jogador
+// ----- executa a atividade escolhida pelo jogador FIXME: not included in TEMP
 
 const doActivity = (activity) => {
-  needsModified = player.updateNeeds(activity);
+  let needsModified = player.updateNeeds(activity);
   player.updateWallet(activity);
   time.increment(activity["timeToComplete"]);
 
@@ -80,13 +84,13 @@ const player = {
     social: 5,
   },
 
-  // atualiza os atributos do jogador de acordo com a atividade escolhida
+  // atualiza os atributos do jogador de acordo com a atividade escolhida 
 
   updateNeeds: function (activity) {
     const activityKeysList = Object.keys(activity.needsModification);
     const needsModified = [];
 
-    for (key of activityKeysList) {
+    for (let key of activityKeysList) {
       this.needs[key] += activity.needsModification[key];
 
       if (this.needs[key] > 5) {
@@ -95,32 +99,46 @@ const player = {
         this.needs[key] = 0;
       }
 
-      // adiciona os valores em um array e formata o retorno da função
+      // adiciona os valores em um array e formata o retorno da função FIXME: not included in TEMP
 
       needsModified.push([
-        activity.needsModification[key].toString().padStart(2, "+"),
+        activity.needsModification[key],
         key,
       ]);
-
-      needsModifiedValues = Object.values(needsModified);
-
-      for (value of needsModifiedValues) {
-        if (value[1] == "nutrition") value[1] = "🍔";
-        if (value[1] == "energy") value[1] = "💤";
-        if (value[1] == "hygiene") value[1] = "🧼";
-        if (value[1] == "toilet") value[1] = "🚽";
-        if (value[1] == "fun") value[1] = "🎈";
-        if (value[1] == "social") value[1] = "💬";
-      }
     }
 
-    let needsModifiedString = needsModified.join(" | ");
-    needsModifiedFormatted = needsModifiedString.replace(/,/g, " ");
+    // 
+
+    let needsModifiedString = [];
+
+    for (let need of needsModified) {
+
+      let valueFormated = need[0].toString().padStart(2, "+");
+      let activityEmoji;
+
+      if (need[1] == "nutrition") {
+        activityEmoji = "🍔";
+      } else if (need[1] == "energy") {
+        activityEmoji = "💤";
+      } else if (need[1] == "hygiene") {
+        activityEmoji = "🧼";
+      } else if (need[1] == "toilet") {
+        activityEmoji = "🚽";
+      } else if (need[1] == "fun") {
+        activityEmoji = "🎈";
+      } else if (need[1] == "social") {
+        activityEmoji = "💬";
+      }
+
+      needsModifiedString.push(`${valueFormated} ${activityEmoji}`)
+    }
+
+    let needsModifiedFormatted = needsModifiedString.join(" | ");
 
     return needsModifiedFormatted;
   },
 
-  // atualiza a carteira
+  // atualiza a carteira 
 
   updateWallet: function (activity) {
     this.wallet -= activity.cost;
@@ -188,7 +206,7 @@ const time = {
     const weekDays = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
 
     return weekDays[this.days];
-  },
+  }
 };
 
 // ----- CODE START -----
@@ -211,34 +229,33 @@ console.clear();
 
 // ----- solicita a escolha da profissão do jogador
 
-  let jobChoice;
-  let chosenJob
-  let confirmChoice;
+let jobChoiceIndex;
+let chosenJob;
 
   // repete a escolha da profissão até que o jogador confirme a escolha
 
   while (true) {
-    formatFunctions.formatToTitle("քǟʀǟʟɨʄɛ");
+    console.log(gameName);
 
     console.log("selecione sua profissão\n");
 
-    for (job of jobList) {
+    for (let job of jobList) {
       console.log(`[${job.index}] ${job.title}`);
     }
 
     console.log();
 
-    jobChoice = validateFunctions.validatePromptIntMinMax(
+    jobChoiceIndex = validateFunctions.validatePromptIntMinMax(
       "sua escolha:",
       jobList.length,
       0,
       `digite um NÚMERO INTEIRO entre 0 e ${jobList.length}`
     );
 
-    chosenJob = jobList[jobChoice];
+    chosenJob = jobList[jobChoiceIndex];
 
     console.clear();
-    formatFunctions.formatToTitle("քǟʀǟʟɨʄɛ");
+    console.log(gameName);
 
     // exibe a opção selecionada
 
@@ -252,7 +269,7 @@ console.clear();
 
     // dá ao jogador a opção de confirmar a escolha ou voltar e escolher novamente
 
-    confirmChoice = validateFunctions.validatePromptIntMinMax(
+    let confirmChoice = validateFunctions.validatePromptIntMinMax(
       "digite [0] para voltar\ndigite [1] para confirmar",
       1,
       0,
@@ -291,7 +308,7 @@ while (true) {
     .formatPrompt("sua escolha:")
     .toUpperCase();
 
-  console.log(); // TODO: create empty line function
+  console.log();
 
   // ----- submenu TRABALHAR
 
@@ -334,9 +351,9 @@ while (true) {
 \t${otherActivityMenu.join("\t")}
 `);
 
-    let activityChoice = formatFunctions.formatPrompt("sua escolha:");
+    let activityChoiceIndex = formatFunctions.formatPrompt("sua escolha:");
 
-    let chosenActivity = activityList[activityChoice];
+    let chosenActivity = activityList[activityChoiceIndex];
 
     // executa a atividade escolhida
 

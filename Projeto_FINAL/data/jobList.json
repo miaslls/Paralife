@@ -3,117 +3,117 @@
       "index": 0,
       "title": "professor",
       "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
-      "periodsToWork": ["1/2 periodo"],
-      "minHoursPerWeek": "30",
-      "salaryPerHour": "15"
+      "periodsToWork": ["manhã", "tarde"],
+      "minHoursPerWeek": 30,
+      "salaryPerHour": 15
     },
   
     {
       "index": 1,
       "title": "desenvolvedor",
-      "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
+      "daysToWork": ["qualquer"],
       "periodsToWork": ["qualquer"],
-      "minHoursPerWeek": "40",
-      "salaryPerHour": "50"
+      "minHoursPerWeek": 40,
+      "salaryPerHour": 50
     },
     {
       "index": 2,
       "title": "médico",
       "daysToWork": ["SEG", "TER", "QUI", "SEX"],
       "periodsToWork": ["manhã", "tarde"],
-      "minHoursPerWeek": "30",
-      "salaryPerHour": "80"
+      "minHoursPerWeek": 30,
+      "salaryPerHour": 80
     },
     
     {
       "index": 3,
       "title": "dentista",
       "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
-      "periodsToWork": ["manhã,tarde"],
-      "minHoursPerWeek": "44",
-      "salaryPerHour": "50"
+      "periodsToWork": ["manhã", "tarde"],
+      "minHoursPerWeek": 44,
+      "salaryPerHour": 50
     },
   
     {
       "index": 4,
       "title": "motorista de aplicativo",
-      "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
-      "periodsToWork": ["manhã,tarde,noite"],
-      "minHoursPerWeek": "10",
-      "salaryPerHour": "20"
+      "daysToWork": ["qualquer"],
+      "periodsToWork": ["qualquer"],
+      "minHoursPerWeek": 10,
+      "salaryPerHour": 20
     },
     {
       "index": 5,
       "title": "cozinheiro",
       "daysToWork": ["SEG", "TER", "QUI", "SEX"],
-      "periodsToWork": ["manhã","tarde","noite"],
-      "minHoursPerWeek": "44",
-      "salaryPerHour": "20"
+      "periodsToWork": ["qualquer"],
+      "minHoursPerWeek": 44,
+      "salaryPerHour": 20
     }, 
     
     {
       "index": 6,
       "title": "auxiliar de produção",
       "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
-      "periodsToWork": ["manhã","tarde"],
-      "minHoursPerWeek": "40",
-      "salaryPerHour": "10"
+      "periodsToWork": ["manhã", "tarde"],
+      "minHoursPerWeek": 40,
+      "salaryPerHour": 10
     },
   
     {
       "index": 7,
       "title": "pedreiro",
       "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
-      "periodsToWork": ["manhã","tarde"],
-      "minHoursPerWeek": "40",
-      "salaryPerHour": "15"
+      "periodsToWork": ["manhã", "tarde"],
+      "minHoursPerWeek": 40,
+      "salaryPerHour": 15
     },
     {
       "index": 8,
       "title": "celebridade",
-      "daysToWork": ["SEG", "TER","Qua" ,"QUI", "SEX"],
-      "periodsToWork": ["manhã", "tarde","noite"],
-      "minHoursPerWeek": "40",
-      "salaryPerHour": "400"
+      "daysToWork": ["qualquer"],
+      "periodsToWork": ["qualquer"],
+      "minHoursPerWeek": 40,
+      "salaryPerHour": 400
     },  
     {
       "index": 9,
       "title": "gerente de vendas",
       "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
-      "periodsToWork": ["manhã","tarde"],
-      "minHoursPerWeek": "40",
-      "salaryPerHour": "20"
+      "periodsToWork": ["manhã", "tarde"],
+      "minHoursPerWeek": 40,
+      "salaryPerHour": 20
     },
     {
       "index": 10,
       "title": "advogado",
-      "daysToWork": ["SEG", "TER","Qua" ,"QUI", "SEX"],
-      "periodsToWork": ["manhã", "tarde","noite"],
-      "minHoursPerWeek": "30",
-      "salaryPerHour": "50"
+      "daysToWork": ["SEG", "TER","QUA" ,"QUI", "SEX"],
+      "periodsToWork": ["manhã", "tarde"],
+      "minHoursPerWeek": 30,
+      "salaryPerHour": 50
     },
     {
       "index": 11,
       "title": "cabeleireiro",
-      "daysToWork": ["SEG", "TER", "QUA", "QUI", "SEX"],
-      "periodsToWork": ["manhã","tarde","noite"],
-      "minHoursPerWeek": "40",
-      "salaryPerHour": "25"
+      "daysToWork": ["TER", "QUA", "QUI", "SEX", "SAB", "DOM"],
+      "periodsToWork": ["manhã", "tarde"],
+      "minHoursPerWeek": 40,
+      "salaryPerHour": 25
     },   
     {
       "index": 12,
       "title": "jornalista",
-      "daysToWork": ["SEG", "TER","Qua" ,"QUI", "SEX"],
-      "periodsToWork": ["manhã", "tarde","noite"],
-      "minHoursPerWeek": "40",
-      "salaryPerHour": "30"
+      "daysToWork": ["qualquer"],
+      "periodsToWork": ["qualquer"],
+      "minHoursPerWeek": 40,
+      "salaryPerHour": 30
     },
     {
       "index": 13,
       "title": "veterinario",
-      "daysToWork": ["SEG", "TER","Qua" ,"QUI", "SEX"],
-      "periodsToWork": ["manhã", "tarde","noite"],
-      "minHoursPerWeek": "40",
-      "salaryPerHour": "60"
+      "daysToWork": ["SEG", "TER","QUA" ,"QUI", "SEX"],
+      "periodsToWork": ["qualquer"],
+      "minHoursPerWeek": 40,
+      "salaryPerHour": 60
     }
 ]

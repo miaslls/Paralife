@@ -1,0 +1,23 @@
+[
+    {
+      "index": 0,
+      "title": "número 1",
+      "timeToComplete": 5,
+      "cost": 0,
+      "needsModification": {
+        "hygiene": -1,
+        "toilet": 3
+      }
+    },
+  
+    {
+      "index": 1,
+      "title": "número 2",
+      "timeToComplete": 20,
+      "cost": 0,
+      "needsModification": {
+        "hygiene": -3,
+        "toilet": 6
+      }
+    }
+]
