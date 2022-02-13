@@ -62,41 +62,5 @@
       "nutrition": 5,
       "toilet": -3
     }
-  },
-  {
-    "index": 6,
-    "title": "energético",
-    "timeToComplete": 5,
-    "cost": 15,
-    "needsModification": {
-      "nutrition": 1,
-      "energy": 4,
-      "toilet": -3,
-      "fun": 1
-    }
-  },
-
-  {
-    "index": 7,
-    "title": "gatorate",
-    "timeToComplete": 5,
-    "cost": 10,
-    "needsModification": {
-      "nutrition": 2,
-      "energy": 2,
-      "hygiene": 0,
-      "toilet": -2
-    }
-  },
-  {
-    "index": 8,
-    "title": "cafe",
-    "timeToComplete": 10,
-    "cost": 10,
-    "needsModification": {
-      "nutrition": 1,
-      "energy": 5,
-      "toilet": -5
-    }
   }
 ]

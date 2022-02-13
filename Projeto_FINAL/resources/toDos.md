@@ -1,13 +1,21 @@
-## **GROUP DECISIONS** 
 
-+ TODO: define game name
 
-## **OBJECT** | player
+## CODE
 
-+ TODO: create method for automated needs update
++ TODO: create function for automated needs update
 
-+ ✅ create methods for activities / events
+---
 
-## **OBJECT** | job
+## STRUCTURE
 
-+ TODO: build modelJobs object/jSON
++ TODO: create start screen - settings and game info
++ TODO: create GAME OVER screen - session stats
+
++ FIXME: data files
+---
+
+## IDEAS
+
++ OPTIONAL: "play how many days?"
+
+---

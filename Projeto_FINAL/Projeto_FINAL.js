@@ -136,7 +136,11 @@ const records = {
     totalHoursSlept: 0,
   },
   nutrition: {
-    // TODO:
+    totalTimesCooked: 0,
+    totalTimesDelivery: 0,
+    totalTimesEatOut: 0,
+    totalCostNutrition: 0,
+    totalMinutesNutrition: 0
   },
   hygiene: {
     totalTimesHygiene: 0,
@@ -146,6 +150,16 @@ const records = {
   toilet: {
     totalTimesToilet: 0,
     totalMinutesToilet: 0,
+  },
+  fun: {
+    totalTimesFun: 0,
+    totalCostFun: 0,
+    totalMinutesFun: 0,
+  },
+  social: {
+    totalTimesSocial: 0,
+    totalCostSocial: 0,
+    totalMinutesSocial: 0,
   },
 };
 
@@ -231,7 +245,50 @@ const doSleep = (hours) => {
   }
 };
 
-// TODO: ----- executa a atividade de NUTRIÇÃO escolhida
+// ----- executa a atividade de NUTRIÇÃO escolhida
+
+const doNutritionActivity = (activity, type) => {
+  player.updateNeeds(activity);
+  
+  switch (type) {
+
+    // COZINHAR
+
+    case 0: {
+      time.increment(activity.timeToComplete * 2);
+      player.updateWallet(activity);
+      records.nutrition.totalTimesCooked++;
+      records.nutrition.totalCostNutrition += activity.cost;
+      records.nutrition.totalMinutesNutrition += activity.timeToComplete * 2;
+
+      break;
+    }
+
+    // DELIVERY
+
+    case 1: {
+      time.increment(activity.timeToComplete * 1.5);
+      player.updateWallet(activity * 1.5);
+      records.nutrition.totalTimesDelivery++;
+      records.nutrition.totalCostNutrition += activity.cost * 1.5;
+      records.nutrition.totalMinutesNutrition += activity.timeToComplete * 1.5;
+
+      break;
+    }
+
+    // RESTAURANTE
+
+    case 2: {
+      time.increment(activity.timeToComplete);
+      player.updateWallet(activity * 2);
+      records.nutrition.totalTimesEatOut++;
+      records.nutrition.totalCostNutrition += activity.cost * 2;
+      records.nutrition.totalMinutesNutrition += activity.timeToComplete;
+
+      break;
+    }
+  }
+};
 
 // ----- executa a atividade de HIGIENE escolhida
 
@@ -251,6 +308,28 @@ const doToiletActivity = (activity) => {
   player.updateNeeds(activity);
   records.toilet.totalTimesToilet++;
   records.toilet.totalMinutesToilet += activity.timeToComplete;
+};
+
+// ----- executa a atividade de DIVERSÃO escolhida
+
+const doFunActivity = (activity) => {
+  time.increment(activity.timeToComplete);
+  player.updateNeeds(activity);
+  player.updateWallet(activity);
+  records.fun.totalTimesFun++;
+  records.fun.totalCostFun += activity.costs;
+  records.fun.totalMinutesFun += activity.timeToComplete;
+};
+
+// ----- executa a atividade de SOCIAL escolhida
+
+const doSocialActivity = (activity) => {
+  time.increment(activity.timeToComplete);
+  player.updateNeeds(activity);
+  player.updateWallet(activity);
+  records.social.totalTimesSocial++;
+  records.social.totalCostSocial += activity.cost;
+  records.social.totalMinutesSocial += activity.timeToComplete;
 };
 
 // ----- CODE START -----
@@ -327,16 +406,24 @@ updatePlayerJob(chosenJob);
 
 console.clear();
 
-// ----- MENU PRINCIPAL -----
+// ----- define variáveis necessárias à execução das atividades
 
 let mainMenuChoice;
 let hoursWorked;
-
+let nutritionActivityChoiceIndex;
+let chosenNutritionActivity;
+let nutritionPrepMethod;
 let hoursSlept;
 let hygieneActivityChoiceIndex;
 let chosenHygieneActivity;
 let toiletActivityChoiceIndex;
 let chosenToiletActivity;
+let funActivityChoiceIndex;
+let chosenFunActivity;
+let socialActivityChoiceIndex;
+let chosenSocialActivity;
+
+// ----- MENU PRINCIPAL -----
 
 const mainMenu = [
   "TRABALHO",
@@ -444,7 +531,129 @@ horário: ${chosenJob.periodsToWork}
     //----- NUTRIÇÃO -----
 
     case 1: {
-      // TODO:
+      console.clear();
+
+      displayPlayerInfo();
+
+      console.log(`NUTRIÇÃO | selecione o que comer`);
+      console.log();
+
+      // exibe as opções de comida (menu NUTRIÇÃO)
+
+      for (let nutritionActivity of activityList_nutrition) {
+        console.log(
+          `[${
+            nutritionActivity.index
+          }] ${nutritionActivity.title.toUpperCase()}`
+        );
+      }
+
+      console.log();
+
+      // solicita a escolha da comida
+
+      nutritionActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
+        "sua escolha:",
+        activityList_nutrition.length - 1,
+        0,
+        `digite um NÚMERO INTEIRO entre 0 e ${
+          activityList_nutrition.length - 1
+        }`
+      );
+
+      chosenNutritionActivity =
+        activityList_nutrition[nutritionActivityChoiceIndex];
+
+      console.clear();
+
+      // solicita a escolha entre COZINHAR, DELIVERY e RESTAURANTE
+
+      displayPlayerInfo();
+
+      console.log(`alimento selecionado | ${chosenNutritionActivity.title.toUpperCase()}
+
+\t-----------------------------------------
+\t[0]  |   COZINHAR    |  🕑🕑🕑   💲    |
+\t-----------------------------------------
+\t[1]  |   DELIVERY    |   🕑🕑    💲💲   |
+\t-----------------------------------------
+\t[2]  |  RESTAURANTE  |    🕑     💲💲💲  |
+\t-----------------------------------------
+`);
+
+      nutritionPrepMethod = validateFunctions.validatePromptIntMinMax(
+        "sua escolha:",
+        2,
+        0,
+        `digite um NÚMERO INTEIRO entre 0 e 2`
+      );
+
+      console.clear();
+
+      // exibe detalhes da atividade selecionada
+
+      displayPlayerInfo();
+
+      switch (nutritionPrepMethod) {
+
+        // ----- COZINHAR
+
+        case 0: {
+          console.log(`atividade selecionada | COZINHAR ${chosenNutritionActivity.title.toUpperCase()}
+
+      custo: \t$${chosenNutritionActivity.cost.toFixed(2)}
+    duração: \t${chosenNutritionActivity.timeToComplete * 2} minutos
+  atributos: \t+${
+          chosenNutritionActivity.needsModification.nutrition
+        } 🍔 | ${chosenNutritionActivity.needsModification.toilet} 🚽
+`);
+
+          // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+
+          confirmChoice = confirmation();
+
+          break;
+        }
+
+        // ----- DELIVERY
+        
+        case 1: {
+          console.log(`atividade selecionada | DELIVERY - ${chosenNutritionActivity.title.toUpperCase()}
+
+      custo: \t$${(chosenNutritionActivity.cost * 1.5).toFixed(2)}
+    duração: \t${chosenNutritionActivity.timeToComplete * 1.5} minutos
+  atributos: \t+${
+          chosenNutritionActivity.needsModification.nutrition
+        } 🍔 | ${chosenNutritionActivity.needsModification.toilet} 🚽
+`);
+
+          // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+
+          confirmChoice = confirmation();
+
+          break;
+        }
+
+        // ----- RESTAURANTE
+        
+        case 2: {
+          console.log(`atividade selecionada | RESTAURANTE - ${chosenNutritionActivity.title.toUpperCase()}
+
+      custo: \t$${(chosenNutritionActivity.cost * 2).toFixed(2)}
+    duração: \t${chosenNutritionActivity.timeToComplete} minutos
+  atributos: \t+${
+          chosenNutritionActivity.needsModification.nutrition
+        } 🍔 | ${chosenNutritionActivity.needsModification.toilet} 🚽
+`);
+
+          // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+
+          confirmChoice = confirmation();
+
+          break;
+        }
+      }
+
       break;
     }
 
@@ -488,7 +697,6 @@ horário: ${chosenJob.periodsToWork}
       displayPlayerInfo();
 
       console.log(`HIGIENE | selecione a atividade`);
-
       console.log();
 
       // exibe as opções (menu HIGIENE)
@@ -505,9 +713,9 @@ horário: ${chosenJob.periodsToWork}
 
       hygieneActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
         "sua escolha:",
-        activityList_hygiene.length,
+        activityList_hygiene.length - 1,
         0,
-        `digite um número INTEIRO entre 0 e ${activityList_hygiene.length - 1}`
+        `digite um NÚMERO INTEIRO entre 0 e ${activityList_hygiene.length - 1}`
       );
 
       chosenHygieneActivity = activityList_hygiene[hygieneActivityChoiceIndex];
@@ -540,7 +748,6 @@ horário: ${chosenJob.periodsToWork}
       displayPlayerInfo();
 
       console.log(`BANHEIRO | selecione a atividade`);
-
       console.log();
 
       // exibe as opções (menu BANHEIRO)
@@ -557,12 +764,12 @@ horário: ${chosenJob.periodsToWork}
 
       toiletActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
         "sua escolha:",
-        activityList_toilet.length - 1,
-        0,
-        `digite um número INTEIRO entre 0 e ${activityList_toilet.length - 1}`
+        2,
+        1,
+        `digite um [1] ou [2]`
       );
 
-      chosenToiletActivity = activityList_toilet[toiletActivityChoiceIndex];
+      chosenToiletActivity = activityList_toilet[toiletActivityChoiceIndex - 1]; // gambiarra de leve p/ começar as opções com num 1 ao invés de zero
 
       console.clear();
 
@@ -588,13 +795,101 @@ horário: ${chosenJob.periodsToWork}
     // ----- DIVERSÃO -----
 
     case 5: {
-      // TODO:
+      console.clear();
+
+      displayPlayerInfo();
+
+      console.log(`DIVERSÃO | selecione a atividade`);
+      console.log();
+
+      // exibe as opções (menu DIVERSÃO)
+
+      for (let funActivity of activityList_fun) {
+        console.log(
+          `[${funActivity.index}] ${funActivity.title.toUpperCase()}`
+        );
+      }
+
+      console.log();
+
+      // solicita a escolha da atividade
+
+      funActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
+        "sua escolha:",
+        activityList_fun.length - 1,
+        0,
+        `digite um NÚMERO INTERO entre 0 e ${activityList_fun.length - 1}`
+      );
+
+      chosenFunActivity = activityList_fun[funActivityChoiceIndex];
+
+      console.clear();
+
+      // exibe detalhes da atividade seleconada
+
+      displayPlayerInfo();
+
+      console.log(`atividade selecionada | ${chosenFunActivity.title.toUpperCase()}
+    
+      custo: \t$${chosenFunActivity.cost.toFixed(2)}
+    duração: \t${chosenFunActivity.timeToComplete} minutos
+  atributos: \t+${chosenFunActivity.needsModification.fun} 🎈
+`);
+
+      // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+
+      confirmChoice = confirmation();
+
       break;
     }
     // ----- SOCIAL -----
 
     case 6: {
-      // TODO:
+      console.clear();
+
+      displayPlayerInfo();
+
+      console.log(`SOCIAL | selecione a atividade`);
+      console.log();
+
+      // exibe as opções (menu SOCIAL)
+
+      for (let socialActivity of activityList_social) {
+        console.log(
+          `[${socialActivity.index}] ${socialActivity.title.toUpperCase()}`
+        );
+      }
+
+      console.log();
+
+      // solicita a escolha da atividade
+
+      socialActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
+        "sua escolha:",
+        activityList_social.length - 1,
+        0,
+        `digite um NÚMERO INTERO entre 0 e ${activityList_social.length - 1}`
+      );
+
+      chosenSocialActivity = activityList_social[socialActivityChoiceIndex];
+
+      console.clear();
+
+      // exibe detalhes da atividade selecionada
+
+      displayPlayerInfo();
+
+      console.log(`atividade selecionada | ${chosenSocialActivity.title.toUpperCase()}
+    
+      custo: \t$${chosenSocialActivity.cost.toFixed(2)}
+    duração: \t${chosenSocialActivity.timeToComplete} minutos
+  atributos: \t+${chosenSocialActivity.needsModification.social} 💬
+`);
+
+      // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+
+      confirmChoice = confirmation();
+
       break;
     }
   }
@@ -612,7 +907,7 @@ switch (mainMenuChoice) {
     break;
   }
   case 1: {
-    // TODO: executa a atividade NUTRIÇÃO
+    doNutritionActivity(chosenNutritionActivity, nutritionPrepMethod); // executa a atividade NUTRIÇÃO
     break;
   }
   case 2: {
@@ -624,15 +919,15 @@ switch (mainMenuChoice) {
     break;
   }
   case 4: {
-    doToiletActivity(chosenToiletActivity); // executa a atividade BANHEIRO 
+    doToiletActivity(chosenToiletActivity); // executa a atividade BANHEIRO
     break;
   }
   case 5: {
-    //TODO: excuta a atividade DIVERSÃO
+    doFunActivity(chosenFunActivity); // excuta a atividade DIVERSÃO
     break;
   }
   case 6: {
-    //TODO: executa a atividade SOCIAL
+    doSocialActivity(chosenSocialActivity); // executa a atividade SOCIAL
     break;
   }
 }
