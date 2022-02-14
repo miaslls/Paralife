@@ -1,4 +1,4 @@
-const sleepFunction = require("../lib/sleep");
+const { sleep } = require("../lib/formatting.js");
 
 exports.hygieneAnimation = () => {
   for (let i = 0; i < 3; i++) {
@@ -21,7 +21,7 @@ o   .     '-. .----<(o)_--. .-'
    --------(_/------(_<_/--\\_)-------- 
 `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
     console.clear();
     console.log(`
          o    .   _     .
@@ -41,6 +41,6 @@ o   .     '-. .----<(o)_--. .-'
    --------(_/------(_<_/--\\_)-------- 
 `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
   }
 };

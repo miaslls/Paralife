@@ -1,4 +1,4 @@
-const sleepFunction = require("../lib/sleep");
+const { sleep } = require("../lib/formatting.js");
 
 exports.toiletAnimation = () => {
   console.clear();
@@ -21,7 +21,7 @@ exports.toiletAnimation = () => {
    '----------'
 `);
 
-  sleepFunction.sleep(500);
+  sleep(500);
 
   console.clear();
   console.log(`
@@ -43,7 +43,7 @@ exports.toiletAnimation = () => {
    '----------'
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -65,7 +65,7 @@ exports.toiletAnimation = () => {
    '----------'
 `);
 
-  sleepFunction.sleep(900);
+  sleep(900);
 
   console.clear();
   console.log(`
@@ -87,5 +87,5 @@ exports.toiletAnimation = () => {
    '----------'
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 };

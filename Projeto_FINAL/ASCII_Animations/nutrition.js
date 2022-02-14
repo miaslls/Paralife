@@ -1,4 +1,4 @@
-const sleepFunction = require("../lib/sleep");
+const { sleep } = require("../lib/formatting.js");
 
 exports.nutritionAnimation = () => {
   console.clear();
@@ -16,7 +16,7 @@ exports.nutritionAnimation = () => {
          '"""""""""""""-.....-'
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -33,7 +33,7 @@ exports.nutritionAnimation = () => {
          '-._______________________.-'
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -50,7 +50,7 @@ exports.nutritionAnimation = () => {
           ''"""=========="""''
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -67,5 +67,5 @@ exports.nutritionAnimation = () => {
                   '''''''''
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 };

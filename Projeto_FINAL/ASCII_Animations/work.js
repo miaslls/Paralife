@@ -1,4 +1,4 @@
-const sleepFunction = require("../lib/sleep");
+const { sleep } = require("../lib/formatting.js");
 
 exports.workAnimation = () => {
   console.clear();
@@ -18,7 +18,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -37,7 +37,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -56,7 +56,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -75,7 +75,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -94,7 +94,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -113,7 +113,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -132,7 +132,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -151,7 +151,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -170,7 +170,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -189,7 +189,7 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 
   console.clear();
   console.log(`
@@ -208,5 +208,5 @@ exports.workAnimation = () => {
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 `);
 
-  sleepFunction.sleep(400);
+  sleep(400);
 };

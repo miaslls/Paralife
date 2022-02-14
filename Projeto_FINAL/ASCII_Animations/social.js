@@ -1,4 +1,4 @@
-const sleepFunction = require("../lib/sleep");
+const { sleep } = require("../lib/formatting.js");
 
 exports.socialAnimation = () => {
   for (let i = 0; i < 3; i++) {
@@ -27,7 +27,7 @@ _\\\\\\__/   )    / \  |
           |, \\. 
 `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
 
     console.clear();
     console.log(`
@@ -54,7 +54,7 @@ _\\\\\\__/   )    / \  |
           |, \\. 
 `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
 
     console.clear();
     console.log(`
@@ -81,6 +81,6 @@ _\\\\\\__/   )    / \  |
           |, \\. 
 `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
   }
 };

@@ -1,5 +1,4 @@
-const sleepFunction = require("../lib/sleep");
-const formatFunctions = require("../lib/format.js");
+const { formatClock, sleep } = require("../lib/formatting.js");
 
 exports.energyAnimation = (nowHours, nowMinutes, hoursSlept) => {
   for (let i = 0; i <= hoursSlept; i++) {
@@ -21,13 +20,13 @@ _____________
 
               zz
     ! _    zz           _____
-    |(~} zz         !  [${formatFunctions.formatClock(nowHours + i, nowMinutes)}]
+    |(~} zz         !  [${formatClock(nowHours + i, nowMinutes)}]
     |(_/__________..| =========
     |  ||:::::::::::|  |_____|
 
     `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
 
     console.clear();
     console.log(`
@@ -39,12 +38,12 @@ _____________
 
                 zz
     ! _      zz         _____
-    |(~}  zz        !  [${formatFunctions.formatClock(nowHours + i, nowMinutes)}]
+    |(~}  zz        !  [${formatClock(nowHours + i, nowMinutes)}]
     |(_/__________..| =========
     |  ||:::::::::::|  |_____|
 
     `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
   }
 };

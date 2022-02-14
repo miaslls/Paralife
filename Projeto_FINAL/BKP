@@ -9,17 +9,17 @@ const activityList_toilet = require("./data/activityList_toilet.json");
 const activityList_fun = require("./data/activityList_fun.json"); // FIXME:
 const activityList_social = require("./data/activityList_social.json"); // FIXME:
 const jobList = require("./data/jobList.json"); //FIXME:
-const { nutritionAnimation } = require("./ASCII_Animations/nutrition.js");
-const { energyAnimation } = require("./ASCII_Animations/energy.js");
-const { hygieneAnimation } = require("./ASCII_Animations/hygiene.js");
-const { toiletAnimation } = require("./ASCII_Animations/toilet.js");
-const { funAnimation } = require("./ASCII_Animations/fun.js");
-const { socialAnimation } = require("./ASCII_Animations/social.js");
-const { workAnimation } = require("./ASCII_Animations/work.js");
-const { ohNoAnimation } = require("./ASCII_Animations/ohNo.js");
-const { formatToTitle, formatPrompt, formatPromptMultipleLines, formatClock, sleep } = require("./lib/formatting.js");
-const { validatePromptString, validatePromptIntMinMax } = require("./lib/validation.js");
-const { confirmation } = require("./lib/confirmation");
+const formatFunctions = require("./lib/formatting.js");
+const validateFunctions = require("./lib/validation.js");
+const sleepFunction = require("./lib/sleep.js");
+const nutritionAnimation = require("./ASCII_Animations/nutrition.js");
+const energyAnimation = require("./ASCII_Animations/energy.js");
+const hygieneAnimation = require("./ASCII_Animations/hygiene.js");
+const toiletAnimation = require("./ASCII_Animations/toilet.js");
+const funAnimation = require("./ASCII_Animations/fun.js");
+const socialAnimation = require("./ASCII_Animations/social.js"); // FIXME:
+const workAnimation = require("./ASCII_Animations/work.js");
+const ohNoAnimation = require("./ASCII_Animations/ohNo.js");
 
 // ----- OBJECTS DEFINITION -----
 
@@ -61,10 +61,10 @@ const player = {
       }
     }
   },
-  // atualiza a carteira com os gastos da atividade
+  // atualiza a carteira
 
-  updateWallet: function (amount) {
-    this.wallet -= amount;
+  updateWallet: function (activity) {
+    this.wallet -= activity.cost;
   },
 
   // atualiza os atributos de forma autônoma a cada troca de período
@@ -112,7 +112,7 @@ const time = {
   // retorna a hora atual no formato 00:00
 
   getTime: function () {
-    let currentTime = formatClock(this.hours, this.minutes);
+    let currentTime = formatFunctions.formatClock(this.hours, this.minutes);
     return currentTime;
   },
 
@@ -227,7 +227,7 @@ const displayPlayerInfo = () => {
 // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
 
 // const confirmation = () => {
-//   let confirmChoice = validatePromptIntMinMax(
+//   let confirmChoice = validateFunctions.validatePromptIntMinMax(
 //     "digite [0] para voltar\ndigite [1] para confirmar",
 //     1,
 //     0,
@@ -250,7 +250,7 @@ const updatePlayerJob = (job) => {
 // ----- executa a atividade TRABALHAR
 
 const doWork = (hours) => {
-  workAnimation();
+  workAnimation.workAnimation();
   let earnedNow = hours * player.job.salaryPerHour;
 
   time.increment(hours * 60);
@@ -268,7 +268,7 @@ const doWork = (hours) => {
 // ----- executa a atividade DORMIR
 
 const doEnergyActivity = (hours) => {
-  energyAnimation(time.hours, time.minutes, hoursSlept);
+  energyAnimation.energyAnimation(time.hours, time.minutes, hoursSlept);
   time.increment(hours * 60);
   player.needs.energy += hours;
   records.energy.totalTimesSlept++;
@@ -282,20 +282,18 @@ const doEnergyActivity = (hours) => {
 // ----- executa a atividade de NUTRIÇÃO escolhida
 
 const doNutritionActivity = (activity, type) => {
-  nutritionAnimation();
+  nutritionAnimation.nutritionAnimation();
   player.updateNeeds(activity);
 
   switch (type) {
     // COZINHAR
 
     case 0: {
-      let modifiedTimetoComplete = activity.timeToComplete * 2;
-
-      time.increment(modifiedTimetoComplete);
-      player.updateWallet(activity.cost);
+      time.increment(activity.timeToComplete * 2);
+      player.updateWallet(activity);
       records.nutrition.totalTimesCooked++;
       records.nutrition.totalCostNutrition += activity.cost;
-      records.nutrition.totalMinutesNutrition += modifiedTimetoComplete;
+      records.nutrition.totalMinutesNutrition += activity.timeToComplete * 2;
 
       break;
     }
@@ -303,14 +301,11 @@ const doNutritionActivity = (activity, type) => {
     // DELIVERY
 
     case 1: {
-      let modifiedTimetoComplete = Math.floor(activity.timeToComplete * 1.5);
-      let modifiedCost = Math.floor(activity.cost * 1.5);
-
-      time.increment(modifiedTimetoComplete);
-      player.updateWallet(modifiedCost);
+      time.increment(activity.timeToComplete * 1.5);
+      player.updateWallet(activity * 1.5);
       records.nutrition.totalTimesDelivery++;
-      records.nutrition.totalCostNutrition += modifiedCost;
-      records.nutrition.totalMinutesNutrition += modifiedTimetoComplete;
+      records.nutrition.totalCostNutrition += activity.cost * 1.5;
+      records.nutrition.totalMinutesNutrition += activity.timeToComplete * 1.5;
 
       break;
     }
@@ -318,12 +313,10 @@ const doNutritionActivity = (activity, type) => {
     // RESTAURANTE
 
     case 2: {
-      let modifiedCost = activity.cost * 2;
-
       time.increment(activity.timeToComplete);
-      player.updateWallet(modifiedCost);
+      player.updateWallet(activity * 2);
       records.nutrition.totalTimesEatOut++;
-      records.nutrition.totalCostNutrition += modifiedCost;
+      records.nutrition.totalCostNutrition += activity.cost * 2;
       records.nutrition.totalMinutesNutrition += activity.timeToComplete;
 
       break;
@@ -334,10 +327,10 @@ const doNutritionActivity = (activity, type) => {
 // ----- executa a atividade de HIGIENE escolhida
 
 const doHigieneActivity = (activity) => {
-  hygieneAnimation();
+  hygieneAnimation.hygieneAnimation();
   time.increment(activity.timeToComplete);
   player.updateNeeds(activity);
-  player.updateWallet(activity.cost);
+  player.updateWallet(activity);
   records.hygiene.totalTimesHygiene++;
   records.hygiene.totalCostHygiene += activity.cost;
   records.hygiene.totalMinutesHygiene += activity.timeToComplete;
@@ -346,7 +339,7 @@ const doHigieneActivity = (activity) => {
 // ----- executa a atividade de BANHEIRO escolhida
 
 const doToiletActivity = (activity) => {
-  toiletAnimation();
+  toiletAnimation.toiletAnimation();
   time.increment(activity.timeToComplete);
   player.updateNeeds(activity);
   records.toilet.totalTimesToilet++;
@@ -356,10 +349,10 @@ const doToiletActivity = (activity) => {
 // ----- executa a atividade de DIVERSÃO escolhida
 
 const doFunActivity = (activity) => {
-  funAnimation();
+  funAnimation.funAnimation();
   time.increment(activity.timeToComplete);
   player.updateNeeds(activity);
-  player.updateWallet(activity.cost);
+  player.updateWallet(activity);
   records.fun.totalTimesFun++;
   records.fun.totalCostFun += activity.costs;
   records.fun.totalMinutesFun += activity.timeToComplete;
@@ -368,10 +361,10 @@ const doFunActivity = (activity) => {
 // ----- executa a atividade de SOCIAL escolhida
 
 const doSocialActivity = (activity) => {
-  socialAnimation();
+  socialAnimation.socialAnimation();
   time.increment(activity.timeToComplete);
   player.updateNeeds(activity);
-  player.updateWallet(activity.cost);
+  player.updateWallet(activity);
   records.social.totalTimesSocial++;
   records.social.totalCostSocial += activity.cost;
   records.social.totalMinutesSocial += activity.timeToComplete;
@@ -379,7 +372,7 @@ const doSocialActivity = (activity) => {
 
 // ----- CODE START ----- BM:
 
-let gameName = formatToTitle("քǟʀǟʟɨʄɛ");
+let gameName = formatFunctions.formatToTitle("քǟʀǟʟɨʄɛ");
 let confirmChoice;
 
 // ----- TELA INCIAL -----
@@ -393,7 +386,7 @@ console.log(gameName);
 
 // solicita o nome do jogador e adiciona no objeto player
 
-player.name = validatePromptString(
+player.name = validateFunctions.validatePromptString(
   "digite seu nome:",
   "o nome não pode ser vazio"
 );
@@ -418,7 +411,7 @@ while (true) {
 
   console.log();
 
-  jobChoiceIndex = validatePromptIntMinMax(
+  jobChoiceIndex = validateFunctions.validatePromptIntMinMax(
     "sua escolha:",
     jobList.length,
     0,
@@ -510,7 +503,7 @@ while (true) {
 
     // solicita a seleção da atividade
 
-    mainMenuChoice = validatePromptIntMinMax(
+    mainMenuChoice = validateFunctions.validatePromptIntMinMax(
       "sua escolha:",
       mainMenu.length - 1,
       0,
@@ -538,7 +531,7 @@ while (true) {
         ) {
           // solicita a quantidade de horas a trabalhar
 
-          hoursWorked = validatePromptIntMinMax(
+          hoursWorked = validateFunctions.validatePromptIntMinMax(
             "trabalhar quantas horas?",
             4,
             1,
@@ -577,7 +570,7 @@ horário: ${chosenJob.periodsToWork}
 
           confirmChoice = 0;
 
-          formatPrompt("digite ENTER para voltar");
+          formatFunctions.formatPrompt("digite ENTER para voltar");
         }
 
         break;
@@ -608,7 +601,7 @@ horário: ${chosenJob.periodsToWork}
         // solicita a escolha da comida
 
         nutritionActivityChoiceIndex =
-          validatePromptIntMinMax(
+          validateFunctions.validatePromptIntMinMax(
             "sua escolha:",
             activityList_nutrition.length - 1,
             0,
@@ -637,7 +630,7 @@ horário: ${chosenJob.periodsToWork}
 \t---------------------------------------
 `);
 
-        nutritionPrepMethod = validatePromptIntMinMax(
+        nutritionPrepMethod = validateFunctions.validatePromptIntMinMax(
           "sua escolha:",
           2,
           0,
@@ -717,7 +710,7 @@ horário: ${chosenJob.periodsToWork}
       case 2: {
         // solicita a quantidade de horas a dormir
 
-        hoursSlept = validatePromptIntMinMax(
+        hoursSlept = validateFunctions.validatePromptIntMinMax(
           "dormir quantas horas?",
           8,
           1,
@@ -766,7 +759,7 @@ horário: ${chosenJob.periodsToWork}
 
         // solicita a escolha da atividade
 
-        hygieneActivityChoiceIndex = validatePromptIntMinMax(
+        hygieneActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
           "sua escolha:",
           activityList_hygiene.length - 1,
           0,
@@ -820,7 +813,7 @@ horário: ${chosenJob.periodsToWork}
 
         // solicita a escolha da atividade
 
-        toiletActivityChoiceIndex = validatePromptIntMinMax(
+        toiletActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
           "sua escolha:",
           2,
           1,
@@ -873,7 +866,7 @@ horário: ${chosenJob.periodsToWork}
 
         // solicita a escolha da atividade
 
-        funActivityChoiceIndex = validatePromptIntMinMax(
+        funActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
           "sua escolha:",
           activityList_fun.length - 1,
           0,
@@ -923,7 +916,7 @@ horário: ${chosenJob.periodsToWork}
 
         // solicita a escolha da atividade
 
-        socialActivityChoiceIndex = validatePromptIntMinMax(
+        socialActivityChoiceIndex = validateFunctions.validatePromptIntMinMax(
           "sua escolha:",
           activityList_social.length - 1,
           0,
@@ -970,6 +963,7 @@ horário: ${chosenJob.periodsToWork}
       break;
     }
     case 2: {
+      // sleepAnimation.sleepAnimation(time.hours, time.minutes, hoursSlept);
       doEnergyActivity(hoursSlept); // executa a atividade DORMIR
       break;
     }
@@ -1017,7 +1011,7 @@ horário: ${chosenJob.periodsToWork}
       lowNeedTriggered = true;
 
       console.clear();
-      ohNoAnimation();
+      ohNoAnimation.ohNoAnimation();
 
       console.log(`sua NUTRIÇÃO chegou a 0!
 
@@ -1027,7 +1021,7 @@ você foi encaminhado para o hospital, para receber os cuidados necessários.
 🕑 03:00\t+10 🍔
 `);
 
-      formatPrompt("digite ENTER para continuar");
+      formatFunctions.formatPrompt("digite ENTER para continuar");
       console.clear();
     }
 
@@ -1040,7 +1034,7 @@ você foi encaminhado para o hospital, para receber os cuidados necessários.
       lowNeedTriggered = true;
 
       console.clear();
-      ohNoAnimation();
+      ohNoAnimation.ohNoAnimation();
 
       console.log(`sua energia chegou a 0!
 
@@ -1049,7 +1043,7 @@ você dormiu por 8 Horas, para recuperar a sua energia.
 🕑 08:00\t+8 💤
 `);
 
-      formatPrompt("digite ENTER para continuar");
+      formatFunctions.formatPrompt("digite ENTER para continuar");
       console.clear();
     }
 
@@ -1063,7 +1057,7 @@ você dormiu por 8 Horas, para recuperar a sua energia.
       lowNeedTriggered = true;
 
       console.clear();
-      ohNoAnimation();
+      ohNoAnimation.ohNoAnimation();
 
       console.log(`sua higiene chegou a 0!
 
@@ -1073,7 +1067,7 @@ você tomou um banho caprichado
 🕑 01:00\t+10 🧼\t-3 💬
 `);
 
-      formatPrompt("digite ENTER para continuar");
+      formatFunctions.formatPrompt("digite ENTER para continuar");
       console.clear();
     }
 
@@ -1088,7 +1082,7 @@ você tomou um banho caprichado
       lowNeedTriggered = true;
 
       console.clear();
-      ohNoAnimation();
+      ohNoAnimation.ohNoAnimation();
 
       console.log(`sua necessidade BANHEIRO chegou a 0!
 
@@ -1098,7 +1092,7 @@ você tomou banho e lavou suas roupas.
 🕑 01:00\t+10 🚽\t-3 💬\t+8 🧼
 `);
 
-      formatPrompt("digite ENTER para continuar");
+      formatFunctions.formatPrompt("digite ENTER para continuar");
       console.clear();
     }
 
@@ -1111,7 +1105,7 @@ você tomou banho e lavou suas roupas.
       lowNeedTriggered = true;
 
       console.clear();
-      ohNoAnimation();
+      ohNoAnimation.ohNoAnimation();
 
       console.log(`sua DIVERSÃO chegou a 0!
 
@@ -1120,7 +1114,7 @@ você foi à emergência psiquiátrica para uma consulta por stress.
 🕑 02:00\t+5 🎈
 `);
 
-      formatPrompt("digite ENTER para continuar");
+      formatFunctions.formatPrompt("digite ENTER para continuar");
       console.clear();
     }
 
@@ -1134,7 +1128,7 @@ você foi à emergência psiquiátrica para uma consulta por stress.
       lowNeedTriggered = true;
 
       console.clear();
-      ohNoAnimation();
+      ohNoAnimation.ohNoAnimation();
 
       console.log(`seu SOCIAL chegou a 0!
 
@@ -1149,7 +1143,7 @@ você conversa com suas plantas.
       );
       console.log(`você chora deprimido`);
 
-      formatPrompt("digite ENTER para continuar");
+      formatFunctions.formatPrompt("digite ENTER para continuar");
       console.clear();
     }
 

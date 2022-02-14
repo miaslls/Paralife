@@ -1,4 +1,4 @@
-const sleepFunction = require("../lib/sleep");
+const { sleep } = require("../lib/formatting.js");
 
 exports.funAnimation = () => {
   for (let i = 0; i < 3; i++) {
@@ -18,7 +18,7 @@ exports.funAnimation = () => {
               '-----'        __|__
 `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
 
     console.clear();
     console.log(`              *                     *
@@ -36,6 +36,6 @@ exports.funAnimation = () => {
               '-----'        __|__
 `);
 
-    sleepFunction.sleep(400);
+    sleep(400);
   }
 };

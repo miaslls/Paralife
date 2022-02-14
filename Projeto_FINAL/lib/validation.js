@@ -1,5 +1,5 @@
 const prompt = require("prompt-sync")();
-const formatFunctions = require("./format.js");
+const formatFunctions = require("./formatting.js");
 
 // ----- VALIDATION FUNCTIONS -----
 
@@ -15,6 +15,8 @@ exports.validatePromptString = (message, errorMessage = "INVÁLIDO") => {
     console.log(`\n${errorMessage}\n`);
   }
 };
+
+// valida NÚMERO INTEIRO entre MIN e MAX (inclusive min e max)
 
 exports.validatePromptIntMinMax = (
   message,

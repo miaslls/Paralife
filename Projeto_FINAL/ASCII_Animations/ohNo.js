@@ -1,4 +1,4 @@
-const sleepFunction = require("../lib/sleep");
+const { sleep } = require("../lib/formatting.js");
 
 exports.ohNoAnimation = () => {
   for (let i = 0; i < 3; i++) {
@@ -14,7 +14,7 @@ exports.ohNoAnimation = () => {
   
     `);
 
-    sleepFunction.sleep(200);
+    sleep(200);
     console.clear();
 
     console.log(`
@@ -28,6 +28,6 @@ exports.ohNoAnimation = () => {
 
 `);
 
-    sleepFunction.sleep(200);
+    sleep(200);
   }
 };
