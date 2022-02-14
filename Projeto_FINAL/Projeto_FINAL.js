@@ -546,9 +546,9 @@ while (true) {
 
           console.log(`atividade selecionada | TRABALHAR ${hoursWorked}h
       
-  \t- ${hoursWorked} 🎈
-  \t+ $${hoursWorked * player.job.salaryPerHour.toFixed(2)}
-  \t+ ${hoursWorked} horas trabalhadas
+  \t-${hoursWorked} 🎈
+  \t+$${hoursWorked * player.job.salaryPerHour.toFixed(2)}
+  \t+${hoursWorked} horas trabalhadas
   
   \tTOTAL horas trabalhadas essa semana: ${records.work.totalHoursWorked}
   `);
@@ -725,7 +725,7 @@ horário: ${chosenJob.periodsToWork}
 
         console.log(`atividade selecionada | DORMIR ${hoursSlept}h
 
-\t+ ${hoursSlept} 💤
+\t+${hoursSlept} 💤
 
 \tTOTAL horas dormidas essa semana: ${records.energy.totalHoursSlept}
 `);
