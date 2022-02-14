@@ -31,3 +31,10 @@ exports.formatPromptMultipleLines = (message) => {
   console.log(message);
   return prompt(`> `);
 };
+
+exports.formatClock = (hours, minutes) => {
+  hours = hours.toString().padStart(2, "0");
+  minutes = minutes.toString().padStart(2, "0");
+
+  return `${hours}:${minutes}`;
+};

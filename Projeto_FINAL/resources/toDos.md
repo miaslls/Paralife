@@ -1,12 +1,15 @@
 
 
-## BOOKMARK: CODE 
+## BM: CODE 
 
-+ TODO: create function for automated needs update
++ ✅ create function for automated needs update
++ ✅ activities triggered by low need
 
 ---
 
-## BOOKMARK: STRUCTURE
+## BM: STRUCTURE
+
++ ✅ low need activity screen
 
 + TODO: create start screen - settings and game info
 + TODO: create GAME OVER screen - session stats
@@ -14,9 +17,11 @@
 + FIXME: data files
 ---
 
-## BOOKMARK: IDEAS
+## BM: IDEAS
 
 + OPTIONAL: "play how many days?"
-+ TODO: ASCII art for activity "animation"0
++ OPTIONAL: daily report
+
++ ✅ ASCII art for activity "animation"0 (https://www.asciiart.eu)
 
 ---

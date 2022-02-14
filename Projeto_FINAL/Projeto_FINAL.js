@@ -1,6 +1,6 @@
 "use strict";
 
-// ----- solicita recursos necessários (prompt/jSON)
+// ----- solicita recursos necessários
 
 const prompt = require("prompt-sync")();
 const activityList_nutrition = require("./data/activityList_nutrition.json");
@@ -9,12 +9,21 @@ const activityList_toilet = require("./data/activityList_toilet.json");
 const activityList_fun = require("./data/activityList_fun.json"); // FIXME:
 const activityList_social = require("./data/activityList_social.json"); // FIXME:
 const jobList = require("./data/jobList.json"); //FIXME:
-const formatFunctions = require("./functions/format.js");
-const validateFunctions = require("./functions/validate.js");
+const formatFunctions = require("./lib/format.js");
+const validateFunctions = require("./lib/validate.js");
+const sleepFunction = require("./lib/sleep.js");
+const nutritionAnimation = require("./ASCII_Animations/nutrition.js");
+const energyAnimation = require("./ASCII_Animations/energy.js");
+const hygieneAnimation = require("./ASCII_Animations/hygiene.js");
+const toiletAnimation = require("./ASCII_Animations/toilet.js");
+const funAnimation = require("./ASCII_Animations/fun.js");
+const socialAnimation = require("./ASCII_Animations/social.js"); // FIXME:
+const workAnimation = require("./ASCII_Animations/work.js");
+const ohNoAnimation = require("./ASCII_Animations/ohNo.js");
 
 // ----- OBJECTS DEFINITION -----
 
-// ----- PLAYER ----- BOOKMARK:
+// ----- PLAYER ----- BM:
 
 // ----- define objeto player (jogador)
 
@@ -70,7 +79,7 @@ const player = {
   },
 };
 
-// ----- TIME ----- BOOKMARK:
+// ----- TIME ----- BM:
 
 // ----- define o objeto time (tempo)
 
@@ -103,9 +112,7 @@ const time = {
   // retorna a hora atual no formato 00:00
 
   getTime: function () {
-    const currentTime = `${this.hours
-      .toString()
-      .padStart(2, "0")}:${this.minutes.toString().padStart(2, "0")}`;
+    let currentTime = formatFunctions.formatClock(this.hours, this.minutes);
     return currentTime;
   },
 
@@ -132,7 +139,7 @@ const time = {
   },
 };
 
-// ----- RECORDS ----- BOOKMARK:
+// ----- RECORDS ----- BM:
 
 // ----- define o objeto records
 
@@ -172,9 +179,17 @@ const records = {
     totalCostSocial: 0,
     totalMinutesSocial: 0,
   },
+  activitiesLowNeed: {
+    lowNeedNutrition: 0,
+    lowNeedEnergy: 0,
+    lowNeedHygiene: 0,
+    lowNeedToilet: 0,
+    lowNeedFun: 0,
+    lowNeedSocial: 0,
+  },
 };
 
-// ----- FUNCTIONS ----- BOOKMARK:
+// ----- FUNCTIONS ----- BM:
 
 // ----- exibe as informações do jogador
 
@@ -235,6 +250,7 @@ const updatePlayerJob = (job) => {
 // ----- executa a atividade TRABALHAR
 
 const doWork = (hours) => {
+  workAnimation.workAnimation();
   let earnedNow = hours * player.job.salaryPerHour;
 
   time.increment(hours * 60);
@@ -251,7 +267,8 @@ const doWork = (hours) => {
 
 // ----- executa a atividade DORMIR
 
-const doSleep = (hours) => {
+const doEnergyActivity = (hours) => {
+  energyAnimation.energyAnimation(time.hours, time.minutes, hoursSlept);
   time.increment(hours * 60);
   player.needs.energy += hours;
   records.energy.totalTimesSlept++;
@@ -265,6 +282,7 @@ const doSleep = (hours) => {
 // ----- executa a atividade de NUTRIÇÃO escolhida
 
 const doNutritionActivity = (activity, type) => {
+  nutritionAnimation.nutritionAnimation();
   player.updateNeeds(activity);
 
   switch (type) {
@@ -309,6 +327,7 @@ const doNutritionActivity = (activity, type) => {
 // ----- executa a atividade de HIGIENE escolhida
 
 const doHigieneActivity = (activity) => {
+  hygieneAnimation.hygieneAnimation();
   time.increment(activity.timeToComplete);
   player.updateNeeds(activity);
   player.updateWallet(activity);
@@ -320,6 +339,7 @@ const doHigieneActivity = (activity) => {
 // ----- executa a atividade de BANHEIRO escolhida
 
 const doToiletActivity = (activity) => {
+  toiletAnimation.toiletAnimation();
   time.increment(activity.timeToComplete);
   player.updateNeeds(activity);
   records.toilet.totalTimesToilet++;
@@ -329,6 +349,7 @@ const doToiletActivity = (activity) => {
 // ----- executa a atividade de DIVERSÃO escolhida
 
 const doFunActivity = (activity) => {
+  funAnimation.funAnimation();
   time.increment(activity.timeToComplete);
   player.updateNeeds(activity);
   player.updateWallet(activity);
@@ -340,6 +361,7 @@ const doFunActivity = (activity) => {
 // ----- executa a atividade de SOCIAL escolhida
 
 const doSocialActivity = (activity) => {
+  socialAnimation.socialAnimation();
   time.increment(activity.timeToComplete);
   player.updateNeeds(activity);
   player.updateWallet(activity);
@@ -348,7 +370,7 @@ const doSocialActivity = (activity) => {
   records.social.totalMinutesSocial += activity.timeToComplete;
 };
 
-// ----- CODE START ----- BOOKMARK:
+// ----- CODE START ----- BM:
 
 let gameName = formatFunctions.formatToTitle("քǟʀǟʟɨʄɛ");
 let confirmChoice;
@@ -443,7 +465,7 @@ let chosenFunActivity;
 let socialActivityChoiceIndex;
 let chosenSocialActivity;
 
-// ----- MENU PRINCIPAL ----- BOOKMARK:
+// ----- MENU PRINCIPAL ----- BM:
 
 const mainMenu = [
   "TRABALHO",
@@ -941,7 +963,8 @@ horário: ${chosenJob.periodsToWork}
       break;
     }
     case 2: {
-      doSleep(hoursSlept); // executa a atividade DORMIR
+      // sleepAnimation.sleepAnimation(time.hours, time.minutes, hoursSlept);
+      doEnergyActivity(hoursSlept); // executa a atividade DORMIR
       break;
     }
     case 3: {
@@ -974,7 +997,160 @@ horário: ${chosenJob.periodsToWork}
 
   // ----- atividades autônomas disparadas por necessidade <= 0
 
-  // TODO:
+  // repete a verificação para garantir que outra necessidade não tenha ficado <= 0
+
+  while (true) {
+    let lowNeedTriggered = false;
+
+    // ----- NUTRITION
+
+    if (player.needs.nutrition <= 0) {
+      time.hours += 3;
+      player.needs.nutrition = 10;
+      records.activitiesLowNeed.lowNeedNutrition++;
+      lowNeedTriggered = true;
+
+      console.clear();
+      ohNoAnimation.ohNoAnimation();
+
+      console.log(`sua NUTRIÇÃO chegou a 0!
+
+você desmaiou por estar com o corpo desnutrido.
+você foi encaminhado para o hospital, para receber os cuidados necessários.
+
+🕑 03:00\t+10 🍔
+`);
+
+      formatFunctions.formatPrompt("digite ENTER para continuar");
+      console.clear();
+    }
+
+    // ----- ENERGY
+
+    if (player.needs.energy <= 0) {
+      time.hours += 8;
+      player.needs.energy = 8;
+      records.activitiesLowNeed.lowNeedEnergy++;
+      lowNeedTriggered = true;
+
+      console.clear();
+      ohNoAnimation.ohNoAnimation();
+
+      console.log(`sua energia chegou a 0!
+
+você dormiu por 8 Horas, para recuperar a sua energia.
+
+🕑 08:00\t+8 💤
+`);
+
+      formatFunctions.formatPrompt("digite ENTER para continuar");
+      console.clear();
+    }
+
+    // ----- HYGIENE
+
+    if (player.needs.hygiene <= 0) {
+      time.hours += 1;
+      player.needs.social -= 3;
+      player.needs.hygiene = 10;
+      records.activitiesLowNeed.lowNeedHygiene++;
+      lowNeedTriggered = true;
+
+      console.clear();
+      ohNoAnimation.ohNoAnimation();
+
+      console.log(`sua higiene chegou a 0!
+
+as pessoas não querem ficar próximas a você, devido ao seu mau cheiro.
+você tomou um banho caprichado
+
+🕑 01:00\t+10 🧼\t-3 💬
+`);
+
+      formatFunctions.formatPrompt("digite ENTER para continuar");
+      console.clear();
+    }
+
+    // ----- TOILET
+
+    if (player.needs.toilet <= 0) {
+      time.hours += 1;
+      player.needs.social -= 3;
+      player.needs.hygiene += 8;
+      player.needs.toilet = 10;
+      records.activitiesLowNeed.lowNeedToilet++;
+      lowNeedTriggered = true;
+
+      console.clear();
+      ohNoAnimation.ohNoAnimation();
+
+      console.log(`sua necessidade BANHEIRO chegou a 0!
+
+você fez xixi na calça.
+você tomou banho e lavou suas roupas.
+
+🕑 01:00\t+10 🚽\t-3 💬\t+8 🧼
+`);
+
+      formatFunctions.formatPrompt("digite ENTER para continuar");
+      console.clear();
+    }
+
+    // ----- FUN
+
+    if (player.needs.fun <= 0) {
+      time.hours += 2;
+      player.needs.fun = 5;
+      records.activitiesLowNeed.lowNeedFun++;
+      lowNeedTriggered = true;
+
+      console.clear();
+      ohNoAnimation.ohNoAnimation();
+
+      console.log(`sua DIVERSÃO chegou a 0!
+
+você foi à emergência psiquiátrica para uma consulta por stress.
+
+🕑 02:00\t+5 🎈
+`);
+
+      formatFunctions.formatPrompt("digite ENTER para continuar");
+      console.clear();
+    }
+
+    // ----- SOCIAL
+
+    if (player.needs.social <= 0) {
+      time.hours += 1;
+      player.needs.fun -= 3;
+      player.needs.social = 5;
+      records.activitiesLowNeed.lowNeedSocial++;
+      lowNeedTriggered = true;
+
+      console.clear();
+      ohNoAnimation.ohNoAnimation();
+
+      console.log(`seu SOCIAL chegou a 0!
+
+você está se sentindo sozinho e abandonado.
+você conversa com suas plantas.
+
+🕑 01:00\t+5 💬\t-3 🎈
+`);
+
+      console.log(
+        `${player.name}, devido a falta de encontros com amigos, está se sentindo sozinho, abandonado`
+      );
+      console.log(`você chora deprimido`);
+
+      formatFunctions.formatPrompt("digite ENTER para continuar");
+      console.clear();
+    }
+
+    if (!lowNeedTriggered) {
+      break;
+    }
+  }
 
   // ----- finaliza o jogo após 7 dias completos
 
