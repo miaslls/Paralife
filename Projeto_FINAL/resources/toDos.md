@@ -7,17 +7,16 @@
 
 + TODO: create start screen - settings and game info
 
-+ FIXME: data files
 
 + FIXME:TODO: **FORMAT CODE** 📌 🚨
 + FIXME:TODO: **EDIT COMMENTS**📌 🚨
 
-+ 💡 other achievements by need (nossa, você curte uma balada, hein? você SE DIVERTIU x vezes)
-
-+ TODO: list used resources on GitHub
++ TODO: 💡 other achievements by need (nossa, você curte uma balada, hein? você SE DIVERTIU x vezes)
++ TODO: 💡 list used resources on GitHub
 
 --- 
 
++ ✅ data files
 + ✅ create GAME OVER screen 
 + ✅ session stats
 + ✅ display needs modifications in lowNeedActivities 

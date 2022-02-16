@@ -959,7 +959,7 @@ let chosenJob;
 while (true) {
   console.log(gameName);
 
-  console.log("escolha sua profissão no jogo");
+  console.log("selecione sua profissão");
 
   for (let job of jobList) {
     console.log(`[${job.index}] ${job.title}`);
@@ -1002,61 +1002,10 @@ while (true) {
 
 player.updatePlayerJob(chosenJob);
 
-// ----- ABOUT -----📌📌
-
 console.clear();
-console.log(gameName);
 
-console.log(`viu como é fácil, ${player.name}?
-você já está jogando!
+// 📌📌
 
-não se esqueça de maximizar seu terminal!
-
-`);
-
-formatPrompt("ENTER");
-
-// ----- OBJETIVO e outras informações 📌
-
-console.clear();
-console.log(gameName);
-
-console.log(`# OBJETIVO DO JOGO:
-
-+ medir o equilíbrio entre TRABALHO, SAÚDE MENTAL e SAÚDE FÍSICA
-em uma simulação de vida real por 7 dias
-
-# COMO?
-
-+ realizando tarefas e cuidando das suas necessidades físicas e mentais (ATRIBUTOS)
-
-# ATRIBUTOS:
-
-🍔 nutrição
-💤 energia
-🧼 higiene
-🚽 banheiro
-🎈 diversão
-💬 social
-
-🚨 IMPORTANTE!
-
-+ seus atributos atualizam automaticamente a cada período (manhã, tarde e noite)
-+ cuidado para não deixar nenhum deles chegar a 0! garanto que não vai gostar!
-
-`)
-
-formatPrompt("ENTER");
-
-console.clear();
-console.log(gameName);
-
-console.log(`agora é só apertar ENTER pra começar!
-`);
-
-formatPrompt("ENTER");
-
-console.clear();
 
 
 // ----- MENU PRINCIPAL -----📌📌📌

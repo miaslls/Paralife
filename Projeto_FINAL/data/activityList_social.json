@@ -1,52 +1,22 @@
 [
   {
     "index": 0,
-    "title": "Barzinho",
+    "title": "barzinho",
     "timeToComplete": 180,
-    "cost": 250,
+    "cost": 100,
     "needsModification": {
       "nutrition": 0,
       "energy": 0,
       "hygiene": 0,
-      "toilet": 0,
-      "fun": 0,
-      "social": 0
+      "toilet": -5,
+      "fun": 2,
+      "social": 6
     }
   },
-
   {
     "index": 1,
-    "title": "Parque",
-    "timeToComplete": 180,
-    "cost": 30,
-    "needsModification": {
-      "nutrition": 0,
-      "energy": 0,
-      "hygiene": 0,
-      "toilet": 0,
-      "fun": 0,
-      "social": 0
-    }
-  },
-
-  {
-    "index": 2,
-    "title": "Visitar amigo",
-    "timeToComplete": 170,
-    "cost": 30,
-    "needsModification": {
-      "nutrition": 0,
-      "energy": 0,
-      "hygiene": 0,
-      "toilet": 0,
-      "fun": 0,
-      "social": 0
-    }
-  },
-  {
-    "index": 3,
-    "title": "Ir a uma festa",
-    "timeToComplete": 8,
+    "title": "telefonar para um amigo",
+    "timeToComplete": 30,
     "cost": 0,
     "needsModification": {
       "nutrition": 0,
@@ -54,7 +24,21 @@
       "hygiene": 0,
       "toilet": 0,
       "fun": 0,
-      "social": 0
+      "social": 2
+    }
+  },
+  {
+    "index": 2,
+    "title": "ir a uma festa",
+    "timeToComplete": 220,
+    "cost": 0,
+    "needsModification": {
+      "nutrition": 0,
+      "energy": 0,
+      "hygiene": 0,
+      "toilet": 0,
+      "fun": 5,
+      "social": 5
     }
   }
 ]

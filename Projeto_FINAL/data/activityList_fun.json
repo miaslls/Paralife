@@ -1,21 +1,21 @@
 [
   {
     "index": 0,
-    "title": "Ciclismo",
+    "title": "ciclismo",
     "timeToComplete": 180,
     "cost": 10,
     "needsModification": {
       "nutrition": 0,
       "energy": 0,
-      "hygiene": 0,
+      "hygiene": -5,
       "toilet": 0,
-      "fun": 0,
+      "fun": 5,
       "social": 0
     }
   },
   {
     "index": 1,
-    "title": "Jogar video game",
+    "title": "jogar video game",
     "timeToComplete": 180,
     "cost": 0,
     "needsModification": {
@@ -23,29 +23,29 @@
       "energy": -2,
       "hygiene": 0,
       "toilet": 0,
-      "fun": 0,
+      "fun": 6,
       "social": 0
     }
   },
   {
     "index": 2,
-    "title": "Banco imobiliario",
+    "title": "banco imobiliario",
     "timeToComplete": 120,
-    "cost": 84.9,
+    "cost": 0,
     "needsModification": {
       "nutrition": 0,
       "energy": 0,
       "hygiene": 0,
       "toilet": 0,
-      "fun": 0,
-      "social": 0
+      "fun": 4,
+      "social": 3
     }
   },
   {
     "index": 3,
     "title": "clube piscina",
     "timeToComplete": 60,
-    "cost": 10,
+    "cost": 20,
     "needsModification": {
       "nutrition": 0,
       "energy": 0,
@@ -57,15 +57,15 @@
   },
   {
     "index": 4,
-    "title": "Parque de Diversão",
-    "timeToComplete": 9,
-    "cost": 90,
+    "title": "parque de Diversão",
+    "timeToComplete": 300,
+    "cost": 50,
     "needsModification": {
       "nutrition": 0,
-      "energy": 0,
+      "energy": -2,
       "hygiene": 0,
       "toilet": 0,
-      "fun": 0,
+      "fun": 5,
       "social": 0
     }
   },
@@ -73,89 +73,14 @@
   {
     "index": 5,
     "title": "cinema",
-    "timeToComplete": 2,
-    "cost": 20,
+    "timeToComplete": 180,
+    "cost": 25,
     "needsModification": {
       "nutrition": 0,
       "energy": 0,
       "hygiene": 0,
       "toilet": 0,
-      "fun": 0,
-      "social": 0
-    }
-  },
-
-  {
-    "index": 6,
-    "title": "teatro",
-    "timeToComplete": 2,
-    "cost": 80,
-    "needsModification": {
-      "nutrition": 0,
-      "energy": 0,
-      "hygiene": 0,
-      "toilet": 0,
-      "fun": 0,
-      "social": 0
-    }
-  },
-
-  {
-    "index": 7,
-    "title": "show musical",
-    "timeToComplete": 120,
-    "cost": 200,
-    "needsModification": {
-      "nutrition": 0,
-      "energy": 0,
-      "hygiene": 0,
-      "toilet": 0,
-      "fun": 0,
-      "social": 0
-    }
-  },
-
-  {
-    "index": 8,
-    "title": "meditar",
-    "timeToComplete": 60,
-    "cost": 0,
-    "needsModification": {
-      "nutrition": 0,
-      "energy": 0,
-      "hygiene": 0,
-      "toilet": 0,
-      "fun": 0,
-      "social": 0
-    }
-  },
-
-  {
-    "index": 9,
-    "title": "observar o por do sol",
-    "timeToComplete": 1,
-    "cost": 0,
-    "needsModification": {
-      "nutrition": 0,
-      "energy": 0,
-      "hygiene": 0,
-      "toilet": 0,
-      "fun": 0,
-      "social": 0
-    }
-  },
-
-  {
-    "index": 10,
-    "title": "Jogar futebol",
-    "timeToComplete": 90,
-    "cost": 10,
-    "needsModification": {
-      "nutrition": 0,
-      "energy": 0,
-      "hygiene": 0,
-      "toilet": 0,
-      "fun": 0,
+      "fun": 8,
       "social": 0
     }
   }
