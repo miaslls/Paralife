@@ -30,6 +30,6 @@ exports.validatePromptIntMinMax = (
     if (!isNaN(num) && num >= min && num <= max && num % 1 == 0) {
       return parseInt(num);
     }
-    console.log(errorMessage);
+    console.log(`\n${errorMessage}\n`);
   }
 };

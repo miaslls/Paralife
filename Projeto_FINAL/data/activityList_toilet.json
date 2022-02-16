@@ -1,4 +1,14 @@
 [
+  {
+    "index": 0,
+    "title": "pum",
+    "timeToComplete": 5,
+    "cost": 0,
+    "needsModification": {
+      "toilet": 1,
+      "social": -1
+    }
+  },
     {
       "index": 1,
       "title": "número 1",
@@ -9,7 +19,6 @@
         "toilet": 3
       }
     },
-  
     {
       "index": 2,
       "title": "número 2",

@@ -17,10 +17,13 @@ const { funAnimation } = require("./ASCII_Animations/fun.js");
 const { socialAnimation } = require("./ASCII_Animations/social.js");
 const { workAnimation } = require("./ASCII_Animations/work.js");
 const { ohNoAnimation } = require("./ASCII_Animations/ohNo.js");
+const { gameOverAnimation } = require("./ASCII_Animations/gameOver.js");
+const { statisticsAnimation } = require("./ASCII_Animations/statistics.js");
 const {
   formatToTitle,
   formatPrompt,
   formatClock,
+  sleep,
 } = require("./lib/formatting.js");
 const {
   validatePromptString,
@@ -51,7 +54,7 @@ const player = {
     social: 7,
   },
 
-  // atualiza o objeto player de acordo com a profissão selecionada
+  // atualiza o objeto player de acordo com a profissão selecionada 📌
 
   updatePlayerJob: function (job) {
     this.job.title = job.title;
@@ -61,7 +64,7 @@ const player = {
     this.job.salaryPerHour = job.salaryPerHour;
   },
 
-  // atualiza os atributos do jogador de acordo com a atividade escolhida
+  // atualiza os atributos do jogador de acordo com a atividade escolhida 📌
 
   updateNeeds: function (chosenActivity) {
     const activityKeysList = Object.keys(chosenActivity.needsModification);
@@ -82,13 +85,13 @@ const player = {
     this.wallet -= amount;
   },
 
-  // atualiza os atributos de forma autônoma a cada troca de período
+  // atualiza os atributos de forma autônoma a cada troca de período 📌
 
   updateNeedsAutonomous: function () {
     this.needs.nutrition -= 3;
     this.needs.energy -= 2;
     this.needs.hygiene -= 3;
-    this.needs.toilet -= 4;
+    this.needs.toilet -= 3;
     this.needs.fun -= 1;
     this.needs.social -= 1;
   },
@@ -98,10 +101,10 @@ const player = {
 
 const time = {
   days: 0,
-  hours: 5,
+  hours: 7,
   minutes: 0,
 
-  // avança o relógio
+  // avança o relógio 📌
 
   increment: function (activityMinutes) {
     let hoursToAdd = 0;
@@ -122,12 +125,14 @@ const time = {
     }
   },
 
-  // retorna a hora atual no formato 00:00
+  // retorna a hora atual no formato 00:00 📌
 
   getTime: function () {
     let currentTime = formatClock(this.hours, this.minutes);
     return currentTime;
   },
+
+  // retorna o período atual 📌
 
   getPeriod: function () {
     let currentPeriod;
@@ -143,7 +148,14 @@ const time = {
     return currentPeriod;
   },
 
-  // retorna o dia da semana
+  // retorna o dia atual 📌
+
+  getDay: function () {
+    let currentDay;
+    return this.days + 1;
+  },
+
+  // retorna o dia da semana atual 📌
 
   getWeekDay: function () {
     const weekDays = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
@@ -152,7 +164,7 @@ const time = {
   },
 };
 
-// ----- CHOSEN ACTIVITY ----- 📌📌
+// ----- CHOSEN ACTIVITY ----- 📌📌 (atividade selecionada)
 
 let chosenActivity = {
   type: "",
@@ -172,7 +184,7 @@ let chosenActivity = {
     hoursWorked: 0,
   },
 
-  // display chosen activity info
+  // exibe informações da atividade selecionada 📌
 
   displayChosenActivityInfo: function () {
     console.clear();
@@ -203,11 +215,12 @@ TOTAL horas trabalhadas até agora: ${records.work.totalHours}
   },
 };
 
-// ----- LOW NEED ACTIVITIES ----- 📌📌
+// ----- LOW NEED ACTIVITIES ----- 📌📌 (atividades acionadas por atributo <= 0)
 
 const lowNeedActivities = {
   nutrition: {
     title: "nutrição",
+    area: "physicalHealth",
     timeToComplete: 180,
     needsModification: {
       nutrition: 10,
@@ -217,6 +230,7 @@ const lowNeedActivities = {
   },
   energy: {
     title: "energia",
+    area: "physicalHealth",
     timeToComplete: 480,
     needsModification: {
       energy: 8,
@@ -225,6 +239,7 @@ const lowNeedActivities = {
   },
   hygiene: {
     title: "higiene",
+    area: "physicalHealth",
     timeToComplete: 60,
     needsModification: {
       hygiene: 10,
@@ -235,6 +250,7 @@ const lowNeedActivities = {
   },
   toilet: {
     title: "banheiro",
+    area: "physicalHealth",
     timeToComplete: 60,
     needsModification: {
       hygiene: 8,
@@ -246,6 +262,7 @@ const lowNeedActivities = {
   },
   fun: {
     title: "diversão",
+    area: "mentalHealth",
     timeToComplete: 120,
     needsModification: {
       fun: 5,
@@ -254,6 +271,7 @@ const lowNeedActivities = {
   },
   social: {
     title: "social",
+    area: "mentalHealth",
     timeToComplete: 60,
     needsModification: {
       fun: -2,
@@ -262,6 +280,8 @@ const lowNeedActivities = {
     message:
       "você se sente sozinho e abandonado então passa um tempo conversando com as plantas.",
   },
+
+  // executa a ação equivalente quando atributo <= 0 📌
 
   triggerAction: function () {
     const needsModificationKeys = [
@@ -283,6 +303,12 @@ const lowNeedActivities = {
         records.lowNeedActivities[key]["totalMinutes"] +=
           actionTriggered.timeToComplete;
 
+        if (actionTriggered.area == "physicalHealth") {
+          records.lowNeedAreas.physicalHealth++;
+        } else {
+          records.lowNeedAreas.mentalHealth++;
+        }
+
         const actionTriggeredTitle = formatToTitle(
           `${actionTriggered.title.toUpperCase()} menor ou igual a ZERO!`
         );
@@ -297,6 +323,7 @@ const lowNeedActivities = {
         console.log(actionTriggered.message);
         console.log();
         console.log(needsModificationString);
+        console.log(`🕑 ${actionTriggered.timeToComplete} min`);
         console.log();
         formatPrompt("digite ENTER para continuar");
         console.clear();
@@ -305,7 +332,7 @@ const lowNeedActivities = {
   },
 };
 
-// ----- RECORDS ----- 📌📌
+// ----- RECORDS ----- 📌📌 (estatísticas)
 
 const records = {
   work: {
@@ -331,6 +358,7 @@ const records = {
   },
   toilet: {
     totalTimes: 0,
+    totalCost: 0,
     totalMinutes: 0,
   },
   fun: {
@@ -369,6 +397,10 @@ const records = {
       totalMinutes: 0,
     },
   },
+  lowNeedAreas: {
+    physicalHealth: 0,
+    mentalHealth: 0,
+  },
 };
 
 // SUBMENUS 📌📌📌
@@ -376,19 +408,19 @@ const records = {
 // ----- submenu WORK 📌📌
 
 const submenuWork = () => {
-  let today = time.getWeekDay();
+  let weekDayToday = time.getWeekDay();
   let now = time.getPeriod();
   let confirmChoice;
 
-  // seleciona a tarefa se dia/período de trabalho permitido
+  // seleciona a tarefa se dia/período de trabalho permitido 📌
 
   if (
     (player.job.daysToWork == "qualquer" ||
-      player.job.daysToWork.includes(today)) &&
+      player.job.daysToWork.includes(weekDayToday)) &&
     (player.job.periodsToWork == "qualquer" ||
       player.job.periodsToWork.includes(now))
   ) {
-    // solicita a quantidade de horas a trabalhar
+    // solicita a quantidade de horas a trabalhar 📌
 
     let hoursWorked = validatePromptIntMinMax(
       "trabalhar quantas horas?",
@@ -397,7 +429,7 @@ const submenuWork = () => {
       "você deve selecionar um NÚMERO INTEIRO entre 1 e 4"
     );
 
-    // altera o objeto chosenActivity com as opções escolhidas
+    // altera o objeto chosenActivity com as opções escolhidas 📌
 
     const WorkActivity = {
       type: 0,
@@ -422,7 +454,7 @@ const submenuWork = () => {
 
     chosenActivity.displayChosenActivityInfo();
 
-    // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+    // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente 📌
 
     confirmChoice = confirmation();
   } else {
@@ -434,7 +466,6 @@ seu cronograma de trabalho:
 
    dias: ${player.job.daysToWork}
 horário: ${player.job.periodsToWork}
-
 `);
 
     confirmChoice = 0;
@@ -459,7 +490,7 @@ const submenuNutrition = () => {
   console.log(`NUTRIÇÃO | selecione o que comer`);
   console.log();
 
-  // exibe as opções de comida
+  // exibe as opções de comida 📌
 
   for (let nutritionActivity of activityList_nutrition) {
     console.log(
@@ -469,13 +500,13 @@ const submenuNutrition = () => {
 
   console.log();
 
-  // solicita a escolha da comida
+  // solicita a escolha da comida 📌
 
   nutritionActivityChoiceIndex = validatePromptIntMinMax(
     "sua escolha:",
     activityList_nutrition.length - 1,
     0,
-    `digite um NÚMERO INTEIRO entre 0 e ${activityList_nutrition.length - 1}\n`
+    `digite um NÚMERO INTEIRO entre 0 e ${activityList_nutrition.length - 1}`
   );
 
   chosenNutritionActivity =
@@ -483,7 +514,7 @@ const submenuNutrition = () => {
 
   console.clear();
 
-  // solicita a escolha entre COZINHAR, DELIVERY e RESTAURANTE
+  // solicita a escolha entre COZINHAR, DELIVERY e RESTAURANTE 📌
 
   displayPlayerInfo();
 
@@ -502,14 +533,14 @@ const submenuNutrition = () => {
     "sua escolha:",
     2,
     0,
-    `digite um NÚMERO INTEIRO entre 0 e 2\n`
+    `digite um NÚMERO INTEIRO entre 0 e 2`
   );
 
-  // altera o objeto chosenActivity com as opções escolhidas
+  // altera o objeto chosenActivity com as opções escolhidas 📌
 
   let nutritionActivity;
 
-  // COZINHAR
+  // COZINHAR 🚨
 
   switch (nutritionPrepMethodIndex) {
     case 0: {
@@ -532,7 +563,7 @@ const submenuNutrition = () => {
       break;
     }
 
-    // DELIVERY
+    // DELIVERY 🚨
 
     case 1: {
       nutritionActivity = {
@@ -556,7 +587,7 @@ const submenuNutrition = () => {
       break;
     }
 
-    // RESTAURANTE
+    // RESTAURANTE 🚨
 
     case 2: {
       nutritionActivity = {
@@ -583,7 +614,7 @@ const submenuNutrition = () => {
 
   chosenActivity.displayChosenActivityInfo();
 
-  // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+  // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente 📌
 
   confirmChoice = confirmation();
   return confirmChoice;
@@ -595,7 +626,7 @@ const submenuEnergy = () => {
   {
     let confirmChoice;
 
-    // solicita a quantidade de horas a dormir
+    // solicita a quantidade de horas a dormir 📌
 
     let hoursSlept = validatePromptIntMinMax(
       "dormir quantas horas?",
@@ -604,7 +635,7 @@ const submenuEnergy = () => {
       "você deve selecionar um NÚMERO INTEIRO entre 1 e 8"
     );
 
-    // altera o objeto chosenActivity com as opções escolhidas
+    // altera o objeto chosenActivity com as opções escolhidas 📌
 
     const energyActivity = {
       type: 2,
@@ -625,7 +656,7 @@ const submenuEnergy = () => {
 
     chosenActivity.displayChosenActivityInfo();
 
-    // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+    // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente 📌
 
     confirmChoice = confirmation();
     return confirmChoice;
@@ -635,7 +666,7 @@ const submenuEnergy = () => {
 // submenu OTHER (hygiene, toilet, fun, social) 📌📌
 
 const submenuOther = (chosenActivityType) => {
-  let otherActivityList;
+  let otherActivityList = [];
   let otherActivityTitle;
   let otherActivityChoiceIndex;
   let chosenOtherActivity;
@@ -666,7 +697,7 @@ const submenuOther = (chosenActivityType) => {
   console.log(`${otherActivityTitle} | selecione a atividade`);
   console.log();
 
-  // exibe as opções (submenu)
+  // exibe as opções (submenu) 📌
 
   for (let activity of otherActivityList) {
     console.log(`[${activity.index}] ${activity.title.toUpperCase()}`);
@@ -674,18 +705,18 @@ const submenuOther = (chosenActivityType) => {
 
   console.log();
 
-  // solicita a escolha da atividade
+  // solicita a escolha da atividade 📌
 
   otherActivityChoiceIndex = validatePromptIntMinMax(
     "sua escolha",
     otherActivityList.length - 1,
     0,
-    `digite um NÚMERO INTEIRO entre 0 e ${otherActivityList.length - 1}\n`
+    `digite um NÚMERO INTEIRO entre 0 e ${otherActivityList.length - 1}`
   );
 
   chosenOtherActivity = otherActivityList[otherActivityChoiceIndex];
 
-  // altera o objeto chosenActivity com as opções escolhidas
+  // altera o objeto chosenActivity com as opções escolhidas 📌
 
   let otherActivity = {
     type: chosenActivityType,
@@ -703,7 +734,7 @@ const submenuOther = (chosenActivityType) => {
 
   chosenActivity.displayChosenActivityInfo();
 
-  // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+  // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente 📌
 
   confirmChoice = confirmation();
   return confirmChoice;
@@ -858,7 +889,7 @@ const getFormattedNeedsModification = (needsModification) => {
   ];
 
   for (let key of needsModificationKeys) {
-    if (needsModification[key] > 0) {
+    if (needsModification[key] > 0 || needsModification[key] < 0) {
       needsModificationList.push([key, needsModification[key]]);
     }
   }
@@ -867,7 +898,7 @@ const getFormattedNeedsModification = (needsModification) => {
 
   for (let need of needsModificationList) {
     let needEmoji;
-    let valueFormated = (need[1]).toString().padStart(2, "+");
+    let valueFormated = need[1].toString().padStart(2, "+");
 
     switch (need[0]) {
       case "nutrition":
@@ -906,12 +937,12 @@ let confirmChoice;
 
 // TODO: 🚨🚨🚨
 
-// ----- seleção das características do jogador (nome e profissão) !!:
+// ----- seleção das características do jogador (nome e profissão) !!: 📌📌
 
 console.clear();
 console.log(gameName);
 
-// solicita o nome do jogador e adiciona no objeto player
+// solicita o nome do jogador e adiciona no objeto player 📌
 
 player.name = validatePromptString(
   "digite seu nome:",
@@ -920,17 +951,17 @@ player.name = validatePromptString(
 
 console.clear();
 
-// solicita a seleção da profissão do jogador
+// solicita a seleção da profissão do jogador 📌
 
 let jobChoiceIndex;
 let chosenJob;
 
-// repete a seleção da profissão até a confirmação do jogador
+// repete a seleção da profissão até a confirmação do jogador 📌
 
 while (true) {
   console.log(gameName);
 
-  console.log("selecione sua profissão\n");
+  console.log("selecione sua profissão");
 
   for (let job of jobList) {
     console.log(`[${job.index}] ${job.title}`);
@@ -942,7 +973,7 @@ while (true) {
     "sua escolha:",
     jobList.length,
     0,
-    `digite um NÚMERO INTEIRO entre 0 e ${jobList.length - 1}\n`
+    `digite um NÚMERO INTEIRO entre 0 e ${jobList.length - 1}`
   );
 
   chosenJob = jobList[jobChoiceIndex];
@@ -950,7 +981,7 @@ while (true) {
   console.clear();
   console.log(gameName);
 
-  // exibe a opção selecionada
+  // exibe a opção selecionada 📌
 
   console.log(`profissão selecionada | ${chosenJob.title.toUpperCase()}
   
@@ -960,7 +991,7 @@ while (true) {
   carga horária mínima: ${chosenJob.minHoursPerWeek}h/semana
   `);
 
-  // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente
+  // dá ao jogador a opção de confirmar a seleção ou voltar e escolher novamente 📌
 
   confirmChoice = confirmation();
 
@@ -969,7 +1000,7 @@ while (true) {
   }
 }
 
-// atualiza o objeto player com os detalhes da profissão escolhida
+// atualiza o objeto player com os detalhes da profissão escolhida 📌
 
 player.updatePlayerJob(chosenJob);
 
@@ -995,17 +1026,17 @@ while (true) {
   let currentPeriod = time.getPeriod(); // variáveis para definição de update autônomo baseado na mudança de período
   let newPeriod;
 
-  // ----- repete a seleção da atividade (MENU e SUBMENU) até a confirmação do jogador 📌
+  // ----- repete a seleção da atividade (MENU e SUBMENU) até a confirmação do jogador 📌📌
 
   while (true) {
-    // exibe dia/hora + status dos atributos
+    // exibe dia/hora + status dos atributos 📌
 
     displayPlayerInfo();
 
     console.log(`selecione a próxima atividade`);
     console.log();
 
-    // exibe as opções (MENU PRINCIPAL)
+    // exibe as opções (MENU PRINCIPAL) 📌📌
 
     for (let option of mainMenu) {
       console.log(`[${mainMenu.indexOf(option)}] ${option}`);
@@ -1019,14 +1050,14 @@ while (true) {
       "sua escolha:",
       mainMenu.length - 1,
       0,
-      `digite um NÚMERO INTEIRO entre 0 e ${mainMenu.length - 1}\n`
+      `digite um NÚMERO INTEIRO entre 0 e ${mainMenu.length - 1}`
     );
 
     console.log();
 
     // ----- SUBMENU -----📌📌
 
-    // ----- exibe opções adicionais e confirma a seleção da atividade
+    // ----- exibe opções adicionais e confirma a seleção da atividade 📌
 
     switch (mainMenuChoice) {
       case 0: {
@@ -1052,7 +1083,7 @@ while (true) {
     }
   }
 
-  // ----- executa a atividade selecionada
+  // ----- executa a atividade selecionada 📌
 
   doNextActivity(chosenActivity.type);
 
@@ -1072,11 +1103,194 @@ while (true) {
 
   // ----- finaliza o jogo após 7 dias completos 📌📌
 
-  if (time.days > 7) {
+  let dayNumberToday = time.getDay();
+
+  // FIXME: 🚨🚨 => dayNumberToday > 7
+
+  if (dayNumberToday > 1) {
     break;
   }
+}
+// ----- tela GAME OVER ----- 📌📌📌
 
-  // ----- tela GAME OVER ----- 📌📌📌
+gameOverAnimation();
 
-  // TODO: 🚨🚨🚨
+console.log(
+  '"a vida é como um jogo\ne cada vez que damos um passo\nnós caminhamos para o GAME OVER."'
+);
+
+console.log();
+formatPrompt("digite ENTER para ver seus resultados");
+console.clear();
+
+// ----- exibe os resultados até o jogador escolher sair 📌📌
+
+while (true) {
+
+// ----- TELA 1 - ÁREAS (trabalho, saúde física e saúde mental) 📌
+
+  console.log(formatToTitle("TRABALHO"));
+
+  if (records.work.totalHours > player.job.minHoursPerWeek + 5) {
+    console.log(
+      "você foi além das expectativas!\n\nparabéns pela sua PROMOÇÃO! você mereceu! ✨"
+    );
+  } else if (records.work.totalHours < player.job.minHoursPerWeek - 5) {
+    console.log(
+      "você não trabalhou o mínimo de horas necessárias.\ninfelizmente, você foi demitido. 💸"
+    );
+  } else {
+    console.log("você cumpriu com suas expectativas no trabalho.");
+  }
+
+  console.log();
+  sleep(1000);
+
+  console.log(formatToTitle("SAÚDE FÍSICA"));
+
+  if (records.lowNeedAreas.physicalHealth < 3) {
+    console.log(
+      "nossa, mas que corpo bem cuidado!\nvocê virou influencer fitness e agora ganha milhões nas redes sociais! 💪"
+    );
+  } else if (records.lowNeedAreas.physicalHealth < 7) {
+    console.log(
+      "você precisa se cuidar melhor, hein?\nvocê desenvolveu uma doença crônica e agora passa seus dias no hospital. 😷"
+    );
+  } else {
+    ("você cuidou do seu corpo direitinho, parabéns!");
+  }
+
+  console.log();
+  sleep(1000);
+
+  console.log(formatToTitle("SAÚDE MENTAL"));
+
+  if (records.lowNeedAreas.mentalHealth < 3) {
+    console.log(
+      "uau! que mente equilibrada!\nvocê virou coach good vibes e ajuda muitas pessoas! ☮"
+    );
+  } else if (records.mentalHealth.mental < 7) {
+    console.log(
+      "você não aguentou o stress e foi internado em uma cínica psiquiátrica. 😭"
+    );
+  } else {
+    ("você cuidou do seu corpo direitinho, parabéns!");
+  }
+
+  // TODO: outras observações (1 para cada atributo) (nossa, você curte uma balada, hein? você SE DIVERTIU x vezes) 💡
+
+  console.log();
+  sleep(1000);
+
+  formatPrompt("digite ENTER para continuar")
+
+  // ----- TELA 2 - ESTATÍSTICAS 📌
+
+  statisticsAnimation();
+
+  sleep(1000);
+
+  console.log(formatToTitle("TRABALHO"));
+  console.log(`trabalhou ${records.work.totalTimes} vezes`);
+  console.log(
+    `🕑 ${records.work.totalHours}h\t💲 +$${records.work.totalEarnings}`
+  );
+
+  console.log();
+  sleep(1000);
+
+  console.log(formatToTitle("ENERGIA"));
+  console.log(`chegou a 0 (OH NO!) ${records.lowNeedActivities.energy.totalTimes} vezes`);
+  console.log();
+  console.log(`dormiu ${records.energy.totalTimes} vezes`);
+  console.log();
+  console.log(`🕑 ${records.energy.totalHours}h`);
+
+  console.log();
+  sleep(1000);
+
+  console.log(formatToTitle("NUTRIÇÃO"));
+  console.log(`chegou a 0 (OH NO!) ${records.lowNeedActivities.nutrition.totalTimes}  vezes`);
+  console.log();
+  console.log(`cozinhou ${records.nutrition.cook.totalTimes} vezes`);
+  console.log(`pediu delivery ${records.nutrition.delivery.totalTimes} vezes`);
+  console.log(
+    `comeu no restaurante ${records.nutrition.eatOut.totalTimes} vezes`
+  );
+  console.log();
+  console.log(
+    `🕑 ${formatClock(
+      Math.floor(records.nutrition.totalMinutes / 60),
+      records.nutrition.totalMinutes % 60
+    )}\t💲 -$${records.nutrition.totalCost}`
+  );
+
+  console.log();
+  sleep(1000);
+
+  const otherNeedsKeys = ["hygiene", "toilet", "fun", "social"];
+
+  for (let key of otherNeedsKeys) {
+    switch (key) {
+      case "hygiene": {
+        console.log(formatToTitle("HIGIENE"));
+        console.log(
+          `chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`
+        );
+        console.log();
+        console.log(`ficou cheiroso ${records[key]["totalTimes"]} vezes`);
+        break;
+      }
+      case "toilet": {
+        console.log(formatToTitle("BANHEIRO"));
+        console.log(
+          `chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`
+        );
+        console.log();
+        console.log(`usou a casinha ${records[key]["totalTimes"]} vezes`);
+        break;
+      }
+      case "fun": {
+        console.log(formatToTitle("DIVERSÃO"));
+        console.log(
+          `chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`
+        );
+        console.log();
+        console.log(`curtiu a vida ${records[key]["totalTimes"]} vezes`);
+        break;
+      }
+      case "social":
+        console.log(formatToTitle("SOCIAL"));
+        console.log(
+          `chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`
+        );
+        console.log();
+        console.log(`jogou conversa fora ${records[key]["totalTimes"]} vezes`);
+        break;
+    }
+    console.log();
+    console.log(
+      `🕑 ${formatClock(
+        Math.floor(records[key]["totalMinutes"] / 60),
+        records[key]["totalMinutes"] % 60
+      )}\t💲 -$${records[key]["totalCost"]}`
+    );
+
+    console.log();
+  }
+
+  // sair do jogo ou voltar à tela anterior 📌
+
+  let endGame = validatePromptIntMinMax(
+    "digite [0] para sair\ndigite [1] para voltar à tela anterior",
+    1,
+    0,
+    "você deve digitar [0] ou [1]"
+  );
+
+  console.clear();
+
+  if (endGame == 0) {
+    break;
+  }
 }
