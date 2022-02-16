@@ -5,17 +5,15 @@
 
 # **FUCK!** IT'S ALL LAST MINUTE! *AAAAAAAAARRRRRGHHHHHH* RUUUUUUUUNNNNN!!!!!
 
-+ TODO: create start screen - settings and game info
-
-
 + FIXME:TODO: **FORMAT CODE** 📌 🚨
-+ FIXME:TODO: **EDIT COMMENTS**📌 🚨
++ ✅ **EDIT COMMENTS**📌 🚨
 
 + TODO: 💡 other achievements by need (nossa, você curte uma balada, hein? você SE DIVERTIU x vezes)
 + TODO: 💡 list used resources on GitHub
 
 --- 
 
++ ✅ create start screen - settings and game info
 + ✅ data files
 + ✅ create GAME OVER screen 
 + ✅ session stats

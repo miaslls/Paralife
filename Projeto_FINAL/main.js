@@ -540,7 +540,7 @@ const submenuNutrition = () => {
 
   let nutritionActivity;
 
-  // COZINHAR 🚨
+  // COZINHAR 📌
 
   switch (nutritionPrepMethodIndex) {
     case 0: {
@@ -563,7 +563,7 @@ const submenuNutrition = () => {
       break;
     }
 
-    // DELIVERY 🚨
+    // DELIVERY 📌
 
     case 1: {
       nutritionActivity = {
@@ -587,7 +587,7 @@ const submenuNutrition = () => {
       break;
     }
 
-    // RESTAURANTE 🚨
+    // RESTAURANTE 📌
 
     case 2: {
       nutritionActivity = {
