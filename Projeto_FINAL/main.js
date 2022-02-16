@@ -501,13 +501,13 @@ const submenuNutrition = () => {
 
   console.log(`alimento selecionado | ${chosenNutritionActivity.title.toUpperCase()}
 
-\t---------------------------------------
-\t[0]  |   COZINHAR    |  🕑🕑🕑   💲    
-\t---------------------------------------
-\t[1]  |   DELIVERY    |   🕑🕑    💲💲   
-\t---------------------------------------
-\t[2]  |  RESTAURANTE  |    🕑     💲💲💲  
-\t---------------------------------------
+---------------------------------------
+[0]  |   COZINHAR    |  🕑🕑🕑   💲    
+---------------------------------------
+[1]  |   DELIVERY    |   🕑🕑    💲💲   
+---------------------------------------
+[2]  |  RESTAURANTE  |    🕑     💲💲💲  
+---------------------------------------
 `);
 
   let nutritionPrepMethodIndex = validatePromptIntMinMax(
@@ -922,6 +922,7 @@ while (true) {
   console.log(gameName);
 
   console.log("escolha sua profissão no jogo");
+  console.log();
 
   for (let job of jobList) {
     console.log(`[${job.index}] ${job.title}`);
