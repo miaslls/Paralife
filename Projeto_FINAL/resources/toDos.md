@@ -2,17 +2,17 @@
 
 + TODO: create start screen - settings and game info
 + TODO: create GAME OVER screen - session stats
-+ TODO: display needs modifications in lowNeedActivities NOTE: extract function from displayChosenActivityInfo();
 
 + FIXME: data files
 
-+ FIXME:TODO: **FORMAT CODE** 📌
-+ FIXME:TODO: **EDIT COMMENTS**📌
++ FIXME:TODO: **FORMAT CODE** 📌 🚨
++ FIXME:TODO: **EDIT COMMENTS**📌 🚨
 
-+ TODO: (firula) add 🚨 to TODO in settings.json
+--- 
 
----
-
++ ✅ display needs modifications in lowNeedActivities 
++ ✅ extract function from displayChosenActivityInfo();
++ ✅ (firula) add 🚨 to TODO in settings.json
 + ✅ refactor autonomous activities triggered by low need
 + ✅ show needs modifications in displayChosenActivityInfo();
 + ✅ 🐞 clock in energy animation showing > 24

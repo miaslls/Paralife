@@ -179,46 +179,9 @@ let chosenActivity = {
 
     displayPlayerInfo();
 
-    const needsModificationList = [];
-    const chosenActivityKeysList = Object.keys(this.needsModification);
-
-    for (let key of chosenActivityKeysList) {
-      if (this.needsModification[key] != 0) {
-        needsModificationList.push([key, this.needsModification[key]]);
-      }
-    }
-
-    const needsModificationFormatted = [];
-
-    for (let need of needsModificationList) {
-      let needEmoji;
-      let valueFormated = need[1].toString().padStart(2, "+");
-
-      switch (need[0]) {
-        case "nutrition":
-          needEmoji = "🍔";
-          break;
-        case "energy":
-          needEmoji = "💤";
-          break;
-        case "hygiene":
-          needEmoji = "🧼";
-          break;
-        case "toilet":
-          needEmoji = "🚽";
-          break;
-        case "fun":
-          needEmoji = "🎈";
-          break;
-        case "social":
-          needEmoji = "💬";
-          break;
-      }
-
-      needsModificationFormatted.push(`${valueFormated} ${needEmoji}`);
-    }
-
-    let needsModificationString = needsModificationFormatted.join(" | ");
+    let needsModificationString = getFormattedNeedsModification(
+      this.needsModification
+    );
 
     console.log(`atividade selecionada | ${this.title}`);
     console.log();
@@ -301,28 +264,39 @@ const lowNeedActivities = {
   },
 
   triggerAction: function () {
-    const playerNeedsKeys = Object.keys(player.needs);
+    const needsModificationKeys = [
+      "nutrition",
+      "energy",
+      "hygiene",
+      "toilet",
+      "fun",
+      "social",
+    ];
 
-    for (let key of playerNeedsKeys) {
+    for (let key of needsModificationKeys) {
       if (player.needs[key] <= 0) {
         let actionTriggered = this[key];
+
         time.increment(actionTriggered.timeToComplete);
         player.updateNeeds(actionTriggered);
         records.lowNeedActivities[key]["totalTimes"]++;
-        records.lowNeedActivities[key]["totalMinutes"] += actionTriggered.timeToComplete;
-
-        console.clear();
-        ohNoAnimation();
+        records.lowNeedActivities[key]["totalMinutes"] +=
+          actionTriggered.timeToComplete;
 
         const actionTriggeredTitle = formatToTitle(
           `${actionTriggered.title.toUpperCase()} menor ou igual a ZERO!`
         );
 
+        let needsModificationString = getFormattedNeedsModification(
+          actionTriggered.needsModification
+        );
+
+        console.clear();
+        ohNoAnimation();
         console.log(actionTriggeredTitle);
         console.log(actionTriggered.message);
-
-        // TODO: add display needsModification NOTE: extract it to a function maybe?
-
+        console.log();
+        console.log(needsModificationString);
         console.log();
         formatPrompt("digite ENTER para continuar");
         console.clear();
@@ -397,44 +371,9 @@ const records = {
   },
 };
 
-// ----- FUNCTIONS ----- 📌📌📌
+// SUBMENUS 📌📌📌
 
-// ----- exibe as informações do jogador 📌📌
-
-const displayPlayerInfo = () => {
-  console.log(gameName);
-
-  console.log(`📆 DIA ${(time.days + 1)
-    .toString()
-    .padStart(
-      2,
-      "0"
-    )} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
-
-👤 ${player.name}
-💲 ${`$ ${player.wallet}`}
-💼 ${player.job.title}
-
----------------------------
-🍔  ${player.needs.nutrition
-    .toString()
-    .padStart(2, "0")}      🧼  ${player.needs.hygiene
-    .toString()
-    .padStart(2, "0")}      🎈  ${player.needs.fun.toString().padStart(2, "0")}
-💤  ${player.needs.energy
-    .toString()
-    .padStart(2, "0")}      🚽  ${player.needs.toilet
-    .toString()
-    .padStart(2, "0")}      💬  ${player.needs.social
-    .toString()
-    .padStart(2, "0")}
----------------------------
-`);
-};
-
-// SUBMENUS 📌📌
-
-// ----- submenu WORK 📌
+// ----- submenu WORK 📌📌
 
 const submenuWork = () => {
   let today = time.getWeekDay();
@@ -495,6 +434,7 @@ seu cronograma de trabalho:
 
    dias: ${player.job.daysToWork}
 horário: ${player.job.periodsToWork}
+
 `);
 
     confirmChoice = 0;
@@ -505,7 +445,7 @@ horário: ${player.job.periodsToWork}
   return confirmChoice;
 };
 
-// ----- submenu NUTRITION 📌
+// ----- submenu NUTRITION 📌📌
 
 const submenuNutrition = () => {
   let nutritionActivityChoiceIndex;
@@ -535,7 +475,7 @@ const submenuNutrition = () => {
     "sua escolha:",
     activityList_nutrition.length - 1,
     0,
-    `digite um NÚMERO INTEIRO entre 0 e ${activityList_nutrition.length - 1}`
+    `digite um NÚMERO INTEIRO entre 0 e ${activityList_nutrition.length - 1}\n`
   );
 
   chosenNutritionActivity =
@@ -562,7 +502,7 @@ const submenuNutrition = () => {
     "sua escolha:",
     2,
     0,
-    `digite um NÚMERO INTEIRO entre 0 e 2`
+    `digite um NÚMERO INTEIRO entre 0 e 2\n`
   );
 
   // altera o objeto chosenActivity com as opções escolhidas
@@ -649,7 +589,7 @@ const submenuNutrition = () => {
   return confirmChoice;
 };
 
-// submenu ENERGY 📌
+// submenu ENERGY 📌📌
 
 const submenuEnergy = () => {
   {
@@ -692,7 +632,7 @@ const submenuEnergy = () => {
   }
 };
 
-// submenu OTHER (hygiene, toilet, fun, social) 📌
+// submenu OTHER (hygiene, toilet, fun, social) 📌📌
 
 const submenuOther = (chosenActivityType) => {
   let otherActivityList;
@@ -740,7 +680,7 @@ const submenuOther = (chosenActivityType) => {
     "sua escolha",
     otherActivityList.length - 1,
     0,
-    `digite um NÚMERO INTEIRO entre 0 e ${otherActivityList.length - 1}`
+    `digite um NÚMERO INTEIRO entre 0 e ${otherActivityList.length - 1}\n`
   );
 
   chosenOtherActivity = otherActivityList[otherActivityChoiceIndex];
@@ -869,6 +809,94 @@ const doOtherActivity = (chosenActivity) => {
   player.updateNeeds(chosenActivity);
 };
 
+// ----- DISPLAY FORMATTED INFO ----- 📌📌📌
+
+// ----- exibe as informações do jogador 📌📌
+
+const displayPlayerInfo = () => {
+  console.log(gameName);
+
+  console.log(`📆 DIA ${(time.days + 1)
+    .toString()
+    .padStart(
+      2,
+      "0"
+    )} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
+
+👤 ${player.name}
+💲 ${`$ ${player.wallet}`}
+💼 ${player.job.title}
+
+---------------------------
+🍔  ${player.needs.nutrition
+    .toString()
+    .padStart(2, "0")}      🧼  ${player.needs.hygiene
+    .toString()
+    .padStart(2, "0")}      🎈  ${player.needs.fun.toString().padStart(2, "0")}
+💤  ${player.needs.energy
+    .toString()
+    .padStart(2, "0")}      🚽  ${player.needs.toilet
+    .toString()
+    .padStart(2, "0")}      💬  ${player.needs.social
+    .toString()
+    .padStart(2, "0")}
+---------------------------
+`);
+};
+
+// retorna as modificações de atributos formatadas. ex: 🍔 +1 | 🚽 -3 📌📌
+
+const getFormattedNeedsModification = (needsModification) => {
+  const needsModificationList = [];
+  const needsModificationKeys = [
+    "nutrition",
+    "energy",
+    "hygiene",
+    "toilet",
+    "fun",
+    "social",
+  ];
+
+  for (let key of needsModificationKeys) {
+    if (needsModification[key] > 0) {
+      needsModificationList.push([key, needsModification[key]]);
+    }
+  }
+
+  const needsModificationFormatted = [];
+
+  for (let need of needsModificationList) {
+    let needEmoji;
+    let valueFormated = (need[1]).toString().padStart(2, "+");
+
+    switch (need[0]) {
+      case "nutrition":
+        needEmoji = "🍔";
+        break;
+      case "energy":
+        needEmoji = "💤";
+        break;
+      case "hygiene":
+        needEmoji = "🧼";
+        break;
+      case "toilet":
+        needEmoji = "🚽";
+        break;
+      case "fun":
+        needEmoji = "🎈";
+        break;
+      case "social":
+        needEmoji = "💬";
+        break;
+    }
+
+    needsModificationFormatted.push(`${valueFormated} ${needEmoji}`);
+  }
+
+  let needsModificationString = needsModificationFormatted.join(" | ");
+  return needsModificationString;
+};
+
 // ----- CODE START ----- 📌📌📌
 
 const gameName = formatToTitle("քǟʀǟʟɨʄɛ");
@@ -876,7 +904,7 @@ let confirmChoice;
 
 // ----- TELA INCIAL -----📌📌📌
 
-// TODO:
+// TODO: 🚨🚨🚨
 
 // ----- seleção das características do jogador (nome e profissão) !!:
 
@@ -914,7 +942,7 @@ while (true) {
     "sua escolha:",
     jobList.length,
     0,
-    `digite um NÚMERO INTEIRO entre 0 e ${jobList.length - 1}`
+    `digite um NÚMERO INTEIRO entre 0 e ${jobList.length - 1}\n`
   );
 
   chosenJob = jobList[jobChoiceIndex];
@@ -991,7 +1019,7 @@ while (true) {
       "sua escolha:",
       mainMenu.length - 1,
       0,
-      `digite um NÚMERO INTEIRO entre 0 e ${mainMenu.length - 1}`
+      `digite um NÚMERO INTEIRO entre 0 e ${mainMenu.length - 1}\n`
     );
 
     console.log();
@@ -1047,4 +1075,8 @@ while (true) {
   if (time.days > 7) {
     break;
   }
+
+  // ----- tela GAME OVER ----- 📌📌📌
+
+  // TODO: 🚨🚨🚨
 }

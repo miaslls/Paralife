@@ -1,0 +1,9 @@
+Jogo Paralife
+
+Seja bem-vindo ao Paralife.
+Para jogar,você deverá fazer escolhas durante o seu jogo,conforme sua opção você receberá pontos positivos ou negativos ao final você receberá um aviso!
+Vamos algumas regras
+O jogador  deverá  dormir no maximo 8 horas por vez
+O jogador deverá escolher trabalhar 4 horas por vez
+O jogador deverá escolher dias e horários que a profissão permite.
+Vamos nessa!....

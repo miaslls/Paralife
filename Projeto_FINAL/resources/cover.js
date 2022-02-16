@@ -10,11 +10,15 @@ let integrantesDoGrupo = [
 ];
 
 let notaDoProjeto = formatPrompt("nota do projeto:");
+let destaque = formatPrompt("projeto destaque? [S] ou [N]");
 
-for (let integrante of integrantesDoGrupo) {
-  if (notaDoProjeto == 10) {
-    console.log(integrante, "🥰");
-  } else {
-    console.log(integrante, "😰");
-  }
+if (notaDoProjeto == 10) {
+  integrantesDoGrupo.push("😆🥰")
+} else {
+  integrantesDoGrupo.push("😰😥");
 }
+if (destaque.toUpperCase() == "S") {
+  integrantesDoGrupo.push("🤩🥳");
+}
+
+console.log(integrantesDoGrupo);
