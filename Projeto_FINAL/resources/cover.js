@@ -1,14 +1,15 @@
-// BM: PROJETO FINAL - Módulo 1 | BLUE
+const prompt = require("prompt-sync")();
+const { formatPrompt } = require("../lib/formatting");
 
+// BM: PROJETO FINAL - Módulo 1 | BLUE
 
 let integrantesDoGrupo = [
   "Camila Salles",
-  "Carlos Eduardo Sobrenome",
+  "Carlos Eduardo Carvalho",
   "Tatiana Gandra",
 ];
 
-// let notaDoProjeto = formatPrompt("nota do projeto: ");
-
+let notaDoProjeto = formatPrompt("nota do projeto:");
 
 for (let integrante of integrantesDoGrupo) {
   if (notaDoProjeto == 10) {

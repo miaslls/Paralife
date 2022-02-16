@@ -1,5 +1,5 @@
 const prompt = require("prompt-sync")();
-const formatFunctions = require("./formatting.js");
+const { formatPromptMultipleLines } = require("./formatting.js");
 
 // ----- VALIDATION FUNCTIONS -----
 
@@ -7,7 +7,7 @@ const formatFunctions = require("./formatting.js");
 
 exports.validatePromptString = (message, errorMessage = "INVÁLIDO") => {
   while (true) {
-    let string = formatFunctions.formatPromptMultipleLines(message);
+    let string = formatPromptMultipleLines(message);
 
     if (string.length > 0) {
       return string;
@@ -25,7 +25,7 @@ exports.validatePromptIntMinMax = (
   errorMessage = "INVÁLIDO"
 ) => {
   while (true) {
-    let num = formatFunctions.formatPromptMultipleLines(message);
+    let num = formatPromptMultipleLines(message);
 
     if (!isNaN(num) && num >= min && num <= max && num % 1 == 0) {
       return parseInt(num);

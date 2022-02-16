@@ -9,6 +9,8 @@ exports.confirmation = () => {
       0,
       "Você deve digitar [0] ou [1]"
     );
+
+    console.clear();
   
     return confirmChoice;
   };

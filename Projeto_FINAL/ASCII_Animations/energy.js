@@ -2,13 +2,12 @@ const { formatClock, sleep } = require("../lib/formatting.js");
 
 exports.energyAnimation = (nowHours, nowMinutes, hoursSlept) => {
   for (let i = 0; i <= hoursSlept; i++) {
-    let hoursShown;
 
-    if (hoursShown == 24) {
-      hoursShown = 0;
+    let hoursShown = nowHours + i;
+
+    if (hoursShown >= 24) {
+      hoursShown -= 24;
     }
-
-    hoursShown = nowHours + i;
 
     console.clear();
     console.log(`
@@ -20,7 +19,7 @@ _____________
 
               zz
     ! _    zz           _____
-    |(~} zz         !  [${formatClock(nowHours + i, nowMinutes)}]
+    |(~} zz         !  [${formatClock(hoursShown, nowMinutes)}]
     |(_/__________..| =========
     |  ||:::::::::::|  |_____|
 
@@ -38,7 +37,7 @@ _____________
 
                 zz
     ! _      zz         _____
-    |(~}  zz        !  [${formatClock(nowHours + i, nowMinutes)}]
+    |(~}  zz        !  [${formatClock(hoursShown, nowMinutes)}]
     |(_/__________..| =========
     |  ||:::::::::::|  |_____|
 
