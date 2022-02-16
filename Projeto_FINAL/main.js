@@ -4,7 +4,7 @@
 
 const prompt = require("prompt-sync")();
 const activityList_nutrition = require("./data/activityList_nutrition.json");
-const activityList_hygiene = require("./data/activityList_hygiene.json"); 
+const activityList_hygiene = require("./data/activityList_hygiene.json");
 const activityList_toilet = require("./data/activityList_toilet.json");
 const activityList_fun = require("./data/activityList_fun.json");
 const activityList_social = require("./data/activityList_social.json");
@@ -19,16 +19,8 @@ const { workAnimation } = require("./ASCII_Animations/work.js");
 const { ohNoAnimation } = require("./ASCII_Animations/ohNo.js");
 const { gameOverAnimation } = require("./ASCII_Animations/gameOver.js");
 const { statisticsAnimation } = require("./ASCII_Animations/statistics.js");
-const {
-  formatToTitle,
-  formatPrompt,
-  formatClock,
-  sleep,
-} = require("./lib/formatting.js");
-const {
-  validatePromptString,
-  validatePromptIntMinMax,
-} = require("./lib/validation.js");
+const { formatToTitle, formatPrompt, formatClock, sleep, } = require("./lib/formatting.js");
+const { validatePromptString, validatePromptIntMinMax, } = require("./lib/validation.js");
 const { confirmation } = require("./lib/confirmation");
 
 // ----- OBJECTS DEFINITION ----- 📌📌📌
@@ -159,7 +151,6 @@ const time = {
 
   getWeekDay: function () {
     const weekDays = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"];
-
     return weekDays[this.days];
   },
 };
@@ -225,8 +216,7 @@ const lowNeedActivities = {
     needsModification: {
       nutrition: 10,
     },
-    message:
-      "você desmaiou por estar desnutrido.\nvocê foi levado ao hospital para receber os cuidados necessários.",
+    message: "você desmaiou por estar desnutrido.\nvocê foi levado ao hospital para receber os cuidados necessários.",
   },
   energy: {
     title: "energia",
@@ -245,8 +235,7 @@ const lowNeedActivities = {
       hygiene: 10,
       social: -3,
     },
-    message:
-      "ninguém queria chegar perto de você, por causa do fedô.\nvocê tomou um banho caprichado",
+    message: "ninguém queria chegar perto de você, por causa do fedô.\nvocê tomou um banho caprichado",
   },
   toilet: {
     title: "banheiro",
@@ -257,8 +246,7 @@ const lowNeedActivities = {
       toilet: 10,
       social: -3,
     },
-    message:
-      "você fez xixi na calça e todo mundo viu. você tomou um banho e lavou suas roupas.",
+    message: "você fez xixi na calça e todo mundo viu. você tomou um banho e lavou suas roupas.",
   },
   fun: {
     title: "diversão",
@@ -277,8 +265,7 @@ const lowNeedActivities = {
       fun: -2,
       social: -3,
     },
-    message:
-      "você se sente sozinho e abandonado então passa um tempo conversando com as plantas.",
+    message: "você se sente sozinho e abandonado então passa um tempo conversando com as plantas.",
   },
 
   // executa a ação equivalente quando atributo <= 0 📌
@@ -300,8 +287,7 @@ const lowNeedActivities = {
         time.increment(actionTriggered.timeToComplete);
         player.updateNeeds(actionTriggered);
         records.lowNeedActivities[key]["totalTimes"]++;
-        records.lowNeedActivities[key]["totalMinutes"] +=
-          actionTriggered.timeToComplete;
+        records.lowNeedActivities[key]["totalMinutes"] += actionTriggered.timeToComplete;
 
         if (actionTriggered.area == "physicalHealth") {
           records.lowNeedAreas.physicalHealth++;
@@ -309,9 +295,7 @@ const lowNeedActivities = {
           records.lowNeedAreas.mentalHealth++;
         }
 
-        const actionTriggeredTitle = formatToTitle(
-          `${actionTriggered.title.toUpperCase()} menor ou igual a ZERO!`
-        );
+        const actionTriggeredTitle = formatToTitle(`${actionTriggered.title.toUpperCase()} menor ou igual a ZERO!`);
 
         let needsModificationString = getFormattedNeedsModification(
           actionTriggered.needsModification
@@ -493,9 +477,7 @@ const submenuNutrition = () => {
   // exibe as opções de comida 📌
 
   for (let nutritionActivity of activityList_nutrition) {
-    console.log(
-      `[${nutritionActivity.index}] ${nutritionActivity.title.toUpperCase()}`
-    );
+    console.log(`[${nutritionActivity.index}] ${nutritionActivity.title.toUpperCase()}`);
   }
 
   console.log();
@@ -509,8 +491,7 @@ const submenuNutrition = () => {
     `digite um NÚMERO INTEIRO entre 0 e ${activityList_nutrition.length - 1}`
   );
 
-  chosenNutritionActivity =
-    activityList_nutrition[nutritionActivityChoiceIndex];
+  chosenNutritionActivity = activityList_nutrition[nutritionActivityChoiceIndex];
 
   console.clear();
 
@@ -790,11 +771,7 @@ const doNutritionActivity = (chosenActivity) => {
 // ----- executa a atividade DORMIR 📌
 
 const doEnergyActivity = (chosenActivity) => {
-  energyAnimation(
-    time.hours,
-    time.minutes,
-    chosenActivity.needsModification.energy
-  );
+  energyAnimation(time.hours, time.minutes, chosenActivity.needsModification.energy);
   time.increment(chosenActivity.timeToComplete);
   player.updateNeeds(chosenActivity);
   records.energy.totalTimes++;
@@ -847,30 +824,15 @@ const doOtherActivity = (chosenActivity) => {
 const displayPlayerInfo = () => {
   console.log(gameName);
 
-  console.log(`📆 DIA ${(time.days + 1)
-    .toString()
-    .padStart(
-      2,
-      "0"
-    )} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
+  console.log(`📆 DIA ${(time.days + 1).toString().padStart(2,"0")} | ${time.getWeekDay()} 🕑 ${time.getTime()} (${time.getPeriod()})
 
 👤 ${player.name}
 💲 ${`$ ${player.wallet}`}
 💼 ${player.job.title}
 
 ---------------------------
-🍔  ${player.needs.nutrition
-    .toString()
-    .padStart(2, "0")}      🧼  ${player.needs.hygiene
-    .toString()
-    .padStart(2, "0")}      🎈  ${player.needs.fun.toString().padStart(2, "0")}
-💤  ${player.needs.energy
-    .toString()
-    .padStart(2, "0")}      🚽  ${player.needs.toilet
-    .toString()
-    .padStart(2, "0")}      💬  ${player.needs.social
-    .toString()
-    .padStart(2, "0")}
+🍔  ${player.needs.nutrition.toString().padStart(2, "0")}      🧼  ${player.needs.hygiene.toString().padStart(2, "0")}      🎈  ${player.needs.fun.toString().padStart(2, "0")}
+💤  ${player.needs.energy.toString().padStart(2, "0")}      🚽  ${player.needs.toilet.toString().padStart(2, "0")}      💬  ${player.needs.social.toString().padStart(2, "0")}
 ---------------------------
 `);
 };
@@ -1044,7 +1006,7 @@ em uma simulação de vida real por 7 dias
 + seus atributos atualizam automaticamente a cada período (manhã, tarde e noite)
 + cuidado para não deixar nenhum deles chegar a 0! garanto que não vai gostar!
 
-`)
+`);
 
 formatPrompt("ENTER");
 
@@ -1057,7 +1019,6 @@ console.log(`agora é só apertar ENTER pra começar!
 formatPrompt("ENTER");
 
 console.clear();
-
 
 // ----- MENU PRINCIPAL -----📌📌📌
 
@@ -1139,7 +1100,6 @@ while (true) {
   // ----- executa a atividade selecionada 📌
 
   doNextActivity(chosenActivity.type);
-
   console.clear();
 
   // ----- atualiza os atributos de forma autônoma a cada troca de período 📌📌
@@ -1166,9 +1126,7 @@ while (true) {
 
 gameOverAnimation();
 
-console.log(
-  '"a vida é como um jogo\ne cada vez que damos um passo\nnós caminhamos para o GAME OVER."'
-);
+console.log('"a vida é como um jogo\ne cada vez que damos um passo\nnós caminhamos para o GAME OVER."');
 
 console.log();
 formatPrompt("digite ENTER para ver seus resultados");
@@ -1177,19 +1135,14 @@ console.clear();
 // ----- exibe os resultados até o jogador escolher sair 📌📌
 
 while (true) {
-
-// ----- TELA 1 - ÁREAS (trabalho, saúde física e saúde mental) 📌
+  // ----- TELA 1 - ÁREAS (trabalho, saúde física e saúde mental) 📌
 
   console.log(formatToTitle("TRABALHO"));
 
   if (records.work.totalHours > player.job.minHoursPerWeek + 5) {
-    console.log(
-      "você foi além das expectativas!\n\nparabéns pela sua PROMOÇÃO! você mereceu! ✨"
-    );
+    console.log("você foi além das expectativas!\n\nparabéns pela sua PROMOÇÃO! você mereceu! ✨");
   } else if (records.work.totalHours < player.job.minHoursPerWeek - 5) {
-    console.log(
-      "você não trabalhou o mínimo de horas necessárias.\ninfelizmente, você foi demitido. 💸"
-    );
+    console.log("você não trabalhou o mínimo de horas necessárias.\ninfelizmente, você foi demitido. 💸");
   } else {
     console.log("você cumpriu com suas expectativas no trabalho.");
   }
@@ -1200,15 +1153,11 @@ while (true) {
   console.log(formatToTitle("SAÚDE FÍSICA"));
 
   if (records.lowNeedAreas.physicalHealth < 3) {
-    console.log(
-      "nossa, mas que corpo bem cuidado!\nvocê virou influencer fitness e agora ganha milhões nas redes sociais! 💪"
-    );
+    console.log("nossa, mas que corpo bem cuidado!\nvocê virou influencer fitness e agora ganha milhões nas redes sociais! 💪");
   } else if (records.lowNeedAreas.physicalHealth < 7) {
-    console.log(
-      "você precisa se cuidar melhor, hein?\nvocê desenvolveu uma doença crônica e agora passa seus dias no hospital. 😷"
-    );
+    console.log("você precisa se cuidar melhor, hein?\nvocê desenvolveu uma doença crônica e agora passa seus dias no hospital. 😷");
   } else {
-    ("você cuidou do seu corpo direitinho, parabéns!");
+    console.log("você cuidou do seu corpo direitinho, parabéns!");
   }
 
   console.log();
@@ -1217,21 +1166,17 @@ while (true) {
   console.log(formatToTitle("SAÚDE MENTAL"));
 
   if (records.lowNeedAreas.mentalHealth < 3) {
-    console.log(
-      "uau! que mente equilibrada!\nvocê virou coach good vibes e ajuda muitas pessoas! ☮"
-    );
+    console.log("uau! que mente equilibrada!\nvocê virou coach good vibes e ajuda muitas pessoas! ☮");
   } else if (records.mentalHealth.mental < 7) {
-    console.log(
-      "você não aguentou o stress e foi internado em uma cínica psiquiátrica. 😭"
-    );
+    console.log("você não aguentou o stress e foi internado em uma cínica psiquiátrica. 😭");
   } else {
-    ("você cuidou do seu corpo direitinho, parabéns!");
+    console.log("você cuidou do seu corpo direitinho, parabéns!");
   }
 
   console.log();
   sleep(1000);
 
-  formatPrompt("digite ENTER para continuar")
+  formatPrompt("digite ENTER para continuar");
 
   // ----- TELA 2 - ESTATÍSTICAS 📌
 
@@ -1241,9 +1186,7 @@ while (true) {
 
   console.log(formatToTitle("TRABALHO"));
   console.log(`trabalhou ${records.work.totalTimes} vezes`);
-  console.log(
-    `🕑 ${records.work.totalHours}h\t💲 +$${records.work.totalEarnings}`
-  );
+  console.log(`🕑 ${records.work.totalHours}h\t💲 +$${records.work.totalEarnings}`);
 
   console.log();
   sleep(1000);
@@ -1263,16 +1206,9 @@ while (true) {
   console.log();
   console.log(`cozinhou ${records.nutrition.cook.totalTimes} vezes`);
   console.log(`pediu delivery ${records.nutrition.delivery.totalTimes} vezes`);
-  console.log(
-    `comeu no restaurante ${records.nutrition.eatOut.totalTimes} vezes`
-  );
+  console.log(`comeu no restaurante ${records.nutrition.eatOut.totalTimes} vezes`);
   console.log();
-  console.log(
-    `🕑 ${formatClock(
-      Math.floor(records.nutrition.totalMinutes / 60),
-      records.nutrition.totalMinutes % 60
-    )}\t💲 -$${records.nutrition.totalCost}`
-  );
+  console.log(`🕑 ${formatClock(Math.floor(records.nutrition.totalMinutes / 60), records.nutrition.totalMinutes % 60)}\t💲 -$${records.nutrition.totalCost}`);
 
   console.log();
   sleep(1000);
@@ -1283,47 +1219,34 @@ while (true) {
     switch (key) {
       case "hygiene": {
         console.log(formatToTitle("HIGIENE"));
-        console.log(
-          `chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`
-        );
+        console.log(`chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`);
         console.log();
         console.log(`ficou cheiroso ${records[key]["totalTimes"]} vezes`);
         break;
       }
       case "toilet": {
         console.log(formatToTitle("BANHEIRO"));
-        console.log(
-          `chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`
-        );
+        console.log(`chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`);
         console.log();
         console.log(`usou a casinha ${records[key]["totalTimes"]} vezes`);
         break;
       }
       case "fun": {
         console.log(formatToTitle("DIVERSÃO"));
-        console.log(
-          `chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`
-        );
+        console.log(`chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`);
         console.log();
         console.log(`curtiu a vida ${records[key]["totalTimes"]} vezes`);
         break;
       }
       case "social":
         console.log(formatToTitle("SOCIAL"));
-        console.log(
-          `chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`
-        );
+        console.log(`chegou a 0 (OH NO!) ${records["lowNeedActivities"][key]["totalTimes"]} vezes`);
         console.log();
         console.log(`jogou conversa fora ${records[key]["totalTimes"]} vezes`);
         break;
     }
     console.log();
-    console.log(
-      `🕑 ${formatClock(
-        Math.floor(records[key]["totalMinutes"] / 60),
-        records[key]["totalMinutes"] % 60
-      )}\t💲 -$${records[key]["totalCost"]}`
-    );
+    console.log(`🕑 ${formatClock(Math.floor(records[key]["totalMinutes"] / 60), records[key]["totalMinutes"] % 60)}\t💲 -$${records[key]["totalCost"]}`);
 
     console.log();
   }
