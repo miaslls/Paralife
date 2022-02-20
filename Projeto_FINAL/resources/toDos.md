@@ -5,7 +5,7 @@
 
 # **FUCK!** IT'S ALL LAST MINUTE! *AAAAAAAAARRRRRGHHHHHH* RUUUUUUUUNNNNN!!!!!
 
-+ FIXME:TODO: **FORMAT CODE** 📌 🚨
++ ✅ **FORMAT CODE** 📌 🚨
 + ✅ **EDIT COMMENTS**📌 🚨
 
 + TODO: 💡 other achievements by need (nossa, você curte uma balada, hein? você SE DIVERTIU x vezes)

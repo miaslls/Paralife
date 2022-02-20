@@ -15,7 +15,7 @@ exports.formatToTitle = (text, separator = "-") => {
   for (i = 0; i < text.length; i++) {
     separatorLine = separatorLine.concat(separator);
   }
-  return `${separatorLine}\n${text}\n${separatorLine}\n`;
+  console.log(`${separatorLine}\n${text}\n${separatorLine}\n`);
 };
 
 // formata o prompt em linha única ex: > message (prompt)
@@ -23,7 +23,7 @@ exports.formatToTitle = (text, separator = "-") => {
 exports.formatPrompt = (message) => prompt(`> ${message} `);
 
 /* formata o prompt em múltiplas linhas. ex: 
-  > message 
+  message 
   > (prompt)
   */
 
