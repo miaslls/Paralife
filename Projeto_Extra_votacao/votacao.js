@@ -1,12 +1,11 @@
 "use strict"; // 🐞 catcher
+const prompt = require("prompt-sync")(); // require prompt
 
-const prompt = require("prompt-sync")();
+// 📌📌📌 ----- FUNCTIONS ----- 
 
-// ----- FUNCTIONS ----- 📌📌📌
+// 📌📌 ----- FORMATTING / VALIDATION FUNCTIONS ----- 
 
-// ----- FORMATTING / VALIDATION FUNCTIONS ----- 📌📌
-
-/* formata o texto como título. ex: 📌
+/* 📌 formata o texto como título. ex: 
 ------------
 example text
 ------------
@@ -26,7 +25,7 @@ const formatToTitle = (text, separator = "-") => {
 
 const formatPrompt = (message) => prompt(`> ${message} `);
 
-/* formata o prompt em múltiplas linhas. ex: 📌
+/* 📌 formata o prompt em múltiplas linhas. ex: 
   message 
   > (prompt)
   */
@@ -36,7 +35,7 @@ const formatPromptMultipleLines = (message) => {
   return prompt(`> `);
 };
 
-// valida NÚMERO INTEIRO entre MIN e MAX (inclusive min e max) 📌
+// 📌 valida NÚMERO INTEIRO entre MIN e MAX (inclusive min e max) 
 
 const validatePromptIntMinMax = (
   message,
@@ -54,9 +53,9 @@ const validatePromptIntMinMax = (
   }
 };
 
-// ----- PROJECT SPECIFIC FUNCTIONS ----- 📌📌
+// 📌📌 ----- PROJECT SPECIFIC FUNCTIONS ----- 
 
-// 📌 autorizaVoto();
+// 📌 autorizaVoto(); autoriza o voto por ano de nascimento
 
 const autorizaVoto = () => {
   let anoNascimento = formatPrompt("ano de nascimento:");
@@ -71,7 +70,7 @@ const autorizaVoto = () => {
   }
 };
 
-// 📌 votacao(autorizacao);
+// 📌 votacao(autorizacao); registra o voto caso autorizado
 
 const votacao = (autorizacao) => {
   switch (autorizacao) {
@@ -133,7 +132,7 @@ const votacao = (autorizacao) => {
   }
 };
 
-// 📌 proximoEleitor();
+// 📌 proximoEleitor(); repete autorização/votação ou finaliza e exibe resultados
 
 const proximoEleitor = () => {
   let finalizar = validatePromptIntMinMax(
@@ -146,7 +145,7 @@ const proximoEleitor = () => {
   return finalizar;
 };
 
-// ----- OBJECTS ----- 📌📌📌
+// 📌📌📌 ----- OBJECTS ----- 
 
 const resultadosVotacao = {
   "candidato A": 0,
@@ -155,14 +154,19 @@ const resultadosVotacao = {
   "EM BRANCO": 0,
   "NULOS": 0,
 
+  // 📌 exibe os resutados da votação 
+
   exibirResultados: function () {
     let resultadosVotacaoArray = Object.entries(resultadosVotacao);
 
     console.clear();
     formatToTitle("resultados | ELEIÇÃO 2022");
 
+
     for (let resultado of resultadosVotacaoArray) {
-      if (!isNaN(resultado[1])) {
+
+      if (!isNaN(resultado[1])) { // 🚨🚨🚨 gambiarra pra não exibir o método do objeto
+
         console.log(`${resultado[0]} - ${resultado[1]} voto(s)`);
       }
     }
@@ -182,7 +186,7 @@ const resultadosVotacao = {
   },
 };
 
-// ----- CODE START ----- 📌📌📌
+// 📌📌📌 ----- CODE START -----
 
 let numeroEleitor = 1;
 
