@@ -2,9 +2,7 @@
 const prompt = require("prompt-sync")(); // require prompt
 
 // 📌📌📌 ----- FUNCTIONS ----- 
-
 // 📌📌 ----- FORMATTING / VALIDATION FUNCTIONS ----- 
-
 /* 📌 formata o texto como título. ex: 
 ------------
 example text
@@ -54,7 +52,6 @@ const validatePromptIntMinMax = (
 };
 
 // 📌📌 ----- PROJECT SPECIFIC FUNCTIONS ----- 
-
 // 📌 autorizaVoto(); autoriza o voto por ano de nascimento
 
 const autorizaVoto = () => {
@@ -146,6 +143,7 @@ const proximoEleitor = () => {
 };
 
 // 📌📌📌 ----- OBJECTS ----- 
+// 📌📌 resultadosVotacao
 
 const resultadosVotacao = {
   "candidato A": 0,
@@ -208,3 +206,5 @@ while (true) {
 }
 
 resultadosVotacao.exibirResultados();
+
+// 💡 TODO: segundo turno

@@ -10,7 +10,7 @@ A ideia deste projeto é criar um programa que simule uma votação com todo o c
 
 + Ter uma função chamada votacao(autorizacao, voto) que valida e contabiliza o voto (número entre 1 e 5) ou retorna a mensagem: "Você não pode votar", caso o voto não possa ser contabilizado;
 
-+ Contabilizar os votos de acordo com os significados:
++ Contabilizar os votos de acordo com os significados:  
 -- 1 = Candidato 1  
 -- 2 = Candidato 2  
 -- 3 = Candidato 3  
