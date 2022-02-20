@@ -141,7 +141,7 @@ const resultadosVotacao = {
   "candidato A": 0,
   "candidato B": 0,
   "candidato C": 0,
-  nulos: 0,
+  "nulos": 0,
   "em branco": 0,
 
   exibirResultados: function () {
@@ -156,15 +156,19 @@ const resultadosVotacao = {
       }
     }
 
-    let resultadoCandidatosArray = resultadosVotacaoArray.slice(0,3);
+    let resultadoCandidatosArray = resultadosVotacaoArray.slice(0, 3);
     resultadoCandidatosArray.sort((a, b) => b[1] - a[1]);
 
     if (resultadoCandidatosArray[0][1] != resultadoCandidatosArray[1][1]) {
-
-    console.log();
-    console.log(`${resultadoCandidatosArray[0][0].toUpperCase()} venceu a eleição com um total de ${resultadoCandidatosArray[0][1]} votos.`);
+      console.log();
+      console.log(
+        `${resultadoCandidatosArray[0][0].toUpperCase()} venceu a eleição com um total de ${
+          resultadoCandidatosArray[0][1]
+        } votos.`
+      );
     } else {
-        console.log("EMPATE. decisão no segundo turno.");
+      console.log();
+      console.log("EMPATE. decisão no segundo turno.");
     }
   },
 };
