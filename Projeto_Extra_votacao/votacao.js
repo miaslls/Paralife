@@ -1,10 +1,12 @@
-"use strict";
+"use strict"; // 🐞 catcher
 
 const prompt = require("prompt-sync")();
 
-// ----- FORMATTING / VALIDATION FUNCTIONS -----
+// ----- FUNCTIONS ----- 📌📌📌
 
-/* formata o texto como título. ex:
+// ----- FORMATTING / VALIDATION FUNCTIONS ----- 📌📌
+
+/* formata o texto como título. ex: 📌
 ------------
 example text
 ------------
@@ -24,7 +26,7 @@ const formatToTitle = (text, separator = "-") => {
 
 const formatPrompt = (message) => prompt(`> ${message} `);
 
-/* formata o prompt em múltiplas linhas. ex: 
+/* formata o prompt em múltiplas linhas. ex: 📌
   message 
   > (prompt)
   */
@@ -34,7 +36,7 @@ const formatPromptMultipleLines = (message) => {
   return prompt(`> `);
 };
 
-// valida NÚMERO INTEIRO entre MIN e MAX (inclusive min e max)
+// valida NÚMERO INTEIRO entre MIN e MAX (inclusive min e max) 📌
 
 const validatePromptIntMinMax = (
   message,
@@ -52,7 +54,9 @@ const validatePromptIntMinMax = (
   }
 };
 
-// ----- PROJECT SPECIFIC FUNCTIONS -----
+// ----- PROJECT SPECIFIC FUNCTIONS ----- 📌📌
+
+// 📌 autorizaVoto();
 
 const autorizaVoto = () => {
   let anoNascimento = formatPrompt("ano de nascimento:");
@@ -66,6 +70,8 @@ const autorizaVoto = () => {
     return "obrigatório";
   }
 };
+
+// 📌 votacao(autorizacao);
 
 const votacao = (autorizacao) => {
   switch (autorizacao) {
@@ -127,6 +133,8 @@ const votacao = (autorizacao) => {
   }
 };
 
+// 📌 proximoEleitor();
+
 const proximoEleitor = () => {
   let finalizar = validatePromptIntMinMax(
     "digite [0] para próximo eleitor\ndigite [1] para finalizar e ver resultados",
@@ -138,7 +146,7 @@ const proximoEleitor = () => {
   return finalizar;
 };
 
-// ----- OBJECTS -----
+// ----- OBJECTS ----- 📌📌📌
 
 const resultadosVotacao = {
   "candidato A": 0,
@@ -174,7 +182,7 @@ const resultadosVotacao = {
   },
 };
 
-// ----- CODE START -----
+// ----- CODE START ----- 📌📌📌
 
 let numeroEleitor = 1;
 
