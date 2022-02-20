@@ -54,7 +54,10 @@ const validatePromptIntMinMax = (
 
 // ----- PROJECT SPECIFIC FUNCTIONS -----
 
-const autorizaVoto = (anoNascimento) => {
+const autorizaVoto = () => {
+  let anoNascimento = formatPrompt("ano de nascimento:");
+  console.log();
+
   if (anoNascimento > 2006) {
     return "negado";
   } else if (anoNascimento <= 2006 && anoNascimento > 2004) {
@@ -85,8 +88,8 @@ const votacao = (autorizacao) => {
       [1] CANDIDATO A
       [2] CANDIDATO B
       [3] CANDIDATO C
-      [4] VOTO NULO
-      [5] VOTO EM BRANCO
+      [4] EM BRANCO
+      [5] NULO
       `);
 
       let voto = validatePromptIntMinMax(
@@ -112,11 +115,11 @@ const votacao = (autorizacao) => {
           break;
         }
         case 4: {
-          resultadosVotacao["nulos"]++;
+          resultadosVotacao["EM BRANCO"]++;
           break;
         }
         case 5: {
-          resultadosVotacao["em branco"]++;
+          resultadosVotacao["NULOS"]++;
           break;
         }
       }
@@ -141,8 +144,8 @@ const resultadosVotacao = {
   "candidato A": 0,
   "candidato B": 0,
   "candidato C": 0,
-  "nulos": 0,
-  "em branco": 0,
+  "EM BRANCO": 0,
+  "NULOS": 0,
 
   exibirResultados: function () {
     let resultadosVotacaoArray = Object.entries(resultadosVotacao);
@@ -161,14 +164,12 @@ const resultadosVotacao = {
 
     if (resultadoCandidatosArray[0][1] != resultadoCandidatosArray[1][1]) {
       console.log();
-      console.log(
-        `${resultadoCandidatosArray[0][0].toUpperCase()} venceu a eleição com um total de ${
-          resultadoCandidatosArray[0][1]
-        } votos.`
-      );
+      console.log(`${resultadoCandidatosArray[0][0].toUpperCase()} venceu a eleição com um total de ${resultadoCandidatosArray[0][1]} votos.`);
+      console.log();
     } else {
       console.log();
       console.log("EMPATE. decisão no segundo turno.");
+      console.log();
     }
   },
 };
@@ -181,10 +182,7 @@ while (true) {
   console.clear();
   formatToTitle(`ELEIÇÕES 2022 | eleitor ${numeroEleitor}`);
 
-  let anoNascimento = formatPrompt("ano de nascimento:");
-  let autorizacao = autorizaVoto(anoNascimento);
-
-  console.log();
+  let autorizacao = autorizaVoto();
 
   votacao(autorizacao);
 
