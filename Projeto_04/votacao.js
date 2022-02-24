@@ -1,6 +1,5 @@
 "use strict"; // catador de 🐞
 const prompt = require("prompt-sync")(); // requer o prompt
-let today = new Date(); // define a data / hora atual
 
 // 📌📌📌 ----- FORMATTING / VALIDATION FUNCTIONS -----
 
@@ -72,6 +71,8 @@ const election = {
   showHeader: function () {
     console.clear();
 
+    const today = new Date(); // define a data / hora atual
+
     let date = `${today.getDate().toString().padStart(2, "0")}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear().toString().substring(2)}`;
     let time = `${today.getHours().toString().padStart(2, "0")}:${today.getMinutes().toString().padStart(2, "0")}`;
 
@@ -83,6 +84,8 @@ const election = {
   voteAuth: function (roundNumber) {
     console.log(`ELEITOR #${roundNumber}`);
     console.log();
+
+    const today = new Date(); // define a data / hora atual
 
     // solicita a data de nascimento do eleitor
 
