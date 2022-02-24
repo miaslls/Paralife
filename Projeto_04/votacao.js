@@ -1,39 +1,28 @@
-"use strict"; // 🐞 catcher
-const prompt = require("prompt-sync")(); // require prompt
+"use strict"; // catador de 🐞
+const prompt = require("prompt-sync")(); // requer o prompt
+let today = new Date(); // define a data / hora atual
 
-// 📌📌📌 ----- FUNCTIONS ----- 
-// 📌📌 ----- FORMATTING / VALIDATION FUNCTIONS ----- 
-/* 📌 formata o texto como título. ex: 
-------------
-example text
-------------
+// 📌📌📌 ----- FORMATTING / VALIDATION FUNCTIONS -----
 
-*/
+// formata o texto como título
 
 const formatToTitle = (text, separator = "-") => {
   let separatorLine = "";
 
-  for (let i = 0; i < text.length; i++) {
+  for (let i = 0; i < text.length + 1; i++) {
     separatorLine = separatorLine.concat(separator);
   }
   console.log(`${separatorLine}\n${text}\n${separatorLine}\n`);
 };
 
-// formata o prompt em linha única ex: > message (prompt)
-
-const formatPrompt = (message) => prompt(`> ${message} `);
-
-/* 📌 formata o prompt em múltiplas linhas. ex: 
-  message 
-  > (prompt)
-  */
+// formata o prompt em múltiplas linhas
 
 const formatPromptMultipleLines = (message) => {
   console.log(message);
   return prompt(`> `);
 };
 
-// 📌 valida NÚMERO INTEIRO entre MIN e MAX (inclusive min e max) 
+// valida NÚMERO INTEIRO entre MIN e MAX (inclusive min e max)
 
 const validatePromptIntMinMax = (
   message,
@@ -51,130 +40,193 @@ const validatePromptIntMinMax = (
   }
 };
 
-// 📌📌 ----- PROJECT SPECIFIC FUNCTIONS ----- 
-// 📌 autorizaVoto(); autoriza o voto por ano de nascimento
+const validateTwoOptionStringPrompt = (
+  message,
+  string1,
+  string2,
+  errorMessage = "INVÁLIDO"
+) => {
+  while (true) {
+    let str = formatPromptMultipleLines(message).toUpperCase();
 
-const autorizaVoto = () => {
-  let anoNascimento = formatPrompt("ano de nascimento:");
-  console.log();
-
-  if (anoNascimento > 2006) {
-    return "negado";
-  } else if (anoNascimento <= 2006 && anoNascimento > 2004) {
-    return "opcional";
-  } else {
-    return "obrigatório";
+    if (str == string1 || str == string2) {
+      return str;
+    }
+    console.log(`\n${errorMessage}\n`);
   }
 };
 
-// 📌 votacao(autorizacao); registra o voto caso autorizado
+// 📌📌📌 ----- OBJECTS / METODS DEFINITION -----
 
-const votacao = (autorizacao) => {
-  switch (autorizacao) {
-    case "negado": {
-      console.log("você não pode votar.");
-      console.log();
-      break;
+const election = {
+  results: {
+    "candidato A": 0,
+    "candidato B": 0,
+    "candidato C": 0,
+    "EM BRANCO": 0,
+    "NULOS": 0,
+  },
+
+  // 📌 exibe o cabeçalho da página
+
+  showHeader: function () {
+    console.clear();
+
+    let date = `${today.getDate().toString().padStart(2, "0")}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear().toString().substring(2)}`;
+    let time = `${today.getHours().toString().padStart(2, "0")}:${today.getMinutes().toString().padStart(2, "0")}`;
+
+    formatToTitle(`✅ ELEIÇÃO ${today.getFullYear()} | 📆 ${date} | 🕑 ${time}`);
+  },
+
+  // 📌 autoriza o voto pela idade do eleitor (data de nascimento)
+
+  voteAuth: function (roundNumber) {
+    console.log(`ELEITOR #${roundNumber}`);
+    console.log();
+
+    // solicita a data de nascimento do eleitor
+
+    let birthYear = validatePromptIntMinMax(
+      "ano de nascimento:",
+      today.getFullYear(),
+      1900,
+      "digite o ANO DE NASCIMENTO com 4 dígitos. ex: 1998"
+    );
+
+    let birthMonth =
+      validatePromptIntMinMax(
+        "mês de nascimento:",
+        12,
+        1,
+        "você deve digitar o NÚMERO correspondente ao MÊS DE NASCIMENTO. ex: 04"
+      ) - 1;
+
+    let birthDay = validatePromptIntMinMax(
+      "dia de nascimento:",
+      31,
+      1,
+      "digite o DIA DO NASCIMENTO. ex: 23"
+    );
+
+    console.log();
+
+    let birthDate = new Date(birthYear, birthMonth, birthDay);
+
+    // cutDate => menor de 16 anos
+
+    let cutDate = new Date(
+      today.getFullYear() - 16,
+      today.getMonth(),
+      today.getDate()
+    );
+
+    // optionalDate => menor de 18 anos
+
+    let optionalDate = new Date(
+      today.getFullYear() - 18,
+      today.getMonth(),
+      today.getDate()
+    );
+
+    if (birthDate > cutDate) {
+      return "denied";
+    } else if (birthDate > optionalDate) {
+      return "optional";
+    } else {
+      return "mandatory";
     }
-    case "opcional": {
-      console.log("seu voto é opcional.");
-      let votarOpcional = formatPrompt("deseja votar? [S] ou [N]");
-      console.log();
-      if (votarOpcional.toUpperCase() == "N") {
+  },
+
+  // 📌 solicita / nega o voto de acordo com autorização
+
+  vote: function (auth) {
+    switch (auth) {
+      case "denied": {
+        console.log("você não pode votar (menor de 16 anos).");
+        console.log();
         break;
       }
-    }
-    case "obrigatório": {
-      console.log(`vote de acordo com a legenda:
+      case "optional": {
+        console.log("seu voto é opcional.");
+        let voteOptional = validateTwoOptionStringPrompt(
+          "deseja votar? [S] ou [N]",
+          "S",
+          "N",
+          "você deve digitar [S] ou [N]"
+        );
+        console.log();
+        if (voteOptional == "N") {
+          break;
+        }
+      }
+      case "mandatory": {
+        console.log(`vote de acordo com a legenda:
 
-      [1] CANDIDATO A
-      [2] CANDIDATO B
-      [3] CANDIDATO C
-      [4] EM BRANCO
-      [5] NULO
+  [1] CANDIDATO A
+  [2] CANDIDATO B
+  [3] CANDIDATO C
+  [4] EM BRANCO
+  [5] NULO
       `);
 
-      let voto = validatePromptIntMinMax(
-        "seu voto",
-        5,
-        1,
-        "você deve digitar um NÚMERO entre 1 e 5"
-      );
+        let vote = validatePromptIntMinMax(
+          "seu voto:",
+          5,
+          1,
+          "você deve digitar um NÚMERO entre 1 e 5"
+        );
+        console.log();
 
-      console.log();
-
-      switch (voto) {
-        case 1: {
-          resultadosVotacao["candidato A"]++;
-          break;
+        if (vote == 1) {
+          this.results["candidato A"]++;
         }
-        case 2: {
-          resultadosVotacao["candidato B"]++;
-          break;
+        if (vote == 2) {
+          this.results["candidato B"]++;
         }
-        case 3: {
-          resultadosVotacao["candidato C"]++;
-          break;
+        if (vote == 3) {
+          this.results["candidato C"]++;
         }
-        case 4: {
-          resultadosVotacao["EM BRANCO"]++;
-          break;
+        if (vote == 4) {
+          this.results["EM BRANCO"]++;
         }
-        case 5: {
-          resultadosVotacao["NULOS"]++;
-          break;
+        if (vote == 5) {
+          this.results["NULOS"]++;
         }
       }
     }
-  }
-};
+  },
 
-// 📌 proximoEleitor(); repete autorização/votação ou finaliza e exibe resultados
+  // 📌 repete autorização / votação ou finaliza e exibe resultados
 
-const proximoEleitor = () => {
-  let finalizar = validatePromptIntMinMax(
-    "digite [0] para próximo eleitor\ndigite [1] para finalizar e ver resultados",
-    1,
-    0,
-    "você deve digitar [0] ou [1]"
-  );
+  nextVoter: function () {
+    let endRound = validatePromptIntMinMax(
+      "digite [0] para próximo eleitor\ndigite [1] para finalizar e ver resultados",
+      1,
+      0,
+      "você deve digitar [0] ou [1]"
+    );
 
-  return finalizar;
-};
+    return endRound;
+  },
 
-// 📌📌📌 ----- OBJECTS ----- 
-// 📌📌 resultadosVotacao
+  // 📌 exibe resultados da eleição
 
-const resultadosVotacao = {
-  "candidato A": 0,
-  "candidato B": 0,
-  "candidato C": 0,
-  "EM BRANCO": 0,
-  "NULOS": 0,
-
-  // 📌 exibe os resutados da votação 
-
-  exibirResultados: function () {
-    let resultadosVotacaoArray = Object.entries(resultadosVotacao);
-
+  showResults: function () {
     console.clear();
-    formatToTitle("resultados | ELEIÇÃO 2022");
+    this.showHeader();
 
+    const resultsArray = Object.entries(election.results);
 
-    for (let resultado of resultadosVotacaoArray) {
-
-      if (!isNaN(resultado[1])) { // 🚨🚨🚨 gambiarra pra não exibir o método do objeto
-
-        console.log(`${resultado[0]} - ${resultado[1]} voto(s)`);
-      }
+    for (let result of resultsArray) {
+      console.log(`${result[0]} - ${result[1]} voto(s)`);
     }
 
-    let resultadoCandidatosArray = resultadosVotacaoArray.slice(0, 3);
-    resultadoCandidatosArray.sort((a, b) => b[1] - a[1]);
+    const candidateResultsArray = resultsArray.slice(0, 3);
+    candidateResultsArray.sort((a, b) => b[1] - a[1]);
 
-    if (resultadoCandidatosArray[0][1] != resultadoCandidatosArray[1][1]) {
+    if (candidateResultsArray[0][1] != candidateResultsArray[1][1]) {
       console.log();
-      console.log(`${resultadoCandidatosArray[0][0].toUpperCase()} venceu a eleição com um total de ${resultadoCandidatosArray[0][1]} votos.`);
+      console.log(`${candidateResultsArray[0][0].toUpperCase()} venceu a eleição com um total de ${candidateResultsArray[0][1]} votos.`);
       console.log();
     } else {
       console.log();
@@ -186,25 +238,20 @@ const resultadosVotacao = {
 
 // 📌📌📌 ----- CODE START -----
 
-let numeroEleitor = 1;
+let roundNumber = 1;
 
 while (true) {
-  console.clear();
-  formatToTitle(`ELEIÇÕES 2022 | eleitor ${numeroEleitor}`);
+  election.showHeader();
+  let auth = election.voteAuth(roundNumber);
+  election.vote(auth);
 
-  let autorizacao = autorizaVoto();
+  roundNumber++;
 
-  votacao(autorizacao);
+  let endRound = election.nextVoter();
 
-  let finalizar = proximoEleitor();
-
-  numeroEleitor++;
-
-  if (finalizar) {
+  if (endRound) {
     break;
   }
 }
 
-resultadosVotacao.exibirResultados();
-
-// 💡 TODO: segundo turno
+election.showResults();
