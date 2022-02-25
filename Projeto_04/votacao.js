@@ -39,6 +39,8 @@ const validatePromptIntMinMax = (
   }
 };
 
+// valida o prompt (duas opções em string)
+
 const validateTwoOptionStringPrompt = (
   message,
   string1,

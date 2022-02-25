@@ -1,4 +1,4 @@
-# **Simulador de votação**
+# ![logo BLUE](https://i.ibb.co/sHBwqxz/BLUE.gif "BLUE") **Simulador de votação**
 
 A ideia deste projeto é criar um programa que simule uma votação com todo o conteúdo visto no módulo até este momento.
 
