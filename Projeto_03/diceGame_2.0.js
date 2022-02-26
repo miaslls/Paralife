@@ -213,7 +213,7 @@ const game = {
 
   // 📌 executa as rodadas de acordo com o número escolhida
 
-  playRound: function (playerObjectList, numberOfRounds) {
+  playRounds: function (playerObjectList, numberOfRounds) {
     console.clear();
 
     for (let round = 0; round < numberOfRounds; round++) {
@@ -251,5 +251,5 @@ const playerObjectList = setUp.buildPlayerList(numberOfPlayers);
 console.log();
 formatPrompt("digite ENTER para começar a partida");
 
-game.playRound(playerObjectList, numberOfRounds);
+game.playRounds(playerObjectList, numberOfRounds);
 game.getResults(playerObjectList);
