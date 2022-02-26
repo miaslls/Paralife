@@ -76,6 +76,8 @@ class Player {
 
 // 📌📌 ----- SET UP -----
 
+// 📌📌 encapsula os métodos do objeto setUp (preparação)
+
 const setUp = {
   // 📌 exibe informações do jogo
 
@@ -137,7 +139,7 @@ vencedor da PARTIDA - aquele que vencer o maior número de rodadas.
   },
 };
 
-// 📌📌 encapsula os métodos do objeto game
+// 📌📌 encapsula os métodos do objeto game (jogo)
 
 const game = {
   rollDice: function (playerObjectList) {
