@@ -8,7 +8,7 @@
 
 ---
 
-<img src="assets/img/flag-pt-br.png" width="16" alt="English"> &nbsp; քǟʀǟʟɨʄɛ é um jogo de ficção interativa que desafia o jogador a equilibrar trabalho, saúde mental e saúde física em uma simulação de vida real que dura 7 dias _in-game_. Para alcançar esse equilíbrio, o jogador deve realizar tarefas e cuidar de suas necessidades físicas e mentais ao longo do jogo.
+<img src="assets/img/flag-pt-br.png" width="16" alt="Português"> &nbsp; քǟʀǟʟɨʄɛ é um jogo de ficção interativa que desafia o jogador a equilibrar trabalho, saúde mental e saúde física em uma simulação de vida real que dura 7 dias _in-game_. Para alcançar esse equilíbrio, o jogador deve realizar tarefas e cuidar de suas necessidades físicas e mentais ao longo do jogo.
 
 ## 🔗 Demo
 
@@ -21,15 +21,15 @@
 &nbsp;
 
 - [General Info](#ℹ️-general-info)
-- [Technologies](#🧮-technologies)
-- [Screenshots](#🖼️-screenshots)
-- [Install and Run](#⚙️-install-and-run)
-- [Authors](#👩‍💻-authors)
-- [Acknowledgements](#🫶-acknowledgements)
+- [Technologies](#-technologies)
+- [Screenshots](#%EF%B8%8F-screenshots)
+- [Install and Run](#%EF%B8%8F-install-and-run)
+- [Authors](#-authors)
+- [Acknowledgements](#-acknowledgements)
 
 </details>
 
-## ℹ️ &nbsp;General Info
+## ℹ️ General Info
 
 <img src="assets/img/flag-en.png" width="16" alt="English"> &nbsp; Proposed exercise:
 
@@ -52,8 +52,11 @@
 &nbsp;
 
 ![Paralife App Screenshot](assets/img/screenshot-01.gif)
+
 ![Paralife App Screenshot](assets/img/screenshot-02.gif)
+
 ![Paralife App Screenshot](assets/img/screenshot-03.gif)
+
 ![Paralife App Screenshot](assets/img/screenshot-04.gif)
 
 </details>
