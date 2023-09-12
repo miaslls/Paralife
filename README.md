@@ -1,5 +1,5 @@
 This page is in <img src="assets/img/flag-en.png" width="14" alt="English"> English.
-Para visualisar essa página em <img src="assets/img/flag-pt-br.png" width="14" alt="Português"> Português, [clique aqui](./README-ptbr.md).
+Para visualizar essa página em <img src="assets/img/flag-pt-br.png" width="14" alt="Português"> Português, [clique aqui](./README-ptbr.md).
 
 ---
 
