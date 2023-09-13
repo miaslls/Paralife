@@ -65,13 +65,13 @@ Proposed exercise:
 Clone the project
 
 ```bash
-> git clone https://github.com/miaslls/Paralife_Node.js.git
+> git clone https://github.com/miaslls/Paralife.git
 ```
 
 Go to the project directory
 
 ```bash
-> cd paralife_Node.js
+> cd Paralife
 ```
 
 Install dependencies
