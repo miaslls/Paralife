@@ -15,21 +15,6 @@ To view this page in <img src="assets/img/flag-en.png" width="14" alt="English">
 
 - [Replit Demo](https://replit.com/@miaslls/Paralife-Demo?v=1)
 
-## 🟰 Tabela de Conteúdos
-
-<details open>
-<summary>expand / collapse</summary>
-&nbsp;
-
-- [Informações Gerais](#ℹ️-informações-gerais)
-- [Tecnologias](#-tecnologias)
-- [Screenshots](#%EF%B8%8F-screenshots)
-- [Instalação](#%EF%B8%8F-instalação)
-- [Autoria](#-autoria)
-- [Aquele Abraço](#-aquele-abraço)
-
-</details>
-
 ## ℹ️ Informações Gerais
 
 Exercício proposto:
@@ -42,10 +27,6 @@ Exercício proposto:
 
 ## 🖼️ Screenshots
 
-<details open>
-<summary>expand / collapse</summary>
-&nbsp;
-
 ![Paralife App Screenshot](assets/img/screenshot-01.gif)
 
 ![Paralife App Screenshot](assets/img/screenshot-02.gif)
@@ -54,13 +35,7 @@ Exercício proposto:
 
 ![Paralife App Screenshot](assets/img/screenshot-04.gif)
 
-</details>
-
 ## ⚙️ Instalação
-
-<details open>
-<summary>expand / collapse</summary>
-&nbsp;
 
 Clone the project
 
@@ -86,12 +61,10 @@ Run the project
 > node src/main.js
 ```
 
-</details>
-
 ## 👩‍💻 Autoria
 
 - [@miaslls](https://www.github.com/miaslls)
 
-## 🫶 Aquele Abraço
+## 🫶 Recursos / Agradecimentos
 
 - [@acaua](https://github.com/acaua)

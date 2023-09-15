@@ -15,21 +15,6 @@ Para visualizar essa página em <img src="assets/img/flag-pt-br.png" width="14" 
 
 - [Replit Demo](https://replit.com/@miaslls/Paralife-Demo?v=1)
 
-## 🟰 Table of Contents
-
-<details open>
-<summary>expand / collapse</summary>
-&nbsp;
-
-- [General Info](#ℹ️-general-info)
-- [Technologies](#-technologies)
-- [Screenshots](#%EF%B8%8F-screenshots)
-- [Install and Run](#%EF%B8%8F-install-and-run)
-- [Authors](#-authors)
-- [Acknowledgements](#-acknowledgements)
-
-</details>
-
 ## ℹ️ General Info
 
 Proposed exercise:
@@ -42,10 +27,6 @@ Proposed exercise:
 
 ## 🖼️ Screenshots
 
-<details open>
-<summary>expand / collapse</summary>
-&nbsp;
-
 ![Paralife App Screenshot](assets/img/screenshot-01.gif)
 
 ![Paralife App Screenshot](assets/img/screenshot-02.gif)
@@ -54,13 +35,7 @@ Proposed exercise:
 
 ![Paralife App Screenshot](assets/img/screenshot-04.gif)
 
-</details>
-
 ## ⚙️ Install and Run
-
-<details open>
-<summary>expand / collapse</summary>
-&nbsp;
 
 Clone the project
 
@@ -85,8 +60,6 @@ Run the project
 ```bash
 > node src/main.js
 ```
-
-</details>
 
 ## 👩‍💻 Authors
 
