@@ -6,7 +6,6 @@ To view this page in <img src="assets/img/flag-en.png" width="14" alt="English">
 # 🪅 քǟʀǟʟɨʄɛ
 
 ![Static Badge: Study](https://img.shields.io/badge/study-blue)
-![Static Badge: Version - 1.0.0](https://img.shields.io/badge/version-1.0.0-green)
 ![Static Badge: Node.js](https://img.shields.io/badge/Node.js-5a5a5a?logo=nodedotjs)
 
 քǟʀǟʟɨʄɛ é um jogo de ficção interativa que desafia o jogador a equilibrar trabalho, saúde mental e saúde física em uma simulação de vida real que dura 7 dias _in-game_. Para alcançar esse equilíbrio, o jogador deve realizar tarefas e cuidar de suas necessidades físicas e mentais ao longo do jogo.
